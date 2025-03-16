@@ -8,12 +8,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject currentSpawnEnemy;
     void Start()
     {
-
-
         // 몬스터 설정
         currentSpawnEnemy = ResourceManager.Instance.enemy1;
-
-
 
 
         StartCoroutine(Spawn());

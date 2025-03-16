@@ -1,21 +1,23 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
+    private float bulletSpeed = 5f;
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime);
+        transform.Translate(Vector3.right * Time.deltaTime*bulletSpeed);
     }
-
-    // TODO: 화면 밖으로 나가면 사라지기. 혹은 일정 시간 뒤에 사라지기.
+        private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy>().Hit();
-
 
             // TODO: 관통?
             Destroy(gameObject);

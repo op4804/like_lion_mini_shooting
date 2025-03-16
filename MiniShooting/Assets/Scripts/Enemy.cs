@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.left * Time.deltaTime);
     }
 
-
     public void Hit()
     {
         GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);

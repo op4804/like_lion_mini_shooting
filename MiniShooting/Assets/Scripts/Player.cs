@@ -18,8 +18,9 @@ public class Player : MonoBehaviour
 
 
     // 플레이어의 현재 총알
-
     private GameObject currentBullet;
+    public float fireRate = 0.2f; // 발사 간격
+    private float fireTimer = 0f;
 
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
@@ -61,9 +62,21 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+        //한 번 눌렀을때 발사체 나감
+        //if(Input.GetKeyDown(KeyCode.X))
+        //{
+        //    Instantiate(currentBullet, transform.position, Quaternion.identity);
+        //}
+
+        //누르고 있는만큼 나감
+        if (Input.GetKey(KeyCode.X))
         {
-            Instantiate(currentBullet, transform.position, Quaternion.identity);
+            fireTimer += Time.deltaTime;
+            if (fireTimer >= fireRate)
+            {
+                Instantiate(currentBullet, transform.position, Quaternion.identity);
+                fireTimer = 0f;
+            }
         }
     }
 
@@ -86,14 +99,16 @@ public class Player : MonoBehaviour
         currentHealth--;
         if(currentHealth > 0)
         {
-            GameManger.Instance.GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 
     public void GetExpParticle(float expAmount)
     {
         exp += expAmount;
-
+        
+        GameManager.Instance.ViewExp(exp, playerLevel);
         // TODO: 레벨업 구현
-    }
+    }    
+
 }
