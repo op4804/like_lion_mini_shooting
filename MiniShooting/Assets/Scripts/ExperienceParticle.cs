@@ -3,8 +3,8 @@ using UnityEngine;
 public class ExperienceParticle : MonoBehaviour
 {
 
-    public float moveSpeed = 5f; // 플레이어에게 날아가는 속도
-    public float attractionRange = 3f; // 플레이어에게 날아가기 시작하는 거리
+    private float moveSpeed = 5f; // 플레이어에게 날아가는 속도
+    private float attractionRange = 3f; // 플레이어에게 날아가기 시작하는 거리
 
     private float expAmount = 0f;
     private Transform player;
@@ -31,7 +31,6 @@ public class ExperienceParticle : MonoBehaviour
         if (isAttracted)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-
         }
     }
 

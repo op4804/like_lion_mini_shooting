@@ -4,53 +4,46 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    
-    private int playerLevel = 1;
+    private int playerLevel = 1; //플레이어 초기 레벨
+    private int expScale = 100; //경험치 스케일링 수치
+
     [SerializeField]
-    private float exp = 0;
-    float playerSpeed = 5.0f;
+    private float exp = 0; // 플레이어 초기 경험치
+    private float playerSpeed = 5.0f; //플레이어 스피드
 
     // 플레이어의 변수
-
-    private int maxHealth = 3;
+    private int maxHealth = 3; //플레이어 최대 생명력
     [SerializeField]
-    private int currentHealth;
-
+    private int currentHealth; //플레이어 현재 생명력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
-    public float fireRate = 0.2f; // 발사 간격
-    private float fireTimer = 0f;
-
+    public float fireRate = 0.2f; //연사 속도
+    private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
-
     private Vector2 minBounds;
     private Vector2 maxBounds;
 
     void Start()
     {
-
         // 화면 경계
         mainCamera = Camera.main;
 
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));        
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
         minBounds = new Vector2(bottomLeft.x, bottomLeft.y);
         maxBounds = new Vector2(topRight.x, topRight.y);
 
         // TODO: 카메라 정보 및 화면의 경곗값은 플레이어만 사용하는 정보는 아니니까 위치 이동을 해야할듯. 
 
-
-
         // 체력 초기화
         currentHealth = maxHealth;
 
         // 총알 초기화
         currentBullet = ResourceManager.Instance.playerBullet1;
-
     }
 
     void Update()
@@ -92,23 +85,29 @@ public class Player : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, minBounds.y, maxBounds.y);
 
         transform.position = newPosition;
-    }       
+    }
 
     public void Hit()
     {
         currentHealth--;
-        if(currentHealth > 0)
+        if (currentHealth > 0)
         {
             GameManager.Instance.GameOver();
         }
     }
 
-    public void GetExpParticle(float expAmount)
+    public void GetExpParticle(float expAmount) //경험치 획득
     {
         exp += expAmount;
-        
-        GameManager.Instance.ViewExp(exp, playerLevel);
-        // TODO: 레벨업 구현
-    }    
 
+        //레벨업 구현
+        if (exp % expScale == 0) // expScale의 배수마다 레벨업
+        {
+            playerLevel += 1;
+
+            GameManager.Instance.ToggleMenu(); //레벨업 능력치 상승 메뉴
+        }
+
+        GameManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
+    }
 }

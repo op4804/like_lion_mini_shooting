@@ -8,7 +8,6 @@ public class ResourceManager : MonoBehaviour
     [Header("Bullets")]
     public GameObject playerBullet1;
 
-
     [Header("Enemies")]
     public GameObject enemy1;
 
