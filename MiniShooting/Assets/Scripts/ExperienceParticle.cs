@@ -21,7 +21,7 @@ public class ExperienceParticle : MonoBehaviour
         if (player == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
-
+        
         // 플레이어가 특정 거리 안에 있으면 자동으로 따라가도록 설정
         if (distance < attractionRange)
         {
@@ -31,6 +31,10 @@ public class ExperienceParticle : MonoBehaviour
         if (isAttracted)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position += new Vector3(-0.5f * Time.deltaTime, 0,0);
         }
     }
 
