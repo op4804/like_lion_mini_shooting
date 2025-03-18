@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     private bool isMenuActive = false;
     public Text expText;
 
+    //라이프 이미지
+    public Image[] lifeImg;
+
     private bool isGameOver;
 
     private void Awake()
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
         {
             HandleMenu(); // 키보드로 메뉴 조작
         }
+
+        
     }
 
     //메뉴 활성화
@@ -141,5 +146,19 @@ public class GameManager : MonoBehaviour
     public void ViewExp(float playerExp, int playerLevel)
     {
         expText.text = $"Level : {playerLevel} \nExp : {playerExp}";
+    }
+
+    public void UpdateLife(int playerLevel, int maxLifeCount, int currentLifeCount)
+    {
+        int viewMaxLife = maxLifeCount / 2;
+        int viewCurrentLife = currentLifeCount / 2;
+
+        if (playerLevel < 3)
+        {
+            if (lifeImg[0]==null)Debug.Log("0번 비활성화");
+            lifeImg[0].gameObject.SetActive(true);
+            RectTransform lifeTransform = lifeImg[0].GetComponent<RectTransform>();
+            lifeTransform.anchoredPosition = new Vector2(0,0);
+        }
     }
 }
