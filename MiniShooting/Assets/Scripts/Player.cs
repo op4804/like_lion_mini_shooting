@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private float playerSpeed = 5.0f; //플레이어 스피드
 
     // 플레이어의 변수
-    private int maxHealth = 3; //플레이어 최대 생명력
+    private int maxHealth = 6; //플레이어 최대 생명력
     [SerializeField]
     private int currentHealth; //플레이어 현재 생명력
 
@@ -90,6 +90,9 @@ public class Player : MonoBehaviour
     public void Hit()
     {
         currentHealth--;
+
+        GameManager.Instance.UpdateLife(playerLevel, maxHealth, currentHealth);
+
         if (currentHealth > 0)
         {
             GameManager.Instance.GameOver();
