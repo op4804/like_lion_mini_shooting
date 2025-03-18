@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour
     public Transform upgradeMenuParent;
 
     //메뉴 표기 기능을 위한 함수
-    private List<String> upgradeOptions = new List<String>();
     private List<Text> optionTexts = new List<Text>();
     private int selectedOption = 0;
     private bool isMenuActive = false;
@@ -37,11 +37,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //기능 예시 3가지 생성
-        upgradeOptions.Add("Increase Speed");
-        upgradeOptions.Add("Increase Fire Rate");
-        upgradeOptions.Add("Increase Max Health");
-
         CreateUpgradeOptions(); // UI 생성
         upgradeMenu.SetActive(false); // 처음에는 메뉴 숨김
     }
@@ -51,6 +46,11 @@ public class GameManager : MonoBehaviour
         if (isMenuActive)
         {
             HandleMenu(); // 키보드로 메뉴 조작
+        }
+        //임시로 레벨업UI 활성화버튼
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ToggleMenu();
         }
     }
 
@@ -76,19 +76,23 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            selectedOption = (selectedOption - 1 + upgradeOptions.Count) % upgradeOptions.Count;
+            selectedOption = (selectedOption - 1 + Upgrade.Instance.GetCount()) % Upgrade.Instance.GetCount();
             UpdateArrowPosition();
+            Debug.Log(selectedOption);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
-            selectedOption = (selectedOption + 1) % upgradeOptions.Count;
+            selectedOption = (selectedOption + 1) % Upgrade.Instance.GetCount();
             UpdateArrowPosition();
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Upgrade.Instance.UpgradeStack(selectedOption);
             ToggleMenu();
         }
+
+        
     }
 
     //메뉴 생성 및 정렬 (텍스트만 생기는 상태)
@@ -96,16 +100,16 @@ public class GameManager : MonoBehaviour
     {
         RectTransform canvasRect = upgradeMenu.GetComponent<RectTransform>();
         float screenHeight = canvasRect.rect.height;
-        float menuHeight = upgradeOptions.Count * 100f;
+        float menuHeight = Upgrade.Instance.GetCount() * 100f;
         float startY = screenHeight / 2 - (menuHeight / 2);
 
-        for (int i = 0; i < upgradeOptions.Count; i++)
+        for (int i = 0; i < Upgrade.Instance.GetCount(); i++)
         {
             GameObject textObject = new GameObject($"UpgradeOption_{i}", typeof(RectTransform), typeof(Text));
             textObject.transform.SetParent(upgradeMenuParent, false);
 
             Text textComponent = textObject.GetComponent<Text>();
-            textComponent.text = upgradeOptions[i];
+            textComponent.text = Upgrade.Instance.GetUpgradeString(i);
             textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             textComponent.fontSize = 24;
             textComponent.color = Color.white;
@@ -127,7 +131,7 @@ public class GameManager : MonoBehaviour
         if (optionTexts.Count > 0)
         {
             Vector2 targetPosition = optionTexts[selectedOption].transform.position;
-            targetPosition.x -= 650f;
+            targetPosition.x -= 280f;
             arrow.transform.position = targetPosition;
         }
     }
