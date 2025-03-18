@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wolfMonstert2_0: -5563437057568461980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

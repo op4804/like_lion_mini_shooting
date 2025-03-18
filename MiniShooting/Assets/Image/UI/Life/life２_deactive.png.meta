@@ -149,9 +149,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 15
-        width: 76
-        height: 133
+        y: 38
+        width: 93
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,10 +170,10 @@ TextureImporter:
       name: "life\uFF12_deactive_1"
       rect:
         serializedVersion: 2
-        x: 23
-        y: 0
-        width: 167
-        height: 318
+        x: 60
+        y: 20
+        width: 169
+        height: 383
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: "life\uFF12_deactive_2"
       rect:
         serializedVersion: 2
-        x: 162
-        y: 15
-        width: 76
-        height: 133
+        x: 194
+        y: 38
+        width: 92
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -157,10 +157,10 @@ TextureImporter:
       name: life3_deactive_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 166
-        width: 139
-        height: 349
+        x: 37
+        y: 86
+        width: 76
+        height: 179
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: life3_deactive_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 296
-        width: 215
-        height: 496
+        x: 89
+        y: 152
+        width: 116
+        height: 252
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: life3_deactive_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 23
-        width: 258
-        height: 506
+        x: 118
+        y: 14
+        width: 139
+        height: 258
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: life3_deactive_3
       rect:
         serializedVersion: 2
-        x: 13
-        y: 75
-        width: 169
-        height: 194
+        x: 185
+        y: 41
+        width: 90
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: life3_deactive_4
       rect:
         serializedVersion: 2
-        x: 326
-        y: 75
-        width: 165
-        height: 216
+        x: 20
+        y: 41
+        width: 92
+        height: 101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: life3_deactive_5
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1
-        width: 19
-        height: 14
+        x: 153
+        y: 5
+        width: 11
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

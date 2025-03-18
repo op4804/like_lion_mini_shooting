@@ -20,12 +20,6 @@ TextureImporter:
   - first:
       213: -6188298695924810010
     second: life1_5
-  - first:
-      213: -6098430723750066417
-    second: life1_6
-  - first:
-      213: 6656094426570767652
-    second: life1_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -163,10 +157,10 @@ TextureImporter:
       name: life1_0
       rect:
         serializedVersion: 2
-        x: 125
-        y: 419
-        width: 39
-        height: 38
+        x: 74
+        y: 14
+        width: 146
+        height: 368
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,10 +179,10 @@ TextureImporter:
       name: life1_1
       rect:
         serializedVersion: 2
-        x: 23
-        y: 320
-        width: 30
-        height: 30
+        x: 77
+        y: 363
+        width: 39
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,10 +201,10 @@ TextureImporter:
       name: life1_2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 3
-        width: 146
-        height: 414
+        x: 223
+        y: 281
+        width: 25
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +223,10 @@ TextureImporter:
       name: life1_3
       rect:
         serializedVersion: 2
-        x: 223
-        y: 321
-        width: 25
-        height: 24
+        x: 10
+        y: 235
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,10 +245,10 @@ TextureImporter:
       name: life1_4
       rect:
         serializedVersion: 2
-        x: 4
-        y: 245
-        width: 40
-        height: 40
+        x: 9
+        y: 36
+        width: 93
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,10 +267,10 @@ TextureImporter:
       name: life1_5
       rect:
         serializedVersion: 2
-        x: 233
-        y: 244
-        width: 41
-        height: 40
+        x: 197
+        y: 37
+        width: 87
+        height: 173
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,50 +281,6 @@ TextureImporter:
       bones: []
       spriteID: 6ee73618f1fbe1aa0800000000000000
       internalID: -6188298695924810010
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: life1_6
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 29
-        width: 93
-        height: 199
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f078c8f41950e5ba0800000000000000
-      internalID: -6098430723750066417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: life1_7
-      rect:
-        serializedVersion: 2
-        x: 197
-        y: 30
-        width: 87
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 42d353f8d923f5c50800000000000000
-      internalID: 6656094426570767652
       vertices: []
       indices: 
       edges: []
@@ -355,8 +305,6 @@ TextureImporter:
       life1_3: 5942258997101009739
       life1_4: -6114493446127760097
       life1_5: -6188298695924810010
-      life1_6: -6098430723750066417
-      life1_7: 6656094426570767652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

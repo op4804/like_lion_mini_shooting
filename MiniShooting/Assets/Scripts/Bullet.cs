@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector3.right * Time.deltaTime * bulletSpeed);
     }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

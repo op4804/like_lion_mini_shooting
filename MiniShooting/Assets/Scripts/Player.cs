@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    [HideInInspector]
+    public static Player Instance = null;
+
     private int playerLevel = 1; //플레이어 초기 레벨
     private int expScale = 100; //경험치 스케일링 수치
 
@@ -14,7 +17,7 @@ public class Player : MonoBehaviour
     // 플레이어의 변수
     private int maxHealth = 6; //플레이어 최대 생명력
     [SerializeField]
-    private int currentHealth; //플레이어 현재 생명력
+    private int currentHealth=6; //플레이어 현재 생명력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
@@ -25,6 +28,22 @@ public class Player : MonoBehaviour
     Camera mainCamera;
     private Vector2 minBounds;
     private Vector2 maxBounds;
+
+    public int GetMaxHealth() => maxHealth;
+    public int GetCurrentHealth() => currentHealth;
+    public int GetPlayerLevel() => playerLevel;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -55,12 +74,12 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        //한 번 눌렀을때 발사체 나감
-        //if(Input.GetKeyDown(KeyCode.X))
-        //{
-        //    Instantiate(currentBullet, transform.position, Quaternion.identity);
-        //}
-
+        //처음 누를때 딜레이 없이 발사
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Instantiate(currentBullet, transform.position, Quaternion.identity);
+            fireTimer = 0f;
+        }
         //누르고 있는만큼 나감
         if (Input.GetKey(KeyCode.X))
         {
@@ -91,12 +110,12 @@ public class Player : MonoBehaviour
     {
         currentHealth--;
 
-        GameManager.Instance.UpdateLife(playerLevel, maxHealth, currentHealth);
-
-        if (currentHealth > 0)
+        if (currentHealth < 0)
         {
             GameManager.Instance.GameOver();
         }
+
+        PlayerHpBar.Instance.UpdateLife();
     }
 
     public void GetExpParticle(float expAmount) //경험치 획득
@@ -108,9 +127,9 @@ public class Player : MonoBehaviour
         {
             playerLevel += 1;
 
-            GameManager.Instance.ToggleMenu(); //레벨업 능력치 상승 메뉴
+            UIManager.Instance.ToggleUpgradeMenu(); //레벨업 능력치 상승 메뉴
         }
 
-        GameManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
+        UIManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
     }
 }
