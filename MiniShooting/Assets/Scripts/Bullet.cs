@@ -23,5 +23,11 @@ public class Bullet : MonoBehaviour
             // TODO: 관통?
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("Boss"))
+        {
+            Destroy(gameObject);
+            collision.gameObject.GetComponent<BossStatus>().Damaged(1);//나중에 탄환데미지로변경 테스트로 1넣음
+
+        }
     }
 }
