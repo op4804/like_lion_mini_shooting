@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 5f; //발사체 속도
+    private float bulletAttack = 10f;
 
     void Update()
     {
@@ -18,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().Hit();
+            collision.gameObject.GetComponent<Enemy>().Hit(bulletAttack);
 
             // TODO: 관통?
             Destroy(gameObject);

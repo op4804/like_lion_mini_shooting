@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     public Text expText;
 
     private bool isGameOver;
-
     private void Awake()
     {
         if (Instance == null)
@@ -35,6 +34,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 화면 경계를 맞춰주는 기능을 위한 변수
+    Camera mainCamera;
+    public Vector2 minBounds;
+    public Vector2 maxBounds;
+
     private void Start()
     {
         //기능 예시 3가지 생성
@@ -44,6 +48,15 @@ public class GameManager : MonoBehaviour
 
         CreateUpgradeOptions(); // UI 생성
         upgradeMenu.SetActive(false); // 처음에는 메뉴 숨김
+
+        // 화면 경계
+        mainCamera = Camera.main;
+
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+
+        minBounds = new Vector2(bottomLeft.x, bottomLeft.y);
+        maxBounds = new Vector2(topRight.x, topRight.y);
     }
 
     private void Update()

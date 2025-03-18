@@ -5,11 +5,13 @@ public class ResourceManager : MonoBehaviour
     [HideInInspector]
     public static ResourceManager Instance = null;
 
-    [Header("Bullets")]
+    [Header("PlayrtBullets")]
     public GameObject playerBullet1;
 
     [Header("Enemies")]
     public GameObject enemy1;
+    [Header("Enemy Bullets")]
+    public GameObject enemybullet1;
 
     [Header("etc")]
     public GameObject expParticle;
