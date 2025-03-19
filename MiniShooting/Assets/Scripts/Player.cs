@@ -137,5 +137,5 @@ public class Player : MonoBehaviour
     //플레이어 스텟 변경용 함수들
     public void SetHP(int newHealth) => maxHealth += newHealth;
     public void SetSpeed(float newSpeed) => playerSpeed += newSpeed;
-    public void SetFireRate(float newFireRate) => fireRate += newFireRate;
+    public void SetFireRate(float newFireRate) => fireRate -= newFireRate;
 }
