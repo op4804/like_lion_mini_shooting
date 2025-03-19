@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 5f; //발사체 속도
+    [SerializeField]
     private float bulletAttack = 10f;
 
     void Update()
@@ -31,5 +32,10 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<BossStatus>().Damaged(1);//나중에 탄환데미지로변경 테스트로 1넣음
 
         }
+    }
+
+    public void SetBulletAttack(float bulletAttack)
+    {
+        this.bulletAttack = bulletAttack;
     }
 }

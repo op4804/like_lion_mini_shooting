@@ -10,6 +10,7 @@ public class ResourceManager : MonoBehaviour
 
     [Header("Enemies")]
     public GameObject enemy1;
+    public GameObject enemy2;
     [Header("Enemy Bullets")]
     public GameObject enemybullet1;
 

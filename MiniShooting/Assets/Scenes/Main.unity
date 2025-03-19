@@ -292,7 +292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBullet1: {fileID: 2579971360516050928, guid: 22990e6c5204a4846adad92a4eb18b24, type: 3}
-  enemy1: {fileID: 2238792627457520440, guid: 6be842404b6fec8429056ccf2f62135c, type: 3}
+  enemy1: {fileID: 450482112071159595, guid: 6de6e58e838aaa94691d94c0a9f6f622, type: 3}
+  enemy2: {fileID: 4637630645489893619, guid: ea5d2b537ca2acd4d98724146ae7bf4c, type: 3}
   enemybullet1: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
   expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
 --- !u!4 &358329393
@@ -328,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &368006651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80dab2c44b26a3d4e86a1bb70e8af31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expText: {fileID: 0}
+  expText: {fileID: 1682957590}
 --- !u!4 &399335717
 Transform:
   m_ObjectHideFlags: 0
@@ -817,6 +818,7 @@ MonoBehaviour:
   exp: 0
   currentHealth: 6
   fireRate: 0.2
+  attack: 10
 --- !u!58 &1034518130
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1206,6 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6915d86d66293ae4da4b3aed050a50d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnDelay1: 2
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0
