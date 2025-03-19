@@ -6,7 +6,10 @@ public class UIManager : MonoBehaviour
     [HideInInspector]
     public static UIManager Instance = null;
 
-    private UpgradeMenu upgradeMenu;
+    [SerializeField]
+    private StatusMenu statusMenu;
+
+    public string IsToggle { get; set; } = null;
 
     public Text expText;
 
@@ -29,7 +32,18 @@ public class UIManager : MonoBehaviour
 
     public void ToggleUpgradeMenu()
     {
-        UpgradeMenu.Instance.ToggleMenu();
+        if (IsToggle == "UpgradeMenu" || IsToggle == null)
+        {
+            UpgradeMenu.Instance.ToggleMenu();
+        }
+    }
+
+    public void ToggleStatusMenu()
+    {
+        if (IsToggle == "StatusMenu" || IsToggle == null)
+        {
+            statusMenu.ToggleMenu();
+        }
     }
 
     //레벨, 경험치 표기

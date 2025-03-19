@@ -48,6 +48,11 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.ToggleUpgradeMenu();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.ToggleStatusMenu();
+        }
     }
 
     public void GameOver()

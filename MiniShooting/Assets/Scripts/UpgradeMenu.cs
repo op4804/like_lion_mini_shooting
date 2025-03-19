@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UpgradeMenu : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class UpgradeMenu : MonoBehaviour
     public GameObject arrow;
     public GameObject upgradePanel;
 
+    public bool isMenuActive = false;
+
     private List<GameObject> optionTexts = new List<GameObject>();
     private int selectedOption = 0;
-    private bool isMenuActive = false;
     private int UpgradeChooseNum = 4;
     private int[] t = new int[4];
 
@@ -46,15 +48,19 @@ public class UpgradeMenu : MonoBehaviour
     {
         isMenuActive = !isMenuActive;
         upgradePanel.SetActive(isMenuActive);
+
         if (isMenuActive)
         {
             Time.timeScale = 0f;
             UpdateArrowPosition();
+            UIManager.Instance.IsToggle = "UpgradeMenu";
         }
         else
         {
             Time.timeScale = 1f;
+            UIManager.Instance.IsToggle = null;
         }
+
         UpgradeRandom();
     }
 
@@ -83,7 +89,7 @@ public class UpgradeMenu : MonoBehaviour
         int optionCount = Upgrade.Instance.GetCount();
         float totalHeight = optionCount * 60f;
         float startY = totalHeight / 2 - 30f; // 중앙 기준 정렬
-        
+
         for (int i = 0; i < UpgradeChooseNum; i++)
         {
             GameObject textObject = new GameObject($"UpgradeOption_{i}", typeof(RectTransform), typeof(Text));
@@ -124,7 +130,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         //업그레이드 옵션중 랜덤으로 N개를 골라서 보여줌
         int optionCount = Upgrade.Instance.GetCount();
-        
+
         for (int i = 0; i < UpgradeChooseNum; i++)
         {
             t[i] = Random.Range(0, optionCount);
