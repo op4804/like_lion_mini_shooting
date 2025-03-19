@@ -5,14 +5,15 @@ using static UnityEngine.CullingGroup;
 
 public class Upgrade : MonoBehaviour
 {
+    public GameObject Player;
 
     [HideInInspector]
     public static Upgrade Instance = null;
 
-    private int UpgradeCount;
-        
     private List<String> upgradeOptions = new List<String>();
+    //인덱스별(넣은 순서) 업그레이드 횟수 저장
     private int[] upgradeStack;
+    //Player오브젝트의 Player스크립트 역할
     private Player StatChange;
 
     private void Awake()
@@ -26,7 +27,6 @@ public class Upgrade : MonoBehaviour
             Destroy(this);
         }
     InitializeOptions();
-    StatChange = GetComponent<Player>();
     }
 
     public int GetCount()
@@ -46,22 +46,36 @@ public class Upgrade : MonoBehaviour
         {
             case "Increase Speed":
                 IncreaseSpeed();
+                upgradeStack[0]++;
+                Debug.Log(upgradeStack[0]);
                 break;
             case "Increase Fire Rate":
                 IncreaseFireRate();
+                upgradeStack[1]++;
                 break;
             case "Increase Max Health":
                 IncreaseMaxHealth();
+                upgradeStack[2]++;
+                break;
+            case "More Bullet":
+                upgradeStack[3]++;
+                break;
+            case "Increase Attack":
+                upgradeStack[4]++;
                 break;
         }
     }
 
+    
     public void InitializeOptions()
     {
         upgradeOptions.Add("Increase Speed");
         upgradeOptions.Add("Increase Fire Rate");
         upgradeOptions.Add("Increase Max Health");
+        upgradeOptions.Add("Increase Attack");
+        upgradeOptions.Add("More Bullet");
         upgradeStack = new int[upgradeOptions.Count];
+        StatChange = Player.GetComponent<Player>();
     }
 
 

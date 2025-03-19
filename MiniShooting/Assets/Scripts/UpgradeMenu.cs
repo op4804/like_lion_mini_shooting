@@ -13,6 +13,8 @@ public class UpgradeMenu : MonoBehaviour
     private List<GameObject> optionTexts = new List<GameObject>();
     private int selectedOption = 0;
     private bool isMenuActive = false;
+    private int UpgradeChooseNum = 4;
+    private int[] t = new int[4];
 
     private void Awake()
     {
@@ -44,7 +46,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         isMenuActive = !isMenuActive;
         upgradePanel.SetActive(isMenuActive);
-
+        UpgradeRandom();
         if (isMenuActive)
         {
             Time.timeScale = 0f;
@@ -81,14 +83,14 @@ public class UpgradeMenu : MonoBehaviour
         int optionCount = Upgrade.Instance.GetCount();
         float totalHeight = optionCount * 60f;
         float startY = totalHeight / 2 - 30f; // 중앙 기준 정렬
-
-        for (int i = 0; i < optionCount; i++)
+        
+        for (int i = 0; i < UpgradeChooseNum; i++)
         {
             GameObject textObject = new GameObject($"UpgradeOption_{i}", typeof(RectTransform), typeof(Text));
             textObject.transform.SetParent(upgradePanel.transform, false);
 
             Text textComponent = textObject.GetComponent<Text>();
-            textComponent.text = Upgrade.Instance.GetUpgradeString(i);
+            textComponent.text = Upgrade.Instance.GetUpgradeString(t[i]);
             textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             textComponent.fontSize = 30;
             textComponent.color = Color.white;
@@ -115,6 +117,17 @@ public class UpgradeMenu : MonoBehaviour
             Vector2 targetPosition = textTransform.anchoredPosition;
             targetPosition.x -= 370f;
             arrow.GetComponent<RectTransform>().anchoredPosition = targetPosition;
+        }
+    }
+
+    private void UpgradeRandom()
+    {
+        //업그레이드 옵션중 랜덤으로 N개를 골라서 보여줌
+        int optionCount = Upgrade.Instance.GetCount();
+        
+        for (int i = 0; i < UpgradeChooseNum; i++)
+        {
+            t[i] = Random.Range(0, optionCount);
         }
     }
 }

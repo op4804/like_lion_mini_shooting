@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,19 +16,28 @@ public class Player : MonoBehaviour
     private float playerSpeed = 5.0f; //플레이어 스피드
 
     // 플레이어의 변수
-    private int maxHealth = 6; //플레이어 최대 생명력
+    private int maxHealth = 6; // 플레이어 최대 생명력
     [SerializeField]
-    private int currentHealth=6; //플레이어 현재 생명력
+    private int currentHealth = 6; // 플레이어 현재 생명력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
 
+    // 플레이어의 공격력
+    [SerializeField]
+    private float attack = 10;
+
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
     private Vector2 minBounds;
     private Vector2 maxBounds;
+
+    // @ 수정점 1 무적 상태 여부
+    private SpriteRenderer spriteRenderer;
+    private bool isInvincible = false;
+    public float invincibleTime = 1.5f;
 
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
@@ -47,12 +57,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // 화면 경계
+        // 화면 경계 TODO: gamemanager에서 가져온 값으로 쓰기. 해당 값 그대로 게임매니저에 있음. 
         mainCamera = Camera.main;
 
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
-
         minBounds = new Vector2(bottomLeft.x, bottomLeft.y);
         maxBounds = new Vector2(topRight.x, topRight.y);
 
@@ -63,6 +72,9 @@ public class Player : MonoBehaviour
 
         // 총알 초기화
         currentBullet = ResourceManager.Instance.playerBullet1;
+
+        // @ 수정점 2 Renderer 추가
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -77,7 +89,8 @@ public class Player : MonoBehaviour
         //처음 누를때 딜레이 없이 발사
         if (Input.GetKeyDown(KeyCode.X))
         {
-            Instantiate(currentBullet, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(currentBullet, transform.position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().SetBulletAttack(attack);
             fireTimer = 0f;
         }
         //누르고 있는만큼 나감
@@ -86,7 +99,8 @@ public class Player : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= fireRate)
             {
-                Instantiate(currentBullet, transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(currentBullet, transform.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().SetBulletAttack(attack);
                 fireTimer = 0f;
             }
         }
@@ -106,17 +120,42 @@ public class Player : MonoBehaviour
         transform.position = newPosition;
     }
 
+    // @ 수정점 3 Hit 메소드에 Renderer 코루틴 추가
     public void Hit()
     {
-        currentHealth--;
-
-        if (currentHealth < 0)
+        if (!isInvincible)
         {
-            GameManager.Instance.GameOver();
+            currentHealth--;
+
+            if (currentHealth < 0)
+            {
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                StartCoroutine(Invisible());
+            }
+
+            PlayerHpBar.Instance.UpdateLife();
+        }
+    }
+
+    // @ 수정점 4 1초 단위로 깜빡거리게 코루틴 작성
+    IEnumerator Invisible()
+    {
+        isInvincible = true;
+
+        for(int i = 0; i<10; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
         }
 
-        PlayerHpBar.Instance.UpdateLife();
+        isInvincible = false;
     }
+
 
     public void GetExpParticle(float expAmount) //경험치 획득
     {
