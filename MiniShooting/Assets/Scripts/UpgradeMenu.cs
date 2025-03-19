@@ -5,9 +5,6 @@ using UnityEngine.UIElements;
 
 public class UpgradeMenu : MonoBehaviour
 {
-    [HideInInspector]
-    public static UpgradeMenu Instance = null;
-
     public GameObject arrow;
     public GameObject upgradePanel;
 
@@ -17,18 +14,6 @@ public class UpgradeMenu : MonoBehaviour
     private int selectedOption = 0;
     private int UpgradeChooseNum = 4;
     private int[] t = new int[4];
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
 
     private void Start()
     {

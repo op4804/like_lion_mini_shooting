@@ -15,11 +15,6 @@ public class StatusMenu : MonoBehaviour
         ViewPlayer();
     }
 
-    void Update()
-    {
-
-    }
-
     public void ToggleMenu()
     {
         isMenuActive = !isMenuActive;

@@ -570,6 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusMenu: {fileID: 399335720}
+  upgradeMenu: {fileID: 399335719}
   expText: {fileID: 1682957590}
 --- !u!4 &399335717
 Transform:

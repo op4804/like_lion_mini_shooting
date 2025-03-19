@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private StatusMenu statusMenu;
 
+    [SerializeField]
+    private UpgradeMenu upgradeMenu;
+
     public string IsToggle { get; set; } = null;
 
     public Text expText;
@@ -34,7 +37,7 @@ public class UIManager : MonoBehaviour
     {
         if (IsToggle == "UpgradeMenu" || IsToggle == null)
         {
-            UpgradeMenu.Instance.ToggleMenu();
+            upgradeMenu.ToggleMenu();
         }
     }
 
