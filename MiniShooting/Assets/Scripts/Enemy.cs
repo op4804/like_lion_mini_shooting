@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     public void Hit(float damage)
     {
         currentEnemyHP -= damage;
-        if (currentEnemyHP < 0) // 사망
+        if (currentEnemyHP <= 0) // 사망
         {
             Destroy(gameObject);
             GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
