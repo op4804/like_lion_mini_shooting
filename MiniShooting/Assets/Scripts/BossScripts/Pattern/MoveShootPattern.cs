@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class PatternMove : MonoBehaviour
+public class MoveShootPattern : MonoBehaviour
 {
-    public float moveSpeed = 10f;       
-    public float yRange = 4f;
-    public float shootInterval = 0.25f;
-    public GameObject knifePrefab;    
-    public Transform knifeSpawnPoint;  
+    public GameObject knifePrefab;//던질 칼
+    public Transform knifeSpawnPoint;//칼 던지는 위치
 
-    private float shootTimer;
-    private Vector2 startPos;
-    private int direction = 1;
+    public float moveSpeed = 10f;//칼의 속도
+    public float yRange = 4f;//보스 가동범위
+    public float shootInterval = 0.25f;//칼던지는 딜레이
+
+    protected float shootTimer;
+    protected Vector2 startPos;
+    protected int direction = 1;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class PatternMove : MonoBehaviour
 
         if (Mathf.Abs(transform.position.y - startPos.y) > yRange)
         {
-            direction *= -1; // ���� ����
+            direction *= -1;
         }
     }
 
@@ -48,6 +49,6 @@ public class PatternMove : MonoBehaviour
     {
         GameObject knife = Instantiate(knifePrefab, knifeSpawnPoint.position, Quaternion.identity);
         Rigidbody2D rb = knife.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = Vector2.left * 8f;  // �������� ���� �߻�
+        rb.linearVelocity = Vector2.left * 8f;
     }
 }

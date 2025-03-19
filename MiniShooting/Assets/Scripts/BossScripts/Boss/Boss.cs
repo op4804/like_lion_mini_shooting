@@ -7,24 +7,19 @@ public class Boss : MonoBehaviour
     public GameObject bulletPrefab;
 
 
-    [Header("이동칼던지기")]
-
-    [Header("돌진")]
+    [Header("상하이동및칼던지기")]
+    [Header("돌진후베기")]
     [Header("")]
     [Header("")]
-    public float fireRate = 0.1f;
-    public float spiralSpeed = 10f;
-    public float bulletSpeed = 5f;
     [Header("")]
-    private float timer;
+    //public float fireRate = 0.1f;
+    //public float spiralSpeed = 10f;
+    //public float bulletSpeed = 5f;
+    //private float timer;
     private float angle;
     void start()
     {
-        PatternMove patternmove = GetComponent<PatternMove>();
-        //PatternMove = GetComponent<PatternMove>();
-        //PatternMove = GetComponent<PatternMove>();
-        //PatternMove = GetComponent<PatternMove>();
-        //PatternMove = GetComponent<PatternMove>();
+        //패턴 5개 지정및 랜덤으로 돌릴것
     }
     void Update()
     {
