@@ -36,5 +36,4 @@ public class Boss : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * bulletSpeed;
     }
 
-
 }

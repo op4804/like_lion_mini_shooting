@@ -39,7 +39,7 @@ public class Upgrade : MonoBehaviour
         
     public void UpgradeStack(int selectedOption)
     {
-        string name=upgradeOptions[selectedOption];
+        string name = upgradeOptions[selectedOption];
         Debug.Log(name);
     }
 
