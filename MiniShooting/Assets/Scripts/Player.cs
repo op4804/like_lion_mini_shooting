@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -33,6 +34,11 @@ public class Player : MonoBehaviour
     private Vector2 minBounds;
     private Vector2 maxBounds;
 
+    // @ 수정점 1 무적 상태 여부
+    private SpriteRenderer spriteRenderer;
+    private bool isInvincible = false;
+    public float invincibleTime = 1.5f;
+
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
     public int GetPlayerLevel() => playerLevel;
@@ -66,6 +72,9 @@ public class Player : MonoBehaviour
 
         // 총알 초기화
         currentBullet = ResourceManager.Instance.playerBullet1;
+
+        // @ 수정점 2 Renderer 추가
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -111,17 +120,42 @@ public class Player : MonoBehaviour
         transform.position = newPosition;
     }
 
+    // @ 수정점 3 Hit 메소드에 Renderer 코루틴 추가
     public void Hit()
     {
-        currentHealth--;
-
-        if (currentHealth < 0)
+        if (!isInvincible)
         {
-            GameManager.Instance.GameOver();
+            currentHealth--;
+
+            if (currentHealth < 0)
+            {
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                StartCoroutine(Invisible());
+            }
+
+            PlayerHpBar.Instance.UpdateLife();
+        }
+    }
+
+    // @ 수정점 4 1초 단위로 깜빡거리게 코루틴 작성
+    IEnumerator Invisible()
+    {
+        isInvincible = true;
+
+        for(int i = 0; i<10; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
         }
 
-        PlayerHpBar.Instance.UpdateLife();
+        isInvincible = false;
     }
+
 
     public void GetExpParticle(float expAmount) //경험치 획득
     {
