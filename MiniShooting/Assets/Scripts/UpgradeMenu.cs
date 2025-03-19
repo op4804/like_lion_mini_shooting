@@ -46,7 +46,6 @@ public class UpgradeMenu : MonoBehaviour
     {
         isMenuActive = !isMenuActive;
         upgradePanel.SetActive(isMenuActive);
-        UpgradeRandom();
         if (isMenuActive)
         {
             Time.timeScale = 0f;
@@ -56,6 +55,7 @@ public class UpgradeMenu : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+        UpgradeRandom();
     }
 
     private void HandleMenu()
@@ -128,6 +128,16 @@ public class UpgradeMenu : MonoBehaviour
         for (int i = 0; i < UpgradeChooseNum; i++)
         {
             t[i] = Random.Range(0, optionCount);
+        }
+        TextUpdate();
+    }
+    //실제로 표시될 텍스트 업데이트
+    private void TextUpdate()
+    {
+        for (int i = 0; i < UpgradeChooseNum; i++)
+        {
+            Text textComponent = optionTexts[i].GetComponent<Text>();
+            textComponent.text = Upgrade.Instance.GetUpgradeString(t[i]);
         }
     }
 }
