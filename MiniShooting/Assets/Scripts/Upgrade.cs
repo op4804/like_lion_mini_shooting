@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using static UnityEngine.CullingGroup;
 
 public class Upgrade : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Upgrade : MonoBehaviour
         
     private List<String> upgradeOptions = new List<String>();
     private int[] upgradeStack;
+    private Player StatChange;
 
     private void Awake()
     {
@@ -23,8 +25,8 @@ public class Upgrade : MonoBehaviour
         {
             Destroy(this);
         }
-
-        InitializeOptions();
+    InitializeOptions();
+    StatChange = GetComponent<Player>();
     }
 
     public int GetCount()
@@ -40,7 +42,18 @@ public class Upgrade : MonoBehaviour
     public void UpgradeStack(int selectedOption)
     {
         string name=upgradeOptions[selectedOption];
-        Debug.Log(name);
+        switch (name)
+        {
+            case "Increase Speed":
+                IncreaseSpeed();
+                break;
+            case "Increase Fire Rate":
+                IncreaseFireRate();
+                break;
+            case "Increase Max Health":
+                IncreaseMaxHealth();
+                break;
+        }
     }
 
     public void InitializeOptions()
@@ -51,4 +64,28 @@ public class Upgrade : MonoBehaviour
         upgradeStack = new int[upgradeOptions.Count];
     }
 
+
+
+
+    //업그레이드 요소들
+    void IncreaseSpeed()
+    {
+        //이동속도 증가량
+        float valancedSpeed = 0.5f;
+        StatChange.SetSpeed(valancedSpeed);
+    }
+
+    void IncreaseFireRate()
+    {
+        //공속 증가량
+        float valancedFireRate = 0.02f;
+        StatChange.SetFireRate(valancedFireRate);
+    }
+
+    void IncreaseMaxHealth()
+    {
+        //체력 증가량
+        int valancedHP = 1;
+        StatChange.SetHP(valancedHP);
+    }
 }

@@ -132,4 +132,10 @@ public class Player : MonoBehaviour
 
         UIManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
     }
+
+
+    //플레이어 스텟 변경용 함수들
+    public void SetHP(int newHealth) => maxHealth += newHealth;
+    public void SetSpeed(float newSpeed) => playerSpeed += newSpeed;
+    public void SetFireRate(float newFireRate) => fireRate += newFireRate;
 }
