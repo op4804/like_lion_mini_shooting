@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 8198675895012422511}
   - component: {fileID: 6352040389681455184}
   - component: {fileID: 4327343385162685828}
-  - component: {fileID: 4779354341669106249}
   m_Layer: 0
-  m_Name: BossKnife
+  m_Name: BossKnifeNone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 0, g: 0.017752886, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.16777529, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -163,16 +162,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &4779354341669106249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060509560368311458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cf5e82ee7166a4ba3535e77f785e4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
