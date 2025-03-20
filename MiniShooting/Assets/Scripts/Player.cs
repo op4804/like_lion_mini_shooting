@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
+    private int bulletCount = 1;//쏠 총알 개수
 
     // 플레이어의 공격력
     [SerializeField]
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
     public float GetAttack() => attack;
     public float GetFireRate() => fireRate;
     public float GetplayerSpeed() => playerSpeed;
+    public float GetbulletCount() => bulletCount;
     
     private void Awake()
     {
@@ -93,8 +95,13 @@ public class Player : MonoBehaviour
         //처음 누를때 딜레이 없이 발사
         if (Input.GetKeyDown(KeyCode.X))
         {
-            GameObject bullet = Instantiate(currentBullet, transform.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+            for (int i = 0; i < bulletCount; i++)
+            {
+                Vector3 bulletYChange = transform.position;
+                bulletYChange += new Vector3(0, i * 0.1f, 0);
+                GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
+                bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+            }
             fireTimer = 0f;
         }
         //누르고 있는만큼 나감
@@ -103,8 +110,13 @@ public class Player : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= fireRate)
             {
-                GameObject bullet = Instantiate(currentBullet, transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    Vector3 bulletYChange = transform.position;
+                    bulletYChange += new Vector3(0, i * 0.1f, 0);
+                    GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
+                    bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+                }
                 fireTimer = 0f;
             }
         }
@@ -181,4 +193,6 @@ public class Player : MonoBehaviour
     public void SetHP(int newHealth) => maxHealth += newHealth;
     public void SetSpeed(float newSpeed) => playerSpeed += newSpeed;
     public void SetFireRate(float newFireRate) => fireRate -= newFireRate;
+    public void SetAttack(float newAttack) => attack += newAttack;
+    public void SetBulletCount(int newBulletCount) => bulletCount += newBulletCount; 
 }
