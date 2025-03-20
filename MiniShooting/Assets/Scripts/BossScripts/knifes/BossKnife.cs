@@ -4,6 +4,7 @@ public class BossKnife : MonoBehaviour
 {
     [SerializeField]
     private float speed = 5f;
+    private Vector2 tempVelocity;
     //[SerializeField]
     //private float damage;
 
@@ -12,13 +13,28 @@ public class BossKnife : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         //transform.Translate(Vector2.left * Time.deltaTime * speed);
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.left * speed;
+        //GetComponent<Rigidbody2D>().linearVelocity = Vector2.left * speed;
+
     }
 
+    void TimeStop()
+    {
+        if (MoveShootPattern.timeStoped = true)
+        {
+            tempVelocity = GetComponent<Rigidbody2D>().linearVelocity;
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        }
+    }
+    void TimeResume()
+    {
+        if (MoveShootPattern.timeStoped = false)
+        {
+            GetComponent<Rigidbody2D>().linearVelocity = tempVelocity;
+        }
+    }
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
