@@ -3,7 +3,7 @@ using UnityEngine;
 // @ 프리펩 enemybullet에 연결된 스크립트.
 public class EnemyBullet : MonoBehaviour
 {
-    private float bulletSpeed = 5f;
+    private float bulletSpeed = 3.5f;
     private GameManager gm;
 
     void Update()

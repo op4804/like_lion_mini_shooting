@@ -8,7 +8,13 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private float spawnDelay1 = 2.0f;
+    [SerializeField]
     private float spawnDelay2 = 5.1f;
+
+    [SerializeField]
+    private bool spawnEnemy1Test = true;
+    [SerializeField]
+    private bool spawnEnemy2Test = true;
 
     void Start()
     {
@@ -26,7 +32,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Spawn1()
     {
-        while (true)
+        while (spawnEnemy1Test)
         {
             yield return new WaitForSeconds(spawnDelay1);
             Instantiate(currentSpawnEnemy1, new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0), Quaternion.identity);
@@ -34,7 +40,7 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator Spawn2()
     {
-        while (true)
+        while (spawnEnemy2Test)
         {
             yield return new WaitForSeconds(spawnDelay2);
             Instantiate(currentSpawnEnemy2, new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0), Quaternion.identity);

@@ -371,6 +371,7 @@ MonoBehaviour:
   enemy1: {fileID: 450482112071159595, guid: 6de6e58e838aaa94691d94c0a9f6f622, type: 3}
   enemy2: {fileID: 4637630645489893619, guid: ea5d2b537ca2acd4d98724146ae7bf4c, type: 3}
   enemybullet1: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
+  claw: {fileID: 2386591105652181286, guid: 8dc313f234690bc4a87e5af4bb454493, type: 3}
   expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
 --- !u!4 &358329393
 Transform:
@@ -1042,7 +1043,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1232,7 +1233,7 @@ Transform:
   m_GameObject: {fileID: 1071085242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0, z: 0.054285094}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1435,6 +1436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay1: 2
+  spawnDelay2: 5.1
+  spawnEnemy1Test: 0
+  spawnEnemy2Test: 1
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0

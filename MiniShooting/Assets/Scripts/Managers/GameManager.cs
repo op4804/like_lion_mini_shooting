@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
     public Vector2 maxBounds;
 
     // 플레이어
-    [SerializeField]
-    private GameObject player;
+    public GameObject player;
 
     private void Start()
     {
