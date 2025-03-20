@@ -16,19 +16,15 @@ public class Player : MonoBehaviour
     private float playerSpeed = 5.0f; //플레이어 스피드
 
     // 플레이어의 변수
-    private int maxHealth = 6; // 플레이어 최대 생명력
+    private int maxHealth = 6; //플레이어 최대 생명력
     [SerializeField]
-    private int currentHealth = 6; // 플레이어 현재 생명력
+    private int currentHealth = 6; //플레이어 현재 생명력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
     private int bulletCount = 1;//쏠 총알 개수
-
-    // 플레이어의 공격력
-    [SerializeField]
-    private float attack = 10;
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
@@ -63,11 +59,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // 화면 경계 TODO: gamemanager에서 가져온 값으로 쓰기. 해당 값 그대로 게임매니저에 있음. 
+        // 화면 경계
         mainCamera = Camera.main;
 
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+
         minBounds = new Vector2(bottomLeft.x, bottomLeft.y);
         maxBounds = new Vector2(topRight.x, topRight.y);
 
@@ -95,6 +92,9 @@ public class Player : MonoBehaviour
         //처음 누를때 딜레이 없이 발사
         if (Input.GetKeyDown(KeyCode.X))
         {
+<<<<<<< HEAD
+            Instantiate(currentBullet, transform.position, Quaternion.identity);
+=======
             for (int i = 0; i < bulletCount; i++)
             {
                 Vector3 bulletYChange = transform.position;
@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
                 GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
                 bullet.GetComponent<Bullet>().SetBulletAttack(attack);
             }
+>>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
             fireTimer = 0f;
         }
         //누르고 있는만큼 나감
@@ -110,6 +111,9 @@ public class Player : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= fireRate)
             {
+<<<<<<< HEAD
+                Instantiate(currentBullet, transform.position, Quaternion.identity);
+=======
                 for (int i = 0; i < bulletCount; i++)
                 {
                     Vector3 bulletYChange = transform.position;
@@ -117,6 +121,7 @@ public class Player : MonoBehaviour
                     GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
                     bullet.GetComponent<Bullet>().SetBulletAttack(attack);
                 }
+>>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
                 fireTimer = 0f;
             }
         }
@@ -161,7 +166,7 @@ public class Player : MonoBehaviour
     {
         isInvincible = true;
 
-        for(int i = 0; i<10; i++)
+        for (int i = 0; i < 10; i++)
         {
             spriteRenderer.enabled = false;
             yield return new WaitForSeconds(0.1f);
@@ -170,6 +175,15 @@ public class Player : MonoBehaviour
         }
 
         isInvincible = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemyBullet"))
+        {
+            Hit();
+            Destroy(collision.gameObject);
+        }
     }
 
 

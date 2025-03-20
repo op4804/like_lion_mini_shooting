@@ -1043,7 +1043,8 @@ MonoBehaviour:
   currentHealth: 6
   fireRate: 0.2
   attack: 10
-  invincibleTime: 1.5
+  invincibleTime: 1
+  shieldPrefab: {fileID: 1801166202305555443, guid: 92dc9967994657b44a727d04dac41a0b, type: 3}
 --- !u!58 &1034518130
 CircleCollider2D:
   m_ObjectHideFlags: 0
