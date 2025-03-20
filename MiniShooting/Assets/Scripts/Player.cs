@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int currentHealth = 6; //플레이어 현재 생명력
 
+    private float attack; // 플레이어의 공격력
+
     // 플레이어의 현재 총알
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isInvincible = false;
     public float invincibleTime = 1.5f;
+
 
     public int GetPlayerLevel() => playerLevel;
     public float GetExp() => exp;
@@ -56,7 +59,6 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void Start()
     {
         // 화면 경계
@@ -92,9 +94,8 @@ public class Player : MonoBehaviour
         //처음 누를때 딜레이 없이 발사
         if (Input.GetKeyDown(KeyCode.X))
         {
-<<<<<<< HEAD
             Instantiate(currentBullet, transform.position, Quaternion.identity);
-=======
+
             for (int i = 0; i < bulletCount; i++)
             {
                 Vector3 bulletYChange = transform.position;
@@ -102,7 +103,6 @@ public class Player : MonoBehaviour
                 GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
                 bullet.GetComponent<Bullet>().SetBulletAttack(attack);
             }
->>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
             fireTimer = 0f;
         }
         //누르고 있는만큼 나감
@@ -111,9 +111,7 @@ public class Player : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= fireRate)
             {
-<<<<<<< HEAD
                 Instantiate(currentBullet, transform.position, Quaternion.identity);
-=======
                 for (int i = 0; i < bulletCount; i++)
                 {
                     Vector3 bulletYChange = transform.position;
@@ -121,7 +119,6 @@ public class Player : MonoBehaviour
                     GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
                     bullet.GetComponent<Bullet>().SetBulletAttack(attack);
                 }
->>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
                 fireTimer = 0f;
             }
         }

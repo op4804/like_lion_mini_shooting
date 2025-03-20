@@ -6,7 +6,6 @@ public abstract class Skill : MonoBehaviour
     protected string description { get; set; } //스킬 설명
     protected float coolTime { get; set; }  // 쿨타임
     protected float lastUsedTime { get; set; } = -10f; //마지막 사용 시간
-
     protected bool skillType { get; set; } // false면 passive, true면 active
     public bool IsActiveSkill => skillType;
     protected bool isUnlocked { get; set; } = false; //스킬 활성화 여부

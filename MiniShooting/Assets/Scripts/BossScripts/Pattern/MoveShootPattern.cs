@@ -71,7 +71,7 @@ public class MoveShootPattern : MonoBehaviour
             {
                 // 플레이어 방향 계산
                 Vector2 direction = ((Vector2)playerTransform.position - (Vector2)knife.transform.position).normalized;
-                rb.velocity = direction * bulletSpeed;
+                rb.linearVelocity = direction * bulletSpeed;
             }
         }
     }
