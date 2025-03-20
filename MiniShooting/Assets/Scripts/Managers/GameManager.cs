@@ -26,8 +26,13 @@ public class GameManager : MonoBehaviour
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
+    [HideInInspector]
     public Vector2 minBounds;
     public Vector2 maxBounds;
+
+    // 플레이어
+    [SerializeField]
+    private GameObject player;
 
     private void Start()
     {

@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
+    private int bulletCount = 1;//쏠 총알 개수
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
@@ -35,10 +36,15 @@ public class Player : MonoBehaviour
     private bool isInvincible = false;
     public float invincibleTime = 1.5f;
 
+    public int GetPlayerLevel() => playerLevel;
+    public float GetExp() => exp;
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
-    public int GetPlayerLevel() => playerLevel;
-
+    public float GetAttack() => attack;
+    public float GetFireRate() => fireRate;
+    public float GetplayerSpeed() => playerSpeed;
+    public float GetbulletCount() => bulletCount;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -86,7 +92,17 @@ public class Player : MonoBehaviour
         //처음 누를때 딜레이 없이 발사
         if (Input.GetKeyDown(KeyCode.X))
         {
+<<<<<<< HEAD
             Instantiate(currentBullet, transform.position, Quaternion.identity);
+=======
+            for (int i = 0; i < bulletCount; i++)
+            {
+                Vector3 bulletYChange = transform.position;
+                bulletYChange += new Vector3(0, i * 0.1f, 0);
+                GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
+                bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+            }
+>>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
             fireTimer = 0f;
         }
         //누르고 있는만큼 나감
@@ -95,7 +111,17 @@ public class Player : MonoBehaviour
             fireTimer += Time.deltaTime;
             if (fireTimer >= fireRate)
             {
+<<<<<<< HEAD
                 Instantiate(currentBullet, transform.position, Quaternion.identity);
+=======
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    Vector3 bulletYChange = transform.position;
+                    bulletYChange += new Vector3(0, i * 0.1f, 0);
+                    GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
+                    bullet.GetComponent<Bullet>().SetBulletAttack(attack);
+                }
+>>>>>>> 30e8b1d2646c62782fe985f3b0b56b971b863a01
                 fireTimer = 0f;
             }
         }
@@ -181,4 +207,6 @@ public class Player : MonoBehaviour
     public void SetHP(int newHealth) => maxHealth += newHealth;
     public void SetSpeed(float newSpeed) => playerSpeed += newSpeed;
     public void SetFireRate(float newFireRate) => fireRate -= newFireRate;
+    public void SetAttack(float newAttack) => attack += newAttack;
+    public void SetBulletCount(int newBulletCount) => bulletCount += newBulletCount; 
 }

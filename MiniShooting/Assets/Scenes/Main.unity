@@ -896,7 +896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &712935818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1969,6 +1969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minBounds: {x: 0, y: 0}
   maxBounds: {x: 0, y: 0}
+  player: {fileID: 1034518128}
 --- !u!4 &1757766094
 Transform:
   m_ObjectHideFlags: 0

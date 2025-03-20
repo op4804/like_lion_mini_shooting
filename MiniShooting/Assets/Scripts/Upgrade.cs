@@ -16,6 +16,19 @@ public class Upgrade : MonoBehaviour
     //Player오브젝트의 Player스크립트 역할
     private Player StatChange;
 
+
+    //이걸로 하면 더 복잡해지는 느낌..
+    //연결은 안되어있고 인덱스 순서만 아는 용도
+    public enum UpgradeType
+    {
+        IncreaseSpeed = 0,
+        IncreaseFireRate = 1,
+        IncreaseMaxHealth = 2,
+        IncreaseBulletCount= 3,
+        IncreaseAttack = 4
+    }
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,27 +54,30 @@ public class Upgrade : MonoBehaviour
         
     public void UpgradeStack(int selectedOption)
     {
+        Debug.Log(upgradeOptions[selectedOption]);
         string name=upgradeOptions[selectedOption];
         switch (name)
         {
+            //업그레이드 메뉴에서 선택되면 값 변경
             case "Increase Speed":
                 IncreaseSpeed();
-                upgradeStack[0]++;
-                Debug.Log(upgradeStack[0]);
+                upgradeStack[(int)UpgradeType.IncreaseSpeed]++;
                 break;
             case "Increase Fire Rate":
                 IncreaseFireRate();
-                upgradeStack[1]++;
+                upgradeStack[(int)UpgradeType.IncreaseFireRate]++;
                 break;
             case "Increase Max Health":
                 IncreaseMaxHealth();
-                upgradeStack[2]++;
+                upgradeStack[(int)UpgradeType.IncreaseMaxHealth]++;
                 break;
-            case "More Bullet":
-                upgradeStack[3]++;
+            case "Increase Bullet Count":
+                IncreaseBulletCount();
+                upgradeStack[(int)UpgradeType.IncreaseBulletCount]++;
                 break;
             case "Increase Attack":
-                upgradeStack[4]++;
+                upgradeStack[(int)UpgradeType.IncreaseAttack]++;
+                IncreaseAttack();
                 break;
         }
     }
@@ -72,8 +88,8 @@ public class Upgrade : MonoBehaviour
         upgradeOptions.Add("Increase Speed");
         upgradeOptions.Add("Increase Fire Rate");
         upgradeOptions.Add("Increase Max Health");
+        upgradeOptions.Add("Increase Bullet Count");
         upgradeOptions.Add("Increase Attack");
-        upgradeOptions.Add("More Bullet");
         upgradeStack = new int[upgradeOptions.Count];
         StatChange = Player.GetComponent<Player>();
     }
@@ -85,21 +101,35 @@ public class Upgrade : MonoBehaviour
     void IncreaseSpeed()
     {
         //이동속도 증가량
-        float valancedSpeed = 0.5f;
-        StatChange.SetSpeed(valancedSpeed);
+        float balancedSpeed = 0.5f;
+        StatChange.SetSpeed(balancedSpeed);
     }
 
     void IncreaseFireRate()
     {
         //공속 증가량
-        float valancedFireRate = 0.02f;
-        StatChange.SetFireRate(valancedFireRate);
+        float balancedFireRate = 0.02f;
+        StatChange.SetFireRate(balancedFireRate);
     }
 
     void IncreaseMaxHealth()
     {
         //체력 증가량
-        int valancedHP = 1;
-        StatChange.SetHP(valancedHP);
+        int balancedHP = 1;
+        StatChange.SetHP(balancedHP);
+    }
+
+    void IncreaseBulletCount()
+    {
+        //총알 개수 증가
+        int balancedBC = 1;
+        StatChange.SetBulletCount(balancedBC);
+    }
+
+    void IncreaseAttack()
+    {
+        //공격력 증가
+        int balancedATK = 1;
+        StatChange.SetAttack(balancedATK);
     }
 }
