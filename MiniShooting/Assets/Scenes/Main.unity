@@ -1968,6 +1968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minBounds: {x: 0, y: 0}
   maxBounds: {x: 0, y: 0}
+  player: {fileID: 1034518128}
 --- !u!4 &1757766094
 Transform:
   m_ObjectHideFlags: 0
