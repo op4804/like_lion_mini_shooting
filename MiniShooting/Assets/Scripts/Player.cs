@@ -39,10 +39,14 @@ public class Player : MonoBehaviour
     private bool isInvincible = false;
     public float invincibleTime = 1.5f;
 
+    public int GetPlayerLevel() => playerLevel;
+    public float GetExp() => exp;
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
-    public int GetPlayerLevel() => playerLevel;
-
+    public float GetAttack() => attack;
+    public float GetFireRate() => fireRate;
+    public float GetplayerSpeed() => playerSpeed;
+    
     private void Awake()
     {
         if (Instance == null)
