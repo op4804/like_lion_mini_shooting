@@ -1,31 +1,38 @@
 using UnityEngine;
+using System.Collections;
 
 public class MoveShootPattern : MonoBehaviour
 {
-    public GameObject knifePrefab;//던질 칼
-    public Transform knifeSpawnPoint;//칼 던지는 위치
+    public static bool timeStoped = false;
 
-    public float moveSpeed = 10f;//칼의 속도
-    public float yRange = 4f;//보스 가동범위
-    public float shootInterval = 0.25f;//칼던지는 딜레이
+    public GameObject knifePrefab;// 던질 칼
+    public Transform knifeSpawnTransform;// 칼 던지는 위치
+    public Transform playerTransform;// 플레이어 위치
 
-    protected float shootTimer;
-    protected Vector2 startPos;
-    protected int direction = 1;
+    public float moveSpeed = 10f;// 보스 이동 속도
+    public float yRange = 4f;// 보스 가동 범위
+    public float shootInterval = 0.25f;// 칼 던지는 딜레이
+
+    public int knifeCount = 8; // 생성할 칼 개수
+    public float radius = 2f; // 원의 반지름
+    public float bulletSpeed = 8f; // 칼의 속도
+
+    private Vector2 startPos;
+    private int direction = 1;
 
     void Start()
     {
-        startPos = transform.position;
-        shootTimer = shootInterval;
+        startPos = transform.position; //발사위치초기화
+
+        StartCoroutine(ShootingCoroutine()); // 코루틴 실행
     }
 
     void Update()
     {
         MoveVertical();
-        HandleShooting();
     }
 
-    void MoveVertical()
+    void MoveVertical() // 위아래 이동
     {
         transform.Translate(Vector2.up * direction * moveSpeed * Time.deltaTime);
 
@@ -35,20 +42,37 @@ public class MoveShootPattern : MonoBehaviour
         }
     }
 
-    void HandleShooting()
+    IEnumerator ShootingCoroutine() // 코루틴을 이용한 총알 발사
     {
-        shootTimer -= Time.deltaTime;
-        if (shootTimer <= 0)
+        while (true)
         {
-            ShootKnife();
-            shootTimer = shootInterval;
+            //SpawnCircularKnives();
+            ShootCircularKnives();
+            yield return new WaitForSeconds(shootInterval); // 일정 시간 대기 후 반복
         }
     }
 
-    void ShootKnife()
+    public void ShootCircularKnives()
     {
-        GameObject knife = Instantiate(knifePrefab, knifeSpawnPoint.position, Quaternion.identity);
-        Rigidbody2D rb = knife.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = Vector2.left * 8f;
+        for (int i = 0; i < knifeCount; i++)
+        {
+            // 원형 배치를 위한 각도 계산
+            float angle = (360f / knifeCount) * i;
+            Vector2 spawnPosition = (Vector2)transform.position + new Vector2(
+                Mathf.Cos(angle * Mathf.Deg2Rad) * radius,
+                Mathf.Sin(angle * Mathf.Deg2Rad) * radius
+            );
+
+            // 칼 생성
+            GameObject knife = Instantiate(knifePrefab, spawnPosition, Quaternion.identity);
+            Rigidbody2D rb = knife.GetComponent<Rigidbody2D>();
+
+            if (rb != null && playerTransform != null)
+            {
+                // 플레이어 방향 계산
+                Vector2 direction = ((Vector2)playerTransform.position - (Vector2)knife.transform.position).normalized;
+                rb.velocity = direction * bulletSpeed;
+            }
+        }
     }
 }
