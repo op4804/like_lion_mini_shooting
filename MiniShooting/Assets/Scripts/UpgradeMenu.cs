@@ -13,7 +13,8 @@ public class UpgradeMenu : MonoBehaviour
     private List<GameObject> optionTexts = new List<GameObject>();
     private int selectedOption = 0;
     const int UpgradeChooseNum = 4;
-    int[] chosenUpgrades = new int[UpgradeChooseNum];
+    //업그레이드마다 인덱스가 있고, 랜덤으로 뽑은 인덱스들을 저장.
+    int[] choosenUpgrades = new int[UpgradeChooseNum];
 
 
     private void Start()
@@ -65,7 +66,8 @@ public class UpgradeMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Upgrade.Instance.UpgradeStack(chosenUpgrades[selectedOption]);
+            //랜덤으로 뽑은 4개의 인덱스중 선택
+            Upgrade.Instance.UpgradeStack(choosenUpgrades[selectedOption]);
             ToggleMenu();
         }
     }
@@ -82,7 +84,7 @@ public class UpgradeMenu : MonoBehaviour
             textObject.transform.SetParent(upgradePanel.transform, false);
 
             Text textComponent = textObject.GetComponent<Text>();
-            textComponent.text = Upgrade.Instance.GetUpgradeString(chosenUpgrades[i]);
+            textComponent.text = Upgrade.Instance.GetUpgradeString(choosenUpgrades[i]);
             textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             textComponent.fontSize = 30;
             textComponent.color = Color.white;
@@ -116,6 +118,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         //업그레이드 옵션중 랜덤으로 N개를 골라서 보여줌
         int optionCount = Upgrade.Instance.GetCount();
+        //중복확인용 자료구조
         HashSet<int> selectedIndexes = new HashSet<int>();
 
         while (selectedIndexes.Count < UpgradeChooseNum)
@@ -128,20 +131,20 @@ public class UpgradeMenu : MonoBehaviour
                 selectedIndexes.Add(randomValue);
             }
         }
-        
-        selectedIndexes.CopyTo(chosenUpgrades);
+        //choosenUpgrades에 자료 복사
+        selectedIndexes.CopyTo(choosenUpgrades);
 
-        TextUpdate(chosenUpgrades);
+        TextUpdate(choosenUpgrades);
     }
     //실제로 표시될 텍스트 업데이트
-    private void TextUpdate(int[] chosenUpgrades)
+    private void TextUpdate(int[] choosenUpgrades)
     {
         for (int i = 0; i < UpgradeChooseNum; i++)
         {
             if (i < optionTexts.Count) // 배열 범위를 벗어나지 않도록 체크
             {
                 Text textComponent = optionTexts[i].GetComponent<Text>();
-                textComponent.text = Upgrade.Instance.GetUpgradeString(chosenUpgrades[i]);
+                textComponent.text = Upgrade.Instance.GetUpgradeString(choosenUpgrades[i]);
             }
         }
     }

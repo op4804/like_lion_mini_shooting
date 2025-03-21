@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float bulletSpeed = 5f; //발사체 속도
+    private float bulletSpeed; //발사체 속도
     [SerializeField]
-    private float bulletAttack = 10f;
+    private float bulletAttack;
 
     void Update()
     {
@@ -37,5 +37,9 @@ public class Bullet : MonoBehaviour
     public void SetBulletAttack(float bulletAttack)
     {
         this.bulletAttack = bulletAttack;
+    }
+    public void SetBulletSpeed(float bulletSpeed)
+    {
+        this.bulletSpeed = bulletSpeed;
     }
 }
