@@ -1,51 +1,124 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public class DashSlashPattern : MonoBehaviour
+public class DashPattern : MonoBehaviour, IBossPattern
 {
-    public LineRenderer warningLine;
-    public Transform player;
-    public float dashSpeed = 15f;
-    public float warningDuration = 1.5f;
-    public GameObject slashPrefab;
+    public float dashSpeed = 20f;
+    public float dashWaringTime = 2f;
+    public float Waringwidth = 2f;
+    public float movetime = 1f;
+    public float dashWaitTime = 2f;
+
+    private Vector2 startPos;
+    private bool isActive = false;
+
+    private LineRenderer lineRenderer;
+    private Transform playerTransform;
 
 
-    void Start()
+    void Awake()
     {
-        
+        startPos = transform.position;
+
+        lineRenderer = GetComponent<LineRenderer>(); // 라인 렌더러 가져오기
+        if (lineRenderer == null)
+        {
+            lineRenderer = gameObject.AddComponent<LineRenderer>(); // 없으면 추가
+        }
+        lineRenderer.startWidth = Waringwidth;
+        lineRenderer.endWidth = Waringwidth;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 머티리얼 적용
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+        Color newStartColor = lineRenderer.startColor;
+        Color newEndColor = lineRenderer.endColor;
+        newStartColor.a = 0.5f;
+        newEndColor.a = 0.5f;
+        lineRenderer.startColor = newStartColor;
+        lineRenderer.endColor = newEndColor;
+        lineRenderer.enabled = false; // 기본적으로 비활성화
+
+        playerTransform = Player.Instance.transform;
+    }
+
+    public void StartPattern()
+    {
+        isActive = true;
+        StartCoroutine(MakeWarningCoroutine());
+    }
+
+    public void StopPattern()
+    {
+        isActive = false;
+        StopAllCoroutines();
+    }
+
+    IEnumerator MakeWarningCoroutine()
+    {
+        if (playerTransform == null)
+            yield break;
+
+        lineRenderer.enabled = true;
+
+        // 라인 렌더러의 시작점과 끝점을 설정하여 플레이어 방향으로 빨간 선을 그림
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, playerTransform.position);
+
+        yield return new WaitForSeconds(dashWaringTime); // 대시 전 경고 시간
+
+        lineRenderer.enabled = false;
+        StartCoroutine(Move());
+
+    }
+    IEnumerator Move()
+    {
+        if (playerTransform == null)
+            yield break;
+
+        float elapsedTime = 0f; // 경과 시간
+        Vector2 startPos = transform.position; // 시작 위치
+        Vector2 targetPos = playerTransform.position; // 목표 위치
+        Vector2 direction = (targetPos - startPos).normalized; // 이동 방향
+
+        while (elapsedTime < movetime)
+        {
+            transform.position += (Vector3)(direction * dashSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 이동이 끝나면 SlashCoroutine 실행
+        StartCoroutine(SlashCoroutine());
+    }
+
+    IEnumerator SlashCoroutine()
+    {
+
+        // 칼 이펙트 생성 (여기서는 간단한 파티클 효과)
+        GameObject slashEffect = new GameObject("SlashEffect");
+        SpriteRenderer renderer = slashEffect.AddComponent<SpriteRenderer>();
+        renderer.color = Color.red; // 붉은색 효과
+        slashEffect.transform.position = transform.position;
+        Destroy(slashEffect, 0.5f); // 0.5초 후 제거
+
+        // 범위 내 플레이어가 있으면 피해 입히기
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(transform.position, Waringwidth / 2f);
+        foreach (var hit in hitObjects)
+        {
+            if (hit.CompareTag("Player"))
+            {
+                hit.gameObject.GetComponent<Player>().Hit();
+            }
+
+        }
+        yield return new WaitForSeconds(dashWaitTime);
+
+        this.transform.position = startPos;
+        StartPattern();
     }
 
 
-    void Update()
-    {
-        
-    }
 
-
-
-    public IEnumerator DashSlashPatternC()
-    {
-        Vector2 dashDir = (player.position - transform.position).normalized;
-        Vector2 targetPos = (Vector2)transform.position + dashDir * 10f;
-
-        warningLine.enabled = true;
-        warningLine.SetPosition(0, transform.position);
-        warningLine.SetPosition(1, targetPos);
-        yield return new WaitForSeconds(warningDuration);
-        warningLine.enabled = false;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = dashDir * dashSpeed;
-        yield return new WaitForSeconds(0.5f);
-
-        rb.linearVelocity = Vector2.zero;
-
-        GameObject slash = Instantiate(slashPrefab, transform.position, Quaternion.identity);
-        LineRenderer slashLine = slash.GetComponent<LineRenderer>();
-        slashLine.SetPosition(0, transform.position);
-        slashLine.SetPosition(1, targetPos);
-
-        Destroy(slash, 1f);
-    }
 
 }
