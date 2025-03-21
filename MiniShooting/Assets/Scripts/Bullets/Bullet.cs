@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float bulletSpeed; //발사체 속도
-    [SerializeField]
-    private float bulletAttack;
-
-    void Update()
+    void Start()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * bulletSpeed);
+        GetComponent<Rigidbody2D>().linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
     }
 
     private void OnBecameInvisible()
@@ -19,27 +15,26 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (SkillManager.Instance.IsBulletHaveEffect(gameObject))
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Enemy>().Hit(bulletAttack);
+            collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
             // TODO: 관통?
-            Destroy(gameObject);
+            SkillManager.Instance.NotifyEffectComplete(gameObject);
         }
         else if (collision.gameObject.CompareTag("Boss"))
-        {
-            Destroy(gameObject);
-            collision.gameObject.GetComponent<BossStatus>().Damaged(1);//나중에 탄환데미지로변경 테스트로 1넣음
-
+        {            
+            collision.gameObject.GetComponent<BossStatus>().Hit(Player.Instance.GetAttack());
+            SkillManager.Instance.NotifyEffectComplete(gameObject);
         }
     }
-
-    public void SetBulletAttack(float bulletAttack)
+    public bool NotifyEffectOutOfScreen()
     {
-        this.bulletAttack = bulletAttack;
-    }
-    public void SetBulletSpeed(float bulletSpeed)
-    {
-        this.bulletSpeed = bulletSpeed;
+        return true;
     }
 }
