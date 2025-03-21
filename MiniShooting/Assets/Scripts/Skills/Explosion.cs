@@ -13,7 +13,7 @@ public class Explosion : Skill
         skillName = "폭발";
         description = "적을 맞추면 폭발하여 주변 적에게 피해를 줍니다.";
         skillType = false; // 패시브 스킬
-        isUnlocked = true;
+        isUnlocked = false;
     }
 
     public override void ApplyEffect()
