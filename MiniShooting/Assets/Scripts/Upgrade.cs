@@ -65,6 +65,7 @@ public class Upgrade : MonoBehaviour
                 IncreaseFireRate();
                 break;
             case UpgradeType.IncreaseMaxHealth:
+                IncreaseCurrentHealth();
                 IncreaseMaxHealth();
                 break;
             case UpgradeType.IncreaseBulletCount:
@@ -96,7 +97,8 @@ public class Upgrade : MonoBehaviour
     {
         //이동속도 증가량
         float balancedSpeed = 0.5f;
-        StatChange.SetSpeed(balancedSpeed);
+        float t = StatChange.GetplayerSpeed() + balancedSpeed;
+        StatChange.SetSpeed(t);
         upgradeStack[(int)UpgradeType.IncreaseSpeed]++;
     }
 
@@ -104,7 +106,8 @@ public class Upgrade : MonoBehaviour
     {
         //공속 증가량
         float balancedFireRate = 0.02f;
-        StatChange.SetFireRate(balancedFireRate);
+        float t = StatChange.GetFireRate() - balancedFireRate;
+        StatChange.SetFireRate(t);
         upgradeStack[(int)UpgradeType.IncreaseFireRate]++;
     }
 
@@ -112,30 +115,44 @@ public class Upgrade : MonoBehaviour
     {
         //체력 증가량
         int balancedHP = 2;
-        StatChange.SetHP(balancedHP);
+        int t = StatChange.GetMaxHealth() + balancedHP;
+        StatChange.SetHP(t);
         upgradeStack[(int)UpgradeType.IncreaseMaxHealth]++;
+        PlayerHpBar.Instance.UpdateLife();
+    }
+
+    void IncreaseCurrentHealth()
+    {
+        //업글할때 체력 회복용
+        int balancedHP = 2;
+        int t = StatChange.GetCurrentHealth() + balancedHP;
+        StatChange.SetCurrentHP(t);
     }
 
     void IncreaseBulletCount()
     {
         //총알 개수 증가
         int balancedBC = 1;
-        StatChange.SetBulletCount(balancedBC);
+        int t = StatChange.GetbulletCount() + balancedBC;
+        StatChange.SetBulletCount(t);
         upgradeStack[(int)UpgradeType.IncreaseBulletCount]++;
     }
 
     void IncreaseAttack()
     {
         //공격력 증가
-        int balancedATK = 1;
-        StatChange.SetAttack(balancedATK);
+        float balancedATK = 1f;
+        float t = StatChange.GetAttack() + balancedATK;
+        StatChange.SetAttack(t);
         upgradeStack[(int)UpgradeType.IncreaseAttack]++;
     }
 
     void IncreaseBulletSpeed()
     {
+        //총알 속도 증가
         float balancedBS = 0.5f;
-        StatChange.SetBulletSpeed(balancedBS);
+        float t = StatChange.GetbulletSpeed() + balancedBS;
+        StatChange.SetBulletSpeed(t);
         upgradeStack[(int)UpgradeType.IncreaseBulletSpeed]++;
     }
 }

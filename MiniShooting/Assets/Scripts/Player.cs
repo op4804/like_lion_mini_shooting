@@ -20,14 +20,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int currentHealth = 6; //플레이어 현재 생명력
 
-    private float attack = 10f; // 플레이어의 공격력
+    private float attack = 3f; // 플레이어의 공격력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
     private int bulletCount = 1;//쏠 총알 개수
-    private float bulletSpeed = 5f;
+    private float bulletSpeed = 15f; //발사체 스피드
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
@@ -42,14 +42,15 @@ public class Player : MonoBehaviour
 
     public int GetPlayerLevel() => playerLevel;
     public float GetExp() => exp;
+    public float GetExpScale() => expScale;
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
     public float GetAttack() => attack;
     public float GetFireRate() => fireRate;
     public float GetplayerSpeed() => playerSpeed;
-    public float GetbulletCount() => bulletCount;
+    public int GetbulletCount() => bulletCount;
     public float GetbulletSpeed() => bulletSpeed;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -118,9 +119,7 @@ public class Player : MonoBehaviour
             Vector3 bulletYChange = transform.position;
             bulletYChange += new Vector3(0, i * sign * 0.1f, 0);
 
-            GameObject bullet = ResourceManager.Instance.Create("playerBullet", bulletYChange);
-            bullet.GetComponent<Bullet>().SetBulletAttack(attack);
-            bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
+            GameObject bullet = SkillManager.Instance.CreateBullet(bulletYChange);
         }
     }
 
@@ -141,6 +140,13 @@ public class Player : MonoBehaviour
     // @ 수정점 3 Hit 메소드에 Renderer 코루틴 추가
     public void Hit()
     {
+        Invincible invSkill = GetComponent<Invincible>();
+        if (invSkill != null && invSkill.IsInvincible)
+        {
+            Debug.Log("무적 상태 확인용 로그 2-hit 메소드 부분");
+            return;
+        }
+
         if (!isInvincible)
         {
             currentHealth--;
@@ -178,6 +184,13 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemyBullet"))
         {
+            Invincible invSkill = GetComponent<Invincible>();
+            if (invSkill != null && invSkill.IsInvincible)
+            {
+                Debug.Log("무적 상태 확인용 로그 1-trigger");
+                Destroy(collision.gameObject);
+                return;
+            }
             Hit();
             Destroy(collision.gameObject);
         }
@@ -192,19 +205,40 @@ public class Player : MonoBehaviour
         if (exp % expScale == 0) // expScale의 배수마다 레벨업
         {
             playerLevel += 1;
-
+            exp = 0;
             UIManager.Instance.ToggleUpgradeMenu(); //레벨업 능력치 상승 메뉴
         }
 
         UIManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
+
+        //경험치 먹은거 체크
+        //경험지 먹은지 3초 지나면 체크 해제
+        expFlag = true;
+        if (StopCoro != null)
+        {
+            StopCoroutine(StopCoro);
+        }
+        StopCoro = StartCoroutine(Timer());
     }
+
+    private bool expFlag = false;
+    private Coroutine StopCoro;
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(3);
+        expFlag = false;
+    }
+    public bool Getflag() => expFlag;
+
+
 
 
     //플레이어 스텟 변경용 함수들
-    public void SetHP(int maxHealth) => this.maxHealth += maxHealth;
-    public void SetSpeed(float playerSpeed) => this.playerSpeed += playerSpeed;
-    public void SetFireRate(float fireRate) => this.fireRate -= fireRate;
-    public void SetAttack(float attack) => this.attack += attack;
-    public void SetBulletCount(int bulletCount) => this.bulletCount += bulletCount;
-    public void SetBulletSpeed(float bulletSpeed) => this.bulletSpeed += bulletSpeed;
+    public void SetHP(int maxHealth) => this.maxHealth = maxHealth;
+    public void SetCurrentHP(int currentHealth) => this.currentHealth = currentHealth;
+    public void SetSpeed(float playerSpeed) => this.playerSpeed = playerSpeed;
+    public void SetFireRate(float fireRate) => this.fireRate = fireRate;
+    public void SetAttack(float attack) => this.attack = attack;
+    public void SetBulletCount(int bulletCount) => this.bulletCount = bulletCount;
+    public void SetBulletSpeed(float bulletSpeed) => this.bulletSpeed = bulletSpeed;
 }
