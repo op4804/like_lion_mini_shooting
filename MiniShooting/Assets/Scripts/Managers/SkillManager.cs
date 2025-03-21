@@ -49,6 +49,8 @@ public class SkillManager : MonoBehaviour
         {
             skills[currentSkillIndex].UseSkill();
         }
+
+        
     }
 
     //발사체 효과 추가

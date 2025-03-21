@@ -149,6 +149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1357657262}
+  - {fileID: 634736118}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &131679081
@@ -838,6 +839,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 517248824}
   m_CullTransparentMesh: 1
 --- !u!1 &629602471
+--- !u!1 &634736117
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -850,6 +852,10 @@ GameObject:
   - component: {fileID: 629602473}
   m_Layer: 5
   m_Name: ExpBar
+  - component: {fileID: 634736118}
+  - component: {fileID: 634736119}
+  m_Layer: 0
+  m_Name: Invincible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -857,11 +863,15 @@ GameObject:
   m_IsActive: 1
 --- !u!224 &629602472
 RectTransform:
+--- !u!4 &634736118
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629602471}
+  m_GameObject: {fileID: 634736117}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -876,6 +886,10 @@ RectTransform:
   m_SizeDelta: {x: 0.00012207, y: -444.9716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &629602473
+  m_Children: []
+  m_Father: {fileID: 49108571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &634736119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -913,6 +927,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629602471}
   m_CullTransparentMesh: 1
+  m_GameObject: {fileID: 634736117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d54276db2fa1e4ba398969922d63fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &666339738
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,8 +2406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultBulletPrefab: {fileID: 0}
+  skillsRoot: {fileID: 49108571}
   skills:
   - {fileID: 1357657263}
+  - {fileID: 634736119}
 --- !u!4 &1891225088
 Transform:
   m_ObjectHideFlags: 0
