@@ -1,59 +1,79 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
-public class MoveShootPattern : MonoBehaviour
+public class MoveShootPattern : MonoBehaviour, IBossPattern
 {
-    public static bool timeStoped = false;
-
     public GameObject knifePrefab;// 던질 칼
     public Transform knifeSpawnTransform;// 칼 던지는 위치
-    public Transform playerTransform;// 플레이어 위치
 
-    public float moveSpeed = 10f;// 보스 이동 속도
-    public float yRange = 4f;// 보스 가동 범위
-    public float shootInterval = 0.25f;// 칼 던지는 딜레이
-
-    public int knifeCount = 8; // 생성할 칼 개수
+    public float moveSpeed = 5f;// 보스 이동 속도
+    public float moveRange = 4f;// 보스 가동 범위
+    public float makeInterval = 0.25f;// 칼 만드는 딜레이
+    public float throwInterval = 0.25f;// 칼 던지는 딜레이
+    public int knifeCount = 5; // 생성할 칼 개수
     public float radius = 2f; // 원의 반지름
-    public float bulletSpeed = 8f; // 칼의 속도
+    public float knifeSpeed = 5f; // 칼의 속도
 
+    private List<GameObject> knifetList;
     private Vector2 startPos;
     private int direction = 1;
+    private bool isActive = false;
 
-    void Start()
+    void Awake()
     {
-        startPos = transform.position; //발사위치초기화
-
-        StartCoroutine(ShootingCoroutine()); // 코루틴 실행
+        startPos = transform.position; //위치초기화
+        knifetList = new List<GameObject>(); //생성된 칼을 저장할 리스트 초기화
     }
 
     void Update()
     {
-        MoveVertical();
+        if (isActive)
+        {
+            Move();
+        }
     }
 
-    void MoveVertical() // 위아래 이동
+    public void StartPattern()
+    {
+        isActive = true;
+        StartCoroutine(ShotCoroutine());
+    }
+
+    public void StopPattern()
+    {
+        isActive = false;
+        StopAllCoroutines();
+        knifetList.Clear();
+    }
+
+    void Move() // 위아래 이동
     {
         transform.Translate(Vector2.up * direction * moveSpeed * Time.deltaTime);
 
-        if (Mathf.Abs(transform.position.y - startPos.y) > yRange)
+        if (Mathf.Abs(transform.position.y - startPos.y) > moveRange)
         {
             direction *= -1;
         }
     }
 
-    IEnumerator ShootingCoroutine() // 코루틴을 이용한 총알 발사
+    IEnumerator ShotCoroutine() // 코루틴을 이용한 총알 발사
     {
         while (true)
         {
-            //SpawnCircularKnives();
-            ShootCircularKnives();
-            yield return new WaitForSeconds(shootInterval); // 일정 시간 대기 후 반복
+            yield return StartCoroutine(MakeKnifeCircle());
+            if(BossPatternManager.timeStoped == false)
+            {
+                yield return StartCoroutine(throwKnife());     
+            }
         }
+
     }
 
-    public void ShootCircularKnives()
-    {
+     IEnumerator MakeKnifeCircle()
+     {
+
         for (int i = 0; i < knifeCount; i++)
         {
             // 원형 배치를 위한 각도 계산
@@ -63,16 +83,32 @@ public class MoveShootPattern : MonoBehaviour
                 Mathf.Sin(angle * Mathf.Deg2Rad) * radius
             );
 
-            // 칼 생성
+            // 칼 생성및 방향 설정
             GameObject knife = Instantiate(knifePrefab, spawnPosition, Quaternion.identity);
-            Rigidbody2D rb = knife.GetComponent<Rigidbody2D>();
 
-            if (rb != null && playerTransform != null)
-            {
-                // 플레이어 방향 계산
-                Vector2 direction = ((Vector2)playerTransform.position - (Vector2)knife.transform.position).normalized;
-                rb.linearVelocity = direction * bulletSpeed;
-            }
+            Rigidbody2D kniferigidbody = knife.GetComponent<Rigidbody2D>();
+            Vector2 direction = ((Vector2)Player.Instance.transform.position - (Vector2)knife.transform.position).normalized;
+            float angle2 = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            kniferigidbody.SetRotation(angle2);
+
+            //칼 리스트에 추가
+            knifetList.Add(knife);
         }
+        yield return new WaitForSeconds(makeInterval); // 만드는텀
     }
+
+    IEnumerator throwKnife()
+    {
+        foreach (GameObject knife in knifetList)
+        {
+            Rigidbody2D kniferigidbody = knife.GetComponent<Rigidbody2D>();
+            float angle = kniferigidbody.rotation;
+            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+            kniferigidbody.linearVelocity = direction * knifeSpeed;
+        }
+
+        knifetList.Clear(); //칼 리스트 초기화
+        yield return new WaitForSeconds(throwInterval); // 던지는텀
+    }
+
 }

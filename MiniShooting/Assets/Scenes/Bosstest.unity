@@ -461,6 +461,7 @@ MonoBehaviour:
   enemy1: {fileID: 2238792627457520440, guid: 6be842404b6fec8429056ccf2f62135c, type: 3}
   enemy2: {fileID: 0}
   enemybullet1: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
+  claw: {fileID: 0}
   expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
 --- !u!4 &171631033
 Transform:
@@ -586,6 +587,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay1: 2
+  spawnDelay2: 5.1
+  spawnEnemy1Test: 1
+  spawnEnemy2Test: 1
 --- !u!4 &337018525
 Transform:
   m_ObjectHideFlags: 0
@@ -601,6 +605,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &417929941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4453166037403692332, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+  m_PrefabInstance: {fileID: 592259077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &471636952
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,9 +842,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1467815567}
     - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: cooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 1060509560368311458, guid: 18f69f0a2c46c18429aa081198f1688d, type: 3}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: patternDuration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: 'managedReferences[-2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: patternScripts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: 'patternScripts.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1479667003}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: 'patternScripts.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1479667003}
+    - target: {fileID: 5691782795607904653, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: 'patternScripts.Array.data[2]'
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       propertyPath: yRange
       value: 5
@@ -845,12 +886,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: moveRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       propertyPath: knifeCount
-      value: 15
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: knifeSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+      propertyPath: moveyRange
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       propertyPath: bulletSpeed
@@ -872,13 +925,15 @@ PrefabInstance:
       propertyPath: knifeSpawnTransform
       value: 
       objectReference: {fileID: 1793294369}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7774641131141765062, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+    - {fileID: 1789506437546698293, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4453166037403692332, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1479666991}
+      addedObject: {fileID: 1479667003}
   m_SourcePrefab: {fileID: 100100000, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
 --- !u!1 &693009172
 GameObject:
@@ -1357,7 +1412,6 @@ MonoBehaviour:
   exp: 0
   currentHealth: 6
   fireRate: 0.2
-  attack: 10
   invincibleTime: 1.5
 --- !u!58 &1467815570
 CircleCollider2D:
@@ -1465,31 +1519,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1479666990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4453166037403692332, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
-  m_PrefabInstance: {fileID: 592259077}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1479666991
+--- !u!114 &1479667003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479666990}
+  m_GameObject: {fileID: 417929941}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a26c8ba62c9b8a4a99b61ea69ba88b0, type: 3}
+  m_Script: {fileID: 11500000, guid: fafc05eccae31f54e91fc748068c0adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveInterval: 1
-  moveDirection: {x: 0, y: 1}
-  moveDistance: 1
-  bulletPrefab: {fileID: 1060509560368311458, guid: 18f69f0a2c46c18429aa081198f1688d, type: 3}
-  bulletCount: 8
-  bulletSpawnInterval: 0
-  bulletSpeed: 5
-  bulletDelay: 2
+  dashSpeed: 20
+  dashWaringTime: 2
+  Waringwidth: 2
+  movetime: 1
+  dashWaitTime: 2
 --- !u!1 &1571782989
 GameObject:
   m_ObjectHideFlags: 0
