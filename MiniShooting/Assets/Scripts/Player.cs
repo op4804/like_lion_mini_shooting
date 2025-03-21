@@ -42,12 +42,13 @@ public class Player : MonoBehaviour
 
     public int GetPlayerLevel() => playerLevel;
     public float GetExp() => exp;
+    public float GetExpScale() => expScale;
     public int GetMaxHealth() => maxHealth;
     public int GetCurrentHealth() => currentHealth;
     public float GetAttack() => attack;
     public float GetFireRate() => fireRate;
     public float GetplayerSpeed() => playerSpeed;
-    public float GetbulletCount() => bulletCount;
+    public int GetbulletCount() => bulletCount;
     public float GetbulletSpeed() => bulletSpeed;
     
     private void Awake()
@@ -195,19 +196,40 @@ public class Player : MonoBehaviour
         if (exp % expScale == 0) // expScale의 배수마다 레벨업
         {
             playerLevel += 1;
-
+            exp = 0;
             UIManager.Instance.ToggleUpgradeMenu(); //레벨업 능력치 상승 메뉴
         }
 
         UIManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
+
+        //경험치 먹은거 체크
+        //경험지 먹은지 3초 지나면 체크 해제
+        expFlag = true;
+        if (StopCoro != null)
+        {
+            StopCoroutine(StopCoro);
+        }
+        StopCoro = StartCoroutine(Timer());
     }
+
+    private bool expFlag = false;
+    private Coroutine StopCoro;
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(3);
+        expFlag = false;
+    }
+    public bool Getflag() => expFlag;
+
+
 
 
     //플레이어 스텟 변경용 함수들
-    public void SetHP(int maxHealth) => this.maxHealth += maxHealth;
-    public void SetSpeed(float playerSpeed) => this.playerSpeed += playerSpeed;
-    public void SetFireRate(float fireRate) => this.fireRate -= fireRate;
-    public void SetAttack(float attack) => this.attack += attack;
-    public void SetBulletCount(int bulletCount) => this.bulletCount += bulletCount;
-    public void SetBulletSpeed(float bulletSpeed) => this.bulletSpeed += bulletSpeed;
+    public void SetHP(int maxHealth) => this.maxHealth = maxHealth;
+    public void SetCurrentHP(int currentHealth) => this.currentHealth = currentHealth;
+    public void SetSpeed(float playerSpeed) => this.playerSpeed = playerSpeed;
+    public void SetFireRate(float fireRate) => this.fireRate = fireRate;
+    public void SetAttack(float attack) => this.attack = attack;
+    public void SetBulletCount(int bulletCount) => this.bulletCount = bulletCount;
+    public void SetBulletSpeed(float bulletSpeed) => this.bulletSpeed = bulletSpeed;
 }
