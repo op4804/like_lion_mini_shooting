@@ -24,9 +24,9 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         // 몬스터 설정
-        currentSpawnEnemy1 = ResourceManager.Instance.enemy1;
-        currentSpawnEnemy2 = ResourceManager.Instance.enemy2;
-        currentSpawnEnemy3 = ResourceManager.Instance.enemy3;
+        currentSpawnEnemy1 = ResourceManager.Instance.oneEyeEnemy;
+        currentSpawnEnemy2 = ResourceManager.Instance.wolfEnemy;
+        currentSpawnEnemy3 = ResourceManager.Instance.bombEnemy;
         StartCoroutine(Spawn1());
         StartCoroutine(Spawn2());
         StartCoroutine(Spawn3());
@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnEnemy1Test)
         {
             yield return new WaitForSeconds(spawnDelay1);
-            Instantiate(currentSpawnEnemy1, new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0), Quaternion.identity);
+            ResourceManager.Instance.Create("oneEyeEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
         }
     }
     IEnumerator Spawn2()
@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnEnemy2Test)
         {
             yield return new WaitForSeconds(spawnDelay2);
-            Instantiate(currentSpawnEnemy2, new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0), Quaternion.identity);
+            ResourceManager.Instance.Create("wolfEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
         }
     }
     IEnumerator Spawn3()
@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnEnemy3Test)
         {
             yield return new WaitForSeconds(spawnDelay3);
-            Instantiate(currentSpawnEnemy3, new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0), Quaternion.identity);
+            ResourceManager.Instance.Create("bombEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
         }
     }
 }

@@ -77,9 +77,6 @@ public class Player : MonoBehaviour
         // 체력 초기화
         currentHealth = maxHealth;
 
-        // 총알 초기화
-        currentBullet = ResourceManager.Instance.playerBullet1;
-
         // @ 수정점 2 Renderer 추가
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -121,7 +118,7 @@ public class Player : MonoBehaviour
             Vector3 bulletYChange = transform.position;
             bulletYChange += new Vector3(0, i * sign * 0.1f, 0);
 
-            GameObject bullet = Instantiate(currentBullet, bulletYChange, Quaternion.identity);
+            GameObject bullet = ResourceManager.Instance.Create("playerBullet", bulletYChange);
             bullet.GetComponent<Bullet>().SetBulletAttack(attack);
             bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
         }
@@ -176,7 +173,7 @@ public class Player : MonoBehaviour
 
         isInvincible = false;
     }
-
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("enemyBullet"))
@@ -185,7 +182,7 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
+    */
 
     public void GetExpParticle(float expAmount) //경험치 획득
     {
