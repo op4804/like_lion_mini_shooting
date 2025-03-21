@@ -82,7 +82,7 @@ public class SkillManager : MonoBehaviour
     {
         if (currentBulletPrefab == null) return null;
 
-        GameObject bullet = Instantiate(currentBulletPrefab, position, Quaternion.identity);
+        GameObject bullet = Instantiate(currentBulletPrefab, position, Quaternion.identity); // TODO: 오브젝트 풀로 생성
 
         foreach (var modifier in bulletModifiers)
         {

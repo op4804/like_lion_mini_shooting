@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private GameObject currentSpawnEnemy1;
-    private GameObject currentSpawnEnemy2;
-    private GameObject currentSpawnEnemy3;
-
     [SerializeField]
     private float spawnDelay1 = 2.0f;
     [SerializeField]
@@ -24,9 +20,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         // 몬스터 설정
-        currentSpawnEnemy1 = ResourceManager.Instance.oneEyeEnemy;
-        currentSpawnEnemy2 = ResourceManager.Instance.wolfEnemy;
-        currentSpawnEnemy3 = ResourceManager.Instance.bombEnemy;
         StartCoroutine(Spawn1());
         StartCoroutine(Spawn2());
         StartCoroutine(Spawn3());
