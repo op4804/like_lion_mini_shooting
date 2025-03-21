@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      minecraft_exp_bar_high_quality_empty_0: 2709754493067341459
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

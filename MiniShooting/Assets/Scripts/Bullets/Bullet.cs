@@ -10,15 +10,12 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         gm = GameManager.Instance;
+        GetComponent<Rigidbody2D>().linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
     }
 
     void Update()
     {
         DestroyOutOfBoundary(); // 화면 밖으로 나가면 사라지는 부분
-
-    void Start()
-    {
-        GetComponent<Rigidbody2D>().linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
     }
 
 
