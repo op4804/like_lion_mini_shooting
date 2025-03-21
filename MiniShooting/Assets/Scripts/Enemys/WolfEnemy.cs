@@ -6,10 +6,13 @@ public class WolfEnemy : Enemy
 
     int upDown = -1;
     bool isAttack = false;
+
+    GameManager gm;
     void Start()
     {
         currentEnemyHP = 50; // TODO: 
         StartCoroutine(Attack());
+        gm = GameManager.Instance;
     }
 
     // Update is called once per frame
@@ -18,6 +21,7 @@ public class WolfEnemy : Enemy
         if(!isAttack)
         {
             Move();
+            DestroyOutOfBoundary();
         }
     }
 
@@ -32,6 +36,15 @@ public class WolfEnemy : Enemy
         else if(transform.position.y < -2)
         {
             upDown *= -1;
+        }
+    }
+
+    private void DestroyOutOfBoundary()
+    {
+        if (transform.position.x > gm.maxBounds.x || transform.position.x < gm.minBounds.x
+            || transform.position.y > gm.maxBounds.y || transform.position.y < gm.minBounds.y)
+        {
+            ResourceManager.Instance.Deactivate(gameObject);
         }
     }
 

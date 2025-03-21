@@ -38,8 +38,8 @@ public class BombEnemy : Enemy
     IEnumerator Explode() // 폭발하는 부분
     {
         yield return new WaitForSeconds(1.5f); // 1.5초 뒤 폭발
-        Instantiate(ResourceManager.Instance.explosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        ResourceManager.Instance.Create("explosionEffect", transform.position);
+        ResourceManager.Instance.Deactivate(gameObject);
     }
 
     IEnumerator Ignite() // 점점 빨게지는 부분

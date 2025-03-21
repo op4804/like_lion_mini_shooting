@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
         {
             GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
             expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
-            Destroy(gameObject);
+            ResourceManager.Instance.Deactivate(gameObject);
             return;
         }
 
