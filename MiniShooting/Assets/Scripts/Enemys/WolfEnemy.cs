@@ -10,10 +10,16 @@ public class WolfEnemy : Enemy
     GameManager gm;
     void Start()
     {
-        currentEnemyHP = 50; // TODO: 
-        StartCoroutine(Attack());
         gm = GameManager.Instance;
     }
+
+    private void OnEnable() // 재생성 되었을때 초기화
+    {
+        currentEnemyHP = 50; // TODO: 
+        StartCoroutine(Attack());
+        isAttack = false;
+    }
+
 
     // Update is called once per frame
     void Update()

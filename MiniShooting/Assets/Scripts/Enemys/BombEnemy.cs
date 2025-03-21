@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BombEnemy : Enemy
@@ -11,12 +13,19 @@ public class BombEnemy : Enemy
     void Start()
     {
         target = GameManager.Instance.player.transform;
+    }
+
+    private void OnEnable() // 초기화
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1); // 색상 초기화
+        isTracing = true; // 따라가기 초기화
         currentEnemyHP = 10; // TODO: 
+
     }
 
     void Update()
     {
-        Trace();
+        Trace();        
     }
 
     void Trace()
@@ -39,7 +48,10 @@ public class BombEnemy : Enemy
     {
         yield return new WaitForSeconds(1.5f); // 1.5초 뒤 폭발
         ResourceManager.Instance.Create("explosionEffect", transform.position);
-        ResourceManager.Instance.Deactivate(gameObject);
+        if(currentEnemyHP > 0) // 오브젝트 풀에 중복으로 들어가는 것 방지.
+        {
+            ResourceManager.Instance.Deactivate(gameObject);
+        }
     }
 
     IEnumerator Ignite() // 점점 빨게지는 부분
@@ -47,7 +59,7 @@ public class BombEnemy : Enemy
         float colorGB = 1;
         while(true)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, colorGB, colorGB);            
+            gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, colorGB, colorGB);            
             colorGB -= Time.deltaTime * 9;
             yield return new WaitForSeconds(0.1f);
         }

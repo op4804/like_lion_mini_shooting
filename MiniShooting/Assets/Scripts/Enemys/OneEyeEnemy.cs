@@ -4,20 +4,19 @@ using UnityEngine;
 public class OneEyeEnemy : Enemy
 {
     // 몬스터의 공격
-    GameObject enemyBullet;
-    float attackDelay;
+    float attackDelay = 2.0f;
 
     GameManager gm;
 
     void Start()
     {
-        enemyBullet = ResourceManager.Instance.enemyBullet;
-        currentEnemyHP = 20; // TODO: 
-        attackDelay = 2.0f;
-
         gm = GameManager.Instance;
+    }
 
+    private void OnEnable() // 처음, 재생성되었을때 초기화
+    {
         StartCoroutine(FireBullet());
+        currentEnemyHP = 20; // TODO: 
     }
 
     void Update()

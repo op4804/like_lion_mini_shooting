@@ -61,11 +61,11 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(explosionEffect);
     }
 
-
+    /*
     public GameObject Create(string key, Vector2 position)
     {
         GameObject go;
-        if (objectDic.ContainsKey(key) && objectDic[key].Count > 1) // 해당 게임 오브젝트(프리팹)이 비활성화 된 오브젝트 풀에 있다면~
+        if (objectDic.ContainsKey(key) && objectDic[key].Count > 0) // 해당 게임 오브젝트(프리팹)이 비활성화 된 오브젝트 풀에 있다면~
         {
             go = objectDic[key].Dequeue();
             go.SetActive(true);
@@ -78,15 +78,17 @@ public class ResourceManager : MonoBehaviour
             return go;
         }        
     }
+    */
     public GameObject Create(string key, Vector3 position) // vector3를 위한 오버로드
     {
         GameObject go;
-        if (objectDic.ContainsKey(key) && objectDic[key].Count > 1) // 해당 게임 오브젝트(프리팹)이 비활성화 된 오브젝트 풀에 있다면~
+        if (objectDic.ContainsKey(key) && objectDic[key].Count > 0) // 해당 게임 오브젝트(프리팹)이 비활성화 된 오브젝트 풀에 있다면~
         {
-            go = objectDic[key].Dequeue();
-            go.SetActive(true);
-            go.transform.position = position;
-            return go;
+            objectDic[key].TryDequeue(out GameObject bullet);
+            bullet.transform.position = position;
+            bullet.SetActive(true);
+            Debug.Log(objectDic[key].Count);
+            return bullet;
         }
         else // 없다면 새로 생성
         {

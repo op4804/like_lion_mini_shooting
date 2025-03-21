@@ -1470,10 +1470,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay1: 2
   spawnDelay2: 5.1
-  spawnDelay3: 1
-  spawnEnemy1Test: 1
+  spawnDelay3: 2
+  spawnEnemy1Test: 0
   spawnEnemy2Test: 1
-  spawnEnemy3Test: 1
+  spawnEnemy3Test: 0
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0
