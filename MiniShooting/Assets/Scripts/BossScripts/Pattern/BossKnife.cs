@@ -22,7 +22,7 @@ public class BossKnife : MonoBehaviour
 
     void TimeStop()
     {
-        if (MoveShootPattern.timeStoped = true)
+        if (BossPatternManager.timeStoped = true)
         {
             tempVelocity = GetComponent<Rigidbody2D>().linearVelocity;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
@@ -30,7 +30,7 @@ public class BossKnife : MonoBehaviour
     }
     void TimeResume()
     {
-        if (MoveShootPattern.timeStoped = false)
+        if (BossPatternManager.timeStoped = false)
         {
             GetComponent<Rigidbody2D>().linearVelocity = tempVelocity;
         }
