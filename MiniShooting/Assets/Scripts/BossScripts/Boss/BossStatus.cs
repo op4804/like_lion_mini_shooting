@@ -14,6 +14,6 @@ public class BossStatus : MonoBehaviour
 
     public float getMaxHp() { return maxHp; }
     public float getCurrentHp() { return currentHp; }
-    public void Damaged(int damage) { currentHp -= damage; }
+    public void Hit(float damage) { currentHp -= damage; }
 
 }

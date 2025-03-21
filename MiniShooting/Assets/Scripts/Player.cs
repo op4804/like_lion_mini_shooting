@@ -20,14 +20,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int currentHealth = 6; //플레이어 현재 생명력
 
-    private float attack = 10f; // 플레이어의 공격력
+    private float attack = 3f; // 플레이어의 공격력
 
     // 플레이어의 현재 총알
     private GameObject currentBullet;
     public float fireRate = 0.2f; //연사 속도
     private float fireTimer = 0f; //다음 발사까지의 시간 계산을 위한 변수
     private int bulletCount = 1;//쏠 총알 개수
-    private float bulletSpeed = 5f;
+    private float bulletSpeed = 15f; //발사체 스피드
 
     // 화면 경계를 맞춰주는 기능을 위한 변수
     Camera mainCamera;
@@ -119,9 +119,7 @@ public class Player : MonoBehaviour
             Vector3 bulletYChange = transform.position;
             bulletYChange += new Vector3(0, i * sign * 0.1f, 0);
 
-            GameObject bullet = ResourceManager.Instance.Create("playerBullet", bulletYChange);
-            bullet.GetComponent<Bullet>().SetBulletAttack(attack);
-            bullet.GetComponent<Bullet>().SetBulletSpeed(bulletSpeed);
+            GameObject bullet = SkillManager.Instance.CreateBullet(bulletYChange);
         }
     }
 
