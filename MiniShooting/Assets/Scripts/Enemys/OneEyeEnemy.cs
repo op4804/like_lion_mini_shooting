@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class OneEyeEnemy : Enemy
 {
-
     // 몬스터의 공격
     GameObject enemybullet;
-
+    float attackDelay;
 
     void Start()
     {
@@ -31,10 +30,13 @@ public class OneEyeEnemy : Enemy
             Instantiate(enemybullet, newPos, Quaternion.identity);
         }
     }
-
     private void Move()
     {
         transform.Translate(Vector3.left * Time.deltaTime);
+    }
 
+    public void Hit()
+    {
+        Debug.Log("자식");
     }
 }

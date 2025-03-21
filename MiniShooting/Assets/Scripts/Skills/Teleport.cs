@@ -17,6 +17,7 @@ public class Teleport : Skill
         teleportDistance = 2f; //이동 거리
         description = "현재 위치에서 다른 위치로 이동합니다.";
         skillType = true;
+        isUnlocked = true;
 
         Camera mainCamera = Camera.main;
         Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
