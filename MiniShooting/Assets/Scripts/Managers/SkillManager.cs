@@ -41,5 +41,7 @@ public class SkillManager : MonoBehaviour
         {
             skills[currentSkillIndex].UseSkill();
         }
+
+        
     }
 }

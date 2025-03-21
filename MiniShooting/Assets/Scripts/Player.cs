@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     public float GetplayerSpeed() => playerSpeed;
     public float GetbulletCount() => bulletCount;
     public float GetbulletSpeed() => bulletSpeed;
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -144,6 +144,13 @@ public class Player : MonoBehaviour
     // @ 수정점 3 Hit 메소드에 Renderer 코루틴 추가
     public void Hit()
     {
+        Invincible invSkill = GetComponent<Invincible>();
+        if (invSkill != null && invSkill.IsInvincible)
+        {
+            Debug.Log("무적 상태 확인용 로그 2-hit 메소드 부분");
+            return;
+        }
+
         if (!isInvincible)
         {
             currentHealth--;
@@ -181,6 +188,13 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemyBullet"))
         {
+            Invincible invSkill = GetComponent<Invincible>();
+            if (invSkill != null && invSkill.IsInvincible)
+            {
+                Debug.Log("무적 상태 확인용 로그 1-trigger");
+                Destroy(collision.gameObject);
+                return;
+            }
             Hit();
             Destroy(collision.gameObject);
         }
