@@ -13,33 +13,39 @@ public class DashPattern : MonoBehaviour, IBossPattern
     private Vector2 startPos;
     private bool isActive = false;
 
-    private LineRenderer lineRenderer;
+    private LineRenderer BosslineRenderer;
     private Transform playerTransform;
+    private TrailRenderer BossTrailRenderer;
 
 
     void Awake()
     {
         startPos = transform.position;
+        playerTransform = Player.Instance.transform;
 
-        lineRenderer = GetComponent<LineRenderer>(); // 라인 렌더러 가져오기
-        if (lineRenderer == null)
+        BosslineRenderer = GetComponent<LineRenderer>(); // 라인 렌더러 가져오기
+        BossTrailRenderer = GetComponent<TrailRenderer>(); // 트레일 렌더러 가져오기
+        if (BosslineRenderer == null)
         {
-            lineRenderer = gameObject.AddComponent<LineRenderer>(); // 없으면 추가
+            BosslineRenderer = gameObject.AddComponent<LineRenderer>(); // 없으면 추가
         }
-        lineRenderer.startWidth = Waringwidth;
-        lineRenderer.endWidth = Waringwidth;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 머티리얼 적용
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
-        Color newStartColor = lineRenderer.startColor;
-        Color newEndColor = lineRenderer.endColor;
+        BossTrailRenderer.enabled = false;
+        BosslineRenderer.enabled = false; // 기본적으로 비활성화
+
+        BosslineRenderer.startWidth = Waringwidth;
+        BosslineRenderer.endWidth = Waringwidth;
+        BosslineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 머티리얼 적용
+        BosslineRenderer.startColor = Color.red;
+        BosslineRenderer.endColor = Color.red;
+        Color newStartColor = BosslineRenderer.startColor;
+        Color newEndColor = BosslineRenderer.endColor;
         newStartColor.a = 0.5f;
         newEndColor.a = 0.5f;
-        lineRenderer.startColor = newStartColor;
-        lineRenderer.endColor = newEndColor;
-        lineRenderer.enabled = false; // 기본적으로 비활성화
+        BosslineRenderer.startColor = newStartColor;
+        BosslineRenderer.endColor = newEndColor;
 
-        playerTransform = Player.Instance.transform;
+
+
     }
 
     public void StartPattern()
@@ -59,20 +65,21 @@ public class DashPattern : MonoBehaviour, IBossPattern
         if (playerTransform == null)
             yield break;
 
-        lineRenderer.enabled = true;
+        BosslineRenderer.enabled = true;
 
         // 라인 렌더러의 시작점과 끝점을 설정하여 플레이어 방향으로 빨간 선을 그림
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, playerTransform.position);
+        BosslineRenderer.SetPosition(0, transform.position);
+        BosslineRenderer.SetPosition(1, playerTransform.position);
 
         yield return new WaitForSeconds(dashWaringTime); // 대시 전 경고 시간
 
-        lineRenderer.enabled = false;
+        BosslineRenderer.enabled = false;
         StartCoroutine(Move());
 
     }
     IEnumerator Move()
     {
+
         if (playerTransform == null)
             yield break;
 
@@ -80,6 +87,7 @@ public class DashPattern : MonoBehaviour, IBossPattern
         Vector2 startPos = transform.position; // 시작 위치
         Vector2 targetPos = playerTransform.position; // 목표 위치
         Vector2 direction = (targetPos - startPos).normalized; // 이동 방향
+        BossTrailRenderer.enabled = true; // 대쉬 이펙트 활성화
 
         while (elapsedTime < movetime)
         {
@@ -87,6 +95,7 @@ public class DashPattern : MonoBehaviour, IBossPattern
             elapsedTime += Time.deltaTime;
             yield return null; // 다음 프레임까지 대기
         }
+        BossTrailRenderer.enabled = false;// 대쉬 이펙트 비활성화
 
         // 이동이 끝나면 SlashCoroutine 실행
         StartCoroutine(SlashCoroutine());

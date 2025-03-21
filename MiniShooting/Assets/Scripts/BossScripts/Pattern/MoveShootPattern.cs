@@ -5,11 +5,14 @@ using UnityEngine.UIElements;
 
 public class MoveShootPattern : MonoBehaviour, IBossPattern
 {
+    public int repeatCount = 3; // 반복할 횟수
+    private int currentRepeat = 0;
+
     public GameObject knifePrefab;// 던질 칼
     public Transform knifeSpawnTransform;// 칼 던지는 위치
 
     public float moveSpeed = 5f;// 보스 이동 속도
-    public float moveRange = 4f;// 보스 가동 범위
+    public float moveRange = 5f;// 보스 가동 범위
     public float makeInterval = 0.25f;// 칼 만드는 딜레이
     public float throwInterval = 0.25f;// 칼 던지는 딜레이
     public int knifeCount = 5; // 생성할 칼 개수
@@ -18,27 +21,24 @@ public class MoveShootPattern : MonoBehaviour, IBossPattern
 
     private List<GameObject> knifetList;
     private Vector2 startPos;
-    private int direction = 1;
+    private Vector2 top;
+    private Vector2 bottom;
     private bool isActive = false;
 
     void Awake()
     {
         startPos = transform.position; //위치초기화
         knifetList = new List<GameObject>(); //생성된 칼을 저장할 리스트 초기화
+
+        top = startPos + Vector2.up * moveRange;
+        bottom = startPos - Vector2.up * moveRange;
     }
 
-    void Update()
-    {
-        if (isActive)
-        {
-            Move();
-        }
-    }
 
     public void StartPattern()
     {
         isActive = true;
-        StartCoroutine(ShotCoroutine());
+        StartCoroutine(PatternCoroutine());
     }
 
     public void StopPattern()
@@ -48,20 +48,38 @@ public class MoveShootPattern : MonoBehaviour, IBossPattern
         knifetList.Clear();
     }
 
-    void Move() // 위아래 이동
+    IEnumerator MoveUpDown()
     {
-        transform.Translate(Vector2.up * direction * moveSpeed * Time.deltaTime);
+        // 현재 → 1번
+        yield return StartCoroutine(MoveToPosition(top));
 
-        if (Mathf.Abs(transform.position.y - startPos.y) > moveRange)
+        // 현재 → 2번 (즉, point1 → 2번)
+        yield return StartCoroutine(MoveToPosition(bottom));
+
+        // 현재 → 1번 (즉, point2 → 1번)
+        yield return StartCoroutine(MoveToPosition(top));
+
+    }
+    IEnumerator MoveToPosition(Vector3 targetPos)
+    {
+        Vector3 startPos = transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < moveRange)
         {
-            direction *= -1;
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / moveRange);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
+        transform.position = targetPos;
     }
 
-    IEnumerator ShotCoroutine() // 코루틴을 이용한 총알 발사
+    IEnumerator PatternCoroutine() // 코루틴을 이용한 총알 발사
     {
         while (true)
         {
+            StartCoroutine(MoveUpDown());
             yield return StartCoroutine(MakeKnifeCircle());
             if(BossPatternManager.timeStoped == false)
             {
