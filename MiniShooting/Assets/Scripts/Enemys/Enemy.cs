@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
         transform.localScale = Vector3.zero;
 
-        Destroy(gameObject);
+        ResourceManager.Instance.Deactivate(gameObject);
     }
 
 }

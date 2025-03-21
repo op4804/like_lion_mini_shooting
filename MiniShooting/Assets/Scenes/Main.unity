@@ -475,11 +475,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24544b9e1de20d46bc556180ff7d57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBullet1: {fileID: 2579971360516050928, guid: 22990e6c5204a4846adad92a4eb18b24, type: 3}
-  enemy1: {fileID: 450482112071159595, guid: 6de6e58e838aaa94691d94c0a9f6f622, type: 3}
-  enemy2: {fileID: 4637630645489893619, guid: ea5d2b537ca2acd4d98724146ae7bf4c, type: 3}
-  enemy3: {fileID: 1830415529988329020, guid: 69cc71215f4ea634982ab8ea6b5ef95d, type: 3}
-  enemybullet1: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
+  playerBullet: {fileID: 2579971360516050928, guid: 22990e6c5204a4846adad92a4eb18b24, type: 3}
+  oneEyeEnemy: {fileID: 450482112071159595, guid: 6de6e58e838aaa94691d94c0a9f6f622, type: 3}
+  wolfEnemy: {fileID: 4637630645489893619, guid: ea5d2b537ca2acd4d98724146ae7bf4c, type: 3}
+  bombEnemy: {fileID: 1830415529988329020, guid: 69cc71215f4ea634982ab8ea6b5ef95d, type: 3}
+  enemyBullet: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
   claw: {fileID: 2386591105652181286, guid: 8dc313f234690bc4a87e5af4bb454493, type: 3}
   expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
   explosionEffect: {fileID: 5584700356191228352, guid: 239b666a28427c248876467101b162a6, type: 3}
@@ -1658,7 +1658,7 @@ MonoBehaviour:
   spawnDelay3: 1
   spawnEnemy1Test: 1
   spawnEnemy2Test: 1
-  spawnEnemy3Test: 0
+  spawnEnemy3Test: 1
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0
@@ -2407,6 +2407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultBulletPrefab: {fileID: 0}
   skillsRoot: {fileID: 49108571}
+  defaultBulletPrefab: {fileID: 0}
   skills:
   - {fileID: 1357657263}
   - {fileID: 634736119}

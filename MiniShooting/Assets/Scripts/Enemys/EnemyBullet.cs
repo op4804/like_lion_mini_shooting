@@ -21,7 +21,7 @@ public class EnemyBullet : MonoBehaviour
         if(transform.position.x > gm.maxBounds.x || transform.position.x < gm.minBounds.x
             || transform.position.y > gm.maxBounds.y || transform.position.y < gm.minBounds.y)
         {
-            Destroy(gameObject);
+            ResourceManager.Instance.Deactivate(gameObject);
         }
 
     }
@@ -31,7 +31,7 @@ public class EnemyBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player>().Hit();
-            Destroy(gameObject);
+            ResourceManager.Instance.Deactivate(gameObject);
         }
     }
 }
