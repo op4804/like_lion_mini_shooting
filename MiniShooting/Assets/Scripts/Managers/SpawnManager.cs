@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private float spawnDelay1 = 2.0f;
     [SerializeField]
-    private float spawnDelay2 = 5.1f;
+    private float spawnDelay2 = 2.0f;
 
     [SerializeField]
     private bool spawnEnemy1Test = true;

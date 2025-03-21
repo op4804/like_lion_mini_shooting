@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossKnife : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 5f;
+    //private float speed = 5f;
     private Vector2 tempVelocity;
     //[SerializeField]
     //private float damage;
@@ -20,21 +20,22 @@ public class BossKnife : MonoBehaviour
 
     }
 
-    void TimeStop()
-    {
-        if (MoveShootPattern.timeStoped = true)
-        {
-            tempVelocity = GetComponent<Rigidbody2D>().linearVelocity;
-            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        }
-    }
-    void TimeResume()
-    {
-        if (MoveShootPattern.timeStoped = false)
-        {
-            GetComponent<Rigidbody2D>().linearVelocity = tempVelocity;
-        }
-    }
+    //void TimeStop()
+    //{
+    //    if (MoveShootPattern.timeStoped = true)
+    //    {
+    //        tempVelocity = GetComponent<Rigidbody2D>().linearVelocity;
+    //        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+    //    }
+    //}
+    //void TimeResume()
+    //{
+    //    if (MoveShootPattern.timeStoped = false)
+    //    {
+    //        GetComponent<Rigidbody2D>().linearVelocity = tempVelocity;
+    //    }
+    //}
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);

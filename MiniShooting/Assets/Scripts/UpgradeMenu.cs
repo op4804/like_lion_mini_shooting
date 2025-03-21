@@ -13,7 +13,7 @@ public class UpgradeMenu : MonoBehaviour
     private List<GameObject> optionTexts = new List<GameObject>();
     private int selectedOption = 0;
     const int UpgradeChooseNum = 4;
-    int[] chosenUpgrades = new int[UpgradeChooseNum];
+    int[] chosenUpgrades = new int[UpgradeChooseNum]; 
 
 
     private void Start()

@@ -149,6 +149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1357657262}
+  - {fileID: 794603772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &131679081
@@ -929,7 +930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &712935818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1009,6 +1010,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712935817}
   m_CullTransparentMesh: 1
+--- !u!1 &794603771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 794603772}
+  - component: {fileID: 794603773}
+  m_Layer: 0
+  m_Name: Bounce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &794603772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794603771}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 49108571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794603773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794603771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b0ec1804603744ca35ba29bdd1ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncingBulletPrefab: {fileID: 1991627106684968163, guid: 43cc0cd72eb27e041ae4893c561acf12, type: 3}
 --- !u!1 &1034518128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,9 +1089,7 @@ MonoBehaviour:
   exp: 0
   currentHealth: 6
   fireRate: 0.2
-  attack: 10
   invincibleTime: 1
-  shieldPrefab: {fileID: 1801166202305555443, guid: 92dc9967994657b44a727d04dac41a0b, type: 3}
 --- !u!58 &1034518130
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1469,8 +1513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnDelay1: 2
-  spawnDelay2: 5.1
-  spawnEnemy1Test: 0
+  spawnDelay2: 2
+  spawnEnemy1Test: 1
   spawnEnemy2Test: 1
 --- !u!4 &1326465898
 Transform:
@@ -2217,8 +2261,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885bc0553115b0147a18373b931801c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultBulletPrefab: {fileID: 2579971360516050928, guid: 22990e6c5204a4846adad92a4eb18b24, type: 3}
   skills:
   - {fileID: 1357657263}
+  - {fileID: 794603773}
 --- !u!4 &1891225088
 Transform:
   m_ObjectHideFlags: 0

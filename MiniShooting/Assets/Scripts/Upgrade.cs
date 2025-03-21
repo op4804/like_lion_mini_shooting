@@ -16,7 +16,6 @@ public class Upgrade : MonoBehaviour
     //Player오브젝트의 Player스크립트 역할
     private Player StatChange;
 
-
     //이걸로 하면 더 복잡해지는 느낌..
     //연결은 안되어있고 인덱스 순서만 아는 용도
     public enum UpgradeType
@@ -27,7 +26,6 @@ public class Upgrade : MonoBehaviour
         IncreaseBulletCount= 3,
         IncreaseAttack = 4
     }
-
 
     private void Awake()
     {
@@ -81,7 +79,6 @@ public class Upgrade : MonoBehaviour
                 break;
         }
     }
-
     
     public void InitializeOptions()
     {
@@ -93,9 +90,6 @@ public class Upgrade : MonoBehaviour
         upgradeStack = new int[upgradeOptions.Count];
         StatChange = Player.GetComponent<Player>();
     }
-
-
-
 
     //업그레이드 요소들
     void IncreaseSpeed()
