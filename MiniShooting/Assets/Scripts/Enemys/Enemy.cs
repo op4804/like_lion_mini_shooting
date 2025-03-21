@@ -22,12 +22,17 @@ public class Enemy : MonoBehaviour
             //크기 줄이기->줄어들면 오브젝트 파괴
             StopAllCoroutines();
             StartCoroutine(RotateAndShrinkAndDie());
+            StopCoroutine(RotateAndShrinkAndDie());
             return;
         }
 
         gameObject.GetComponent<Animator>().SetTrigger("hit");
         transform.Translate(Vector3.right * 0.1f);
         
+    }
+    void OnDisable()
+    {
+        StopAllCoroutines(); 
     }
 
     //원심분리기
