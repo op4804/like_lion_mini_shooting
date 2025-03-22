@@ -10,7 +10,7 @@ public interface IBossPattern
     //공격패턴은 패턴이 지속될 동안 보스 hp를 일정수치만큼 까면 패턴이 넘어간다.
 
     IEnumerator StartPattern(); // 패턴 실행
-    IEnumerator Move(); // 무빙 코루틴
-    IEnumerator Spawn(GameObject go ,Transform pos); // 소환 코루틴
+    //IEnumerator Move(); // 무빙 코루틴
+    //IEnumerator Spawn(GameObject go ,Transform pos); // 소환 코루틴
 
 }
