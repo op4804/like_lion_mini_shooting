@@ -5,14 +5,12 @@ using UnityEngine.UIElements;
 
 public class MoveShootPattern : MonoBehaviour, IBossPattern
 {
-    public int repeatCount = 3; // 반복할 횟수
-    private int currentRepeat = 0;
-
     public GameObject knifePrefab;// 던질 칼
     public Transform knifeSpawnTransform;// 칼 던지는 위치
 
-    public float moveSpeed = 5f;// 보스 이동 속도
-    public float moveRange = 5f;// 보스 가동 범위
+    public float moveDuration = 1f;      // 이동하는 데 걸리는 시간
+    public float moveRange = 5f;// 보스 이동 범위
+
     public float makeInterval = 0.25f;// 칼 만드는 딜레이
     public float throwInterval = 0.25f;// 칼 던지는 딜레이
     public int knifeCount = 5; // 생성할 칼 개수
@@ -21,77 +19,92 @@ public class MoveShootPattern : MonoBehaviour, IBossPattern
 
     private List<GameObject> knifetList;
     private Vector2 startPos;
-    private Vector2 top;
-    private Vector2 bottom;
-    private bool isActive = false;
+    private Vector2 upPos;
+    private Vector2 downPos;
+    private bool isMoveEnd = false;
 
     void Awake()
     {
-        startPos = transform.position; //위치초기화
         knifetList = new List<GameObject>(); //생성된 칼을 저장할 리스트 초기화
 
-        top = startPos + Vector2.up * moveRange;
-        bottom = startPos - Vector2.up * moveRange;
+        startPos = this.transform.position;
+        upPos = startPos + Vector2.up * moveRange;
+        downPos = startPos + Vector2.down * moveRange;
     }
 
 
-    public void StartPattern()
+    IEnumerator IBossPattern.StartPattern()
     {
-        isActive = true;
-        StartCoroutine(PatternCoroutine());
-    }
-
-    public void StopPattern()
-    {
-        isActive = false;
-        StopAllCoroutines();
-        knifetList.Clear();
-    }
-
-    IEnumerator MoveUpDown()
-    {
-        // 현재 → 1번
-        yield return StartCoroutine(MoveToPosition(top));
-
-        // 현재 → 2번 (즉, point1 → 2번)
-        yield return StartCoroutine(MoveToPosition(bottom));
-
-        // 현재 → 1번 (즉, point2 → 1번)
-        yield return StartCoroutine(MoveToPosition(top));
-
-    }
-    IEnumerator MoveToPosition(Vector3 targetPos)
-    {
-        Vector3 startPos = transform.position;
-        float elapsed = 0f;
-
-        while (elapsed < moveRange)
-        {
-            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / moveRange);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = targetPos;
+        yield return StartCoroutine(PatternCoroutine());
     }
 
     IEnumerator PatternCoroutine() // 코루틴을 이용한 총알 발사
     {
-        while (true)
-        {
-            StartCoroutine(MoveUpDown());
-            yield return StartCoroutine(MakeKnifeCircle());
-            if(BossPatternManager.timeStoped == false)
-            {
-                yield return StartCoroutine(throwKnife());     
-            }
-        }
+        StartCoroutine(MoveSequence());
 
+        yield return StartCoroutine(MakeKnifeCircle());
+        if (BossPatternManager.timeStoped == false)
+        {
+            yield return StartCoroutine(throwKnife());
+        }
+        yield return StartCoroutine(MakeKnifeCircle());
+        if (BossPatternManager.timeStoped == false)
+        {
+            yield return StartCoroutine(throwKnife());
+        }
+        yield return StartCoroutine(MakeKnifeCircle());
+        if (BossPatternManager.timeStoped == false)
+        {
+            yield return StartCoroutine(throwKnife());
+        }
+        yield return StartCoroutine(MakeKnifeCircle());
+        if (BossPatternManager.timeStoped == false)
+        {
+            yield return StartCoroutine(throwKnife());
+        }
+        yield return StartCoroutine(MakeKnifeCircle());
+        if (BossPatternManager.timeStoped == false)
+        {
+            yield return StartCoroutine(throwKnife());
+        }
+        yield return new WaitUntil(() => isMoveEnd);
     }
 
-     IEnumerator MakeKnifeCircle()
-     {
+    IEnumerator MoveSequence()
+    {
+        isMoveEnd = false; 
+        // 위로 왕복
+        yield return StartCoroutine(MoveToPosition(upPos));
+        yield return StartCoroutine(MoveToPosition(startPos));
 
+        // 아래로 왕복
+        yield return StartCoroutine(MoveToPosition(downPos));
+        yield return StartCoroutine(MoveToPosition(startPos));
+        isMoveEnd = true;
+    }
+    IEnumerator MoveToPosition(Vector2 targetPos)
+    {
+        Vector2 initialPos = transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < moveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / moveDuration;
+
+            transform.position = Vector2.Lerp(initialPos, targetPos, t);
+            yield return null;
+        }
+
+        transform.position = targetPos; // 정확하게 위치 맞추기
+    }
+
+
+
+
+    IEnumerator MakeKnifeCircle()
+     {
+        yield return new WaitForSeconds(makeInterval); // 만드는텀
         for (int i = 0; i < knifeCount; i++)
         {
             // 원형 배치를 위한 각도 계산
@@ -112,11 +125,11 @@ public class MoveShootPattern : MonoBehaviour, IBossPattern
             //칼 리스트에 추가
             knifetList.Add(knife);
         }
-        yield return new WaitForSeconds(makeInterval); // 만드는텀
+        yield return null;
     }
-
     IEnumerator throwKnife()
     {
+        yield return new WaitForSeconds(throwInterval); // 던지는텀
         foreach (GameObject knife in knifetList)
         {
             Rigidbody2D kniferigidbody = knife.GetComponent<Rigidbody2D>();
@@ -126,7 +139,7 @@ public class MoveShootPattern : MonoBehaviour, IBossPattern
         }
 
         knifetList.Clear(); //칼 리스트 초기화
-        yield return new WaitForSeconds(throwInterval); // 던지는텀
+        yield return null;
     }
 
 }
