@@ -16,7 +16,6 @@ public class UpgradeMenu : MonoBehaviour
     //업그레이드마다 인덱스가 있고, 랜덤으로 뽑은 인덱스들을 저장.
     int[] choosenUpgrades = new int[UpgradeChooseNum];
 
-
     private void Start()
     {
         CreateUpgradeOptions();
@@ -125,17 +124,14 @@ public class UpgradeMenu : MonoBehaviour
         {
             int randomValue = Random.Range(0, optionCount);
 
-            // 중복되지 않은 경우만 추가
-            if (!selectedIndexes.Contains(randomValue))
-            {
-                selectedIndexes.Add(randomValue);
-            }
+            selectedIndexes.Add(randomValue);
         }
         //choosenUpgrades에 자료 복사
         selectedIndexes.CopyTo(choosenUpgrades);
 
         TextUpdate(choosenUpgrades);
     }
+
     //실제로 표시될 텍스트 업데이트
     private void TextUpdate(int[] choosenUpgrades)
     {

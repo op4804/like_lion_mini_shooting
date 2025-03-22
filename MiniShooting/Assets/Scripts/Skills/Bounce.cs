@@ -41,10 +41,6 @@ public class Bounce : Skill
                                                                             //밑에서 효과 온, 오프로 예시를 들텐데 해당 명령과 상관없이 작동합니다.
 
                 bouncingBullet.SetBounceValues(maxBounces, bounceRadius); //고유 스킬 수치를 넘겨주는 명령입니다.
-
-                SkillManager.Instance.RegisterBulletEffect(bullet); //스킬 매니저에게 효과 쓰겠다 등록해주는 명령입니다.
-                                                                    //효과가 끝났을때 스킬 매니저에게 알려주기위해 사용합니다.
-                                                                    //효과를 온, 오프 한다고 생각했을때 온 해주는 명령이라 생각하시면 될거같습니다.
             }
         });
     }

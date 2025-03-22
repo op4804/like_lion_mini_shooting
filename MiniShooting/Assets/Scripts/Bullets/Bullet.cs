@@ -5,12 +5,25 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Bullet : MonoBehaviour
 {
 
-    GameManager gm;
+    private GameManager gm;
+    private Rigidbody2D rb;
 
     private void Start()
     {
         gm = GameManager.Instance;
-        GetComponent<Rigidbody2D>().linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
+    }
+    private void OnEnable()
+    {
+        if (gm == null)
+            gm = GameManager.Instance;
+
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        rb.linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
+        SkillManager.Instance.RegisterBulletEffect(gameObject, name);
     }
 
     void Update()
@@ -18,28 +31,27 @@ public class Bullet : MonoBehaviour
         DestroyOutOfBoundary(); // 화면 밖으로 나가면 사라지는 부분
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (SkillManager.Instance.IsBulletHaveEffect(gameObject))
+        if (SkillManager.Instance.IsBulletHaveEffect(gameObject, name))
         {
             return;
         }
 
-        
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
             // TODO: 관통?
-            SkillManager.Instance.NotifyEffectComplete(gameObject);
+            SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
         else if (collision.gameObject.CompareTag("Boss"))
-        {            
+        {
             collision.gameObject.GetComponent<BossStatus>().Hit(Player.Instance.GetAttack());
-            SkillManager.Instance.NotifyEffectComplete(gameObject);
+            SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
     }
+
     public bool NotifyEffectOutOfScreen()
     {
         return true;
@@ -53,8 +65,6 @@ public class Bullet : MonoBehaviour
             ResourceManager.Instance.Deactivate(gameObject);
         }
     }
-
-
 }
 
 

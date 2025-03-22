@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private Vector3 originalScale;
 
     private bool isDead = false;
+    public bool IsDead() => isDead;
 
     protected virtual void Awake()
     {
@@ -26,7 +27,10 @@ public class Enemy : MonoBehaviour
 
         if (currentEnemyHP <= 0) // 사망
         {
-            
+            isDead = true;
+
+            GetComponent<Collider2D>().enabled = false;
+
             GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
             expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
             
@@ -42,7 +46,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void OnEnable()
     {
-        Debug.Log("Enemy 초기화");
+        GetComponent<Collider2D>().enabled = true;
         isDead = false;
         transform.localScale = originalScale;
         transform.rotation = Quaternion.identity;
@@ -50,8 +54,6 @@ public class Enemy : MonoBehaviour
 
     void OnDisable()
     {
-        isDead = true;
-        Debug.Log($"[Enemy] 비활성화됨: {GetInstanceID()}", this);
         StopAllCoroutines();
     }
 
@@ -89,7 +91,6 @@ public class Enemy : MonoBehaviour
 
         transform.localScale = Vector3.zero;
 
-        Debug.Log("Deactivate 호출됨");
         ResourceManager.Instance.Deactivate(gameObject);
     }
 

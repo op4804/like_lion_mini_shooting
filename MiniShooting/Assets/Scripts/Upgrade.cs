@@ -55,6 +55,7 @@ public class Upgrade : MonoBehaviour
     {
         Debug.Log(upgradeOptions[selectedOption]);
         UpgradeType upgradeType = (UpgradeType)selectedOption;
+
         switch (upgradeType)
         {
             //업그레이드 메뉴에서 선택되면 값 변경

@@ -30,7 +30,7 @@ public class SkillManager : MonoBehaviour
     private List<Action<GameObject>> bulletModifiers = new List<Action<GameObject>>(); //패시브 스킬 적용
 
     // 발사체별 효과 카운트 저장
-    private Dictionary<GameObject, int> bulletEffectStates = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, HashSet<string>> bulletEffectStates = new Dictionary<GameObject, HashSet<string>>();
 
     private int currentSkillIndex = 0;
 
@@ -71,7 +71,6 @@ public class SkillManager : MonoBehaviour
                     skill.UseSkill();
             }
         }
-
     }
 
     //발사체 효과 등록
@@ -85,7 +84,7 @@ public class SkillManager : MonoBehaviour
     {
         if (currentBulletPrefab == null) return null;
 
-        GameObject bullet = Instantiate(currentBulletPrefab, position, Quaternion.identity); // TODO: 오브젝트 풀로 생성
+        GameObject bullet = ResourceManager.Instance.Create(currentBulletPrefab.name, position);
 
         foreach (var modifier in bulletModifiers)
         {
@@ -96,35 +95,37 @@ public class SkillManager : MonoBehaviour
     }
 
     //발사체 효과 생성시 호출해야함. 발사하는 발사체의 효과 진행 상태를 저장
-    public void RegisterBulletEffect(GameObject bullet)
+    public void RegisterBulletEffect(GameObject bullet, string effectName)
     {
         if (!bulletEffectStates.ContainsKey(bullet))
-        {
-            bulletEffectStates[bullet] = 0;
-        }
-        bulletEffectStates[bullet]++;
+            bulletEffectStates[bullet] = new HashSet<string>();
 
+        bulletEffectStates[bullet].Add(effectName);
+
+        //    Debug.Log($"{bullet}에 {effectName} 효과 등록됨", bullet);
+        //else
+        //    Debug.LogWarning($"{bullet}에 {effectName} 효과 중복 등록 시도", bullet);
     }
 
     // 효과 끝날때 destroy 대신 호출해야함 destroy를 skillManager에서 관리
     // 발사체 사라지는 시점을 모든 효과가 끝난후로 관리합니다.
-    public void NotifyEffectComplete(GameObject bullet)
+    public void NotifyEffectComplete(GameObject bullet, string effectName)
     {
         if (!bulletEffectStates.ContainsKey(bullet)) return;
 
-        bulletEffectStates[bullet]--;
+        bulletEffectStates[bullet].Remove(effectName);
 
-        if (bulletEffectStates[bullet] <= 0)
+        if (bulletEffectStates[bullet].Count == 0)
         {
             bulletEffectStates.Remove(bullet);
-            Destroy(bullet);
+            ResourceManager.Instance.Deactivate(bullet);
         }
     }
 
     //발사체 효과가 있는지 판별하는 함수입니다.
     //켜진 효과가 존재한다면 기본 발사체의 충돌 후 사라지지않고 모든 효과가 끝나고 사라지게 됩니다.
-    public bool IsBulletHaveEffect(GameObject bullet)
+    public bool IsBulletHaveEffect(GameObject bullet, string effectName)
     {
-        return bulletEffectStates.ContainsKey(bullet) && bulletEffectStates[bullet] > 0;
+        return bulletEffectStates.ContainsKey(bullet) && bulletEffectStates[bullet].Contains(effectName);
     }
 }
