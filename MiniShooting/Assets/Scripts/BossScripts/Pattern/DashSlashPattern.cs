@@ -6,12 +6,11 @@ public class DashPattern : MonoBehaviour, IBossPattern
 {
     public float dashSpeed = 20f;
     public float dashWaringTime = 2f;
-    public float Waringwidth = 2f;
     public float movetime = 1f;
     public float dashWaitTime = 2f;
 
+    public float Waringwidth = 2f;
     private Vector2 startPos;
-    private bool isActive = false;
 
     private LineRenderer BosslineRenderer;
     private Transform playerTransform;
@@ -25,13 +24,8 @@ public class DashPattern : MonoBehaviour, IBossPattern
 
         BosslineRenderer = GetComponent<LineRenderer>(); // 라인 렌더러 가져오기
         BossTrailRenderer = GetComponent<TrailRenderer>(); // 트레일 렌더러 가져오기
-        if (BosslineRenderer == null)
-        {
-            BosslineRenderer = gameObject.AddComponent<LineRenderer>(); // 없으면 추가
-        }
         BossTrailRenderer.enabled = false;
         BosslineRenderer.enabled = false; // 기본적으로 비활성화
-
         BosslineRenderer.startWidth = Waringwidth;
         BosslineRenderer.endWidth = Waringwidth;
         BosslineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 머티리얼 적용
@@ -44,20 +38,11 @@ public class DashPattern : MonoBehaviour, IBossPattern
         BosslineRenderer.startColor = newStartColor;
         BosslineRenderer.endColor = newEndColor;
 
-
-
     }
 
-    public void StartPattern()
+    IEnumerator IBossPattern.StartPattern()
     {
-        isActive = true;
-        StartCoroutine(MakeWarningCoroutine());
-    }
-
-    public void StopPattern()
-    {
-        isActive = false;
-        StopAllCoroutines();
+        yield return StartCoroutine(MakeWarningCoroutine());
     }
 
     IEnumerator MakeWarningCoroutine()
@@ -98,7 +83,7 @@ public class DashPattern : MonoBehaviour, IBossPattern
         BossTrailRenderer.enabled = false;// 대쉬 이펙트 비활성화
 
         // 이동이 끝나면 SlashCoroutine 실행
-        StartCoroutine(SlashCoroutine());
+        yield return StartCoroutine(SlashCoroutine());
     }
 
     IEnumerator SlashCoroutine()
@@ -119,15 +104,10 @@ public class DashPattern : MonoBehaviour, IBossPattern
             {
                 hit.gameObject.GetComponent<Player>().Hit();
             }
-
         }
-        yield return new WaitForSeconds(dashWaitTime);
+        yield return null;
 
         this.transform.position = startPos;
-        StartPattern();
     }
-
-
-
 
 }
