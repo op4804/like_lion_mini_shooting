@@ -7,6 +7,7 @@ public class ExpBar : MonoBehaviour
     private Image expBar;
     private Image Exp;
     public GameObject ee; // Exp Image가 있는 오브젝트
+    public GameObject bar;
 
     private float exp;
     private float expScale;
@@ -15,7 +16,7 @@ public class ExpBar : MonoBehaviour
     void Awake()
     {
         expBar = GetComponent<Image>();
-
+        bar.SetActive(true);
         if (ee == null)
         {
             Debug.LogError("ee가 null입니다! Inspector에서 GameObject를 연결하세요.");
@@ -23,6 +24,7 @@ public class ExpBar : MonoBehaviour
         else
         {
             Exp = ee.GetComponent<Image>();
+            expBar = bar.GetComponent<Image>();
             if (Exp == null)
             {
                 Debug.LogError("Exp Image 컴포넌트가 없습니다! GameObject에 Image가 있는지 확인하세요.");
