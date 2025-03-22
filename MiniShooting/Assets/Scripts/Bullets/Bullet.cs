@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
+        
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());

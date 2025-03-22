@@ -15,8 +15,10 @@ public class BombEnemy : Enemy
         target = GameManager.Instance.player.transform;
     }
 
-    private void OnEnable() // 초기화
+    protected override void OnEnable() // 초기화
     {
+        base.OnEnable();
+
         gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1); // 색상 초기화
         isTracing = true; // 따라가기 초기화
         currentEnemyHP = 10; // TODO: 

@@ -13,8 +13,10 @@ public class WolfEnemy : Enemy
         gm = GameManager.Instance;
     }
 
-    private void OnEnable() // 재생성 되었을때 초기화
+    protected override void OnEnable() // 재생성 되었을때 초기화
     {
+        base.OnEnable();
+        Debug.Log("BombEnemy 추가 초기화");
         currentEnemyHP = 50; // TODO: 
         StartCoroutine(Attack());
         isAttack = false;

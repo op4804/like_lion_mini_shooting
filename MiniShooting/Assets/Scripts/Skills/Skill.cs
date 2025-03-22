@@ -4,6 +4,8 @@ public abstract class Skill : MonoBehaviour
 {
     protected string skillName { get; set; }//스킬 이름
     protected string description { get; set; } //스킬 설명
+
+    protected float damage { get; set; } //데미지
     protected float coolTime { get; set; }  // 쿨타임
     protected float lastUsedTime { get; set; } = -10f; //마지막 사용 시간
     protected bool skillType { get; set; } // false면 passive, true면 active
@@ -15,6 +17,11 @@ public abstract class Skill : MonoBehaviour
     public virtual void InitializeSkill(Player player)
     {
         this.player = player;
+    }
+
+    public bool IsUnlockSkill()
+    {
+        return isUnlocked;
     }
 
     public void UnlockSkill()

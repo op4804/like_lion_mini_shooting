@@ -13,8 +13,10 @@ public class OneEyeEnemy : Enemy
         gm = GameManager.Instance;
     }
 
-    private void OnEnable() // 처음, 재생성되었을때 초기화
+    protected override void OnEnable() // 처음, 재생성되었을때 초기화
     {
+        base.OnEnable();
+
         StartCoroutine(FireBullet());
         currentEnemyHP = 20; // TODO: 
     }

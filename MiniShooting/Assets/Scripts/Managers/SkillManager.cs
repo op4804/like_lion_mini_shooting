@@ -22,7 +22,7 @@ public class SkillManager : MonoBehaviour
 {
     [HideInInspector]
     public static SkillManager Instance = null;
-        
+
     public GameObject defaultBulletPrefab;
     private GameObject currentBulletPrefab;
 
@@ -63,12 +63,15 @@ public class SkillManager : MonoBehaviour
     {
         if (skills.Count == 0) return;
 
-        if (Input.GetKeyDown(KeyCode.Z) && skills[currentSkillIndex].IsActiveSkill) //z키를 눌러 액티브 스킬 사용
+        if (Input.GetKeyDown(KeyCode.Z)) //z키를 눌러 액티브 스킬 사용
         {
-            skills[currentSkillIndex].UseSkill();
+            foreach (var skill in skills)
+            {
+                if (skill.IsActiveSkill && skill.IsUnlockSkill())
+                    skill.UseSkill();
+            }
         }
 
-        
     }
 
     //발사체 효과 등록
@@ -107,7 +110,6 @@ public class SkillManager : MonoBehaviour
     // 발사체 사라지는 시점을 모든 효과가 끝난후로 관리합니다.
     public void NotifyEffectComplete(GameObject bullet)
     {
-        Debug.Log(!bulletEffectStates.ContainsKey(bullet));
         if (!bulletEffectStates.ContainsKey(bullet)) return;
 
         bulletEffectStates[bullet]--;

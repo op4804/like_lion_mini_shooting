@@ -24,6 +24,9 @@ public class ResourceManager : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject claw;
 
+    [Header("Skills")]
+    public GameObject eagle;
+
     [Header("etc")]
     public GameObject expParticle;
     public GameObject explosionEffect;
@@ -59,6 +62,7 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(claw);
         prefabs.Add(expParticle);
         prefabs.Add(explosionEffect);
+        prefabs.Add(eagle);
     }
 
     
@@ -72,7 +76,7 @@ public class ResourceManager : MonoBehaviour
             go.transform.position = position;
             return go;
         }
-        else // 없다면 새로 생성
+        else 
         {
             go = Instantiate(stringToGameobject(key), position, Quaternion.identity);
             return go;
@@ -85,12 +89,14 @@ public class ResourceManager : MonoBehaviour
         if (objectDic.ContainsKey(key) && objectDic[key].Count > 0) // 해당 게임 오브젝트(프리팹)이 비활성화 된 오브젝트 풀에 있다면~
         {
             go = objectDic[key].Dequeue();
+            Debug.Log($"[Pool] 꺼냄: {key}, ID: {go.GetInstanceID()}", go);
             go.SetActive(true);
             go.transform.position = position;
             return go;
         }
         else // 없다면 새로 생성
         {
+            Debug.LogWarning($"[Pool] 새로 생성됨 - key: {key}");
             go = Instantiate(stringToGameobject(key), position, Quaternion.identity);
             return go;
         }        
@@ -100,6 +106,9 @@ public class ResourceManager : MonoBehaviour
     {
         gameObject.SetActive(false);
         string key = gameObject.name.Replace("(Clone)", "");
+
+        Debug.Log($"[Pool] 등록: {key}, ID: {gameObject.GetInstanceID()}", gameObject);
+
         if (objectDic.ContainsKey(key))
         {
             objectDic[key].Enqueue(gameObject);
