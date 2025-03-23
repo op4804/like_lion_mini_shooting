@@ -72,8 +72,8 @@ public class WolfEnemy : Enemy
             transform.Translate(Vector3.left);
             yield return new WaitForSeconds(0.02f);
         }
-        GameObject leftClaw = Instantiate(ResourceManager.Instance.claw, this.transform.position, Quaternion.identity);
-        GameObject rightClaw = Instantiate(ResourceManager.Instance.claw, this.transform.position, Quaternion.identity);
+        GameObject leftClaw = ResourceManager.Instance.Create("claw", this.transform.position);
+        GameObject rightClaw = ResourceManager.Instance.Create("claw", this.transform.position);
         rightClaw.GetComponent<SpriteRenderer>().flipX = true;
         StartCoroutine(RushBack());
     }

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
     public void Hit(float damage)
     {
-        if (isDead) return;
+        if (isDead) return; // 죽었으면 피격되지 않음.
 
         currentEnemyHP -= damage;      
 
@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour
             GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
             expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
             
-            //크기 줄이기->줄어들면 오브젝트 파괴
-            StopAllCoroutines();
+            // 크기 줄이기-> 줄어들면 오브젝트 파괴
+            StopAllCoroutines(); // 모든 행동 중지
             StartCoroutine(RotateAndShrinkAndDie());
 
             return;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         gameObject.GetComponent<Animator>().SetTrigger("hit");
         transform.Translate(Vector3.right * 0.1f);
     }
-    protected virtual void OnEnable()
+    protected virtual void OnEnable() // 초기화
     {
         GetComponent<Collider2D>().enabled = true;
         isDead = false;
