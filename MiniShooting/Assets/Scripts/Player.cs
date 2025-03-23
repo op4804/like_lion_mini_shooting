@@ -140,10 +140,9 @@ public class Player : MonoBehaviour
     // @ 수정점 3 Hit 메소드에 Renderer 코루틴 추가
     public void Hit()
     {
-        Invincible invSkill = GetComponent<Invincible>();
-        if (invSkill != null && invSkill.IsInvincible)
+        if (isInvincible)
         {
-            Debug.Log("무적 상태 확인용 로그 2-hit 메소드 부분");
+            Debug.Log("무적 상태 - 데미지 무시");
             return;
         }
 
@@ -196,6 +195,17 @@ public class Player : MonoBehaviour
         }
     }
     */
+
+    // 무적 상태
+    public void SetInvincibleMode(bool value)
+    {
+        isInvincible = value;
+    }
+
+    public bool IsInvincible()
+    {
+        return isInvincible;
+    }
 
     public void GetExpParticle(float expAmount) //경험치 획득
     {
