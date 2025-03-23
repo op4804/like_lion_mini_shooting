@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ExplosionEffect : MonoBehaviour
 {
-
-    private void Start()
+    private void OnEnable()
     {
-        Destroy(gameObject, 1f); // 1초 뒤 스스로 파괴
+        ResourceManager.Instance.Deactivate(gameObject, 1f); // 1초 뒤 스스로 파괴
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

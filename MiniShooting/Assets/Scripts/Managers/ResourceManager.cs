@@ -30,6 +30,7 @@ public class ResourceManager : MonoBehaviour
     [Header("etc")]
     public GameObject expParticle;
     public GameObject explosionEffect;
+    public GameObject frag;
 
     // 오브젝트 풀링 구현
     private List<GameObject> prefabs = new(); // 모든 프리팹을 가지고 있는 리스트
@@ -63,6 +64,7 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(expParticle);
         prefabs.Add(explosionEffect);
         prefabs.Add(eagle);
+        prefabs.Add(frag);
     }
 
     
