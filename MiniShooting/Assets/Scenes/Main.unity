@@ -531,6 +531,7 @@ MonoBehaviour:
   eagle: {fileID: 8348515755537654264, guid: 86831d6ccb6c24a4bb00bca4c589f9ff, type: 3}
   expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
   explosionEffect: {fileID: 5584700356191228352, guid: 239b666a28427c248876467101b162a6, type: 3}
+  frag: {fileID: 0}
 --- !u!4 &358329393
 Transform:
   m_ObjectHideFlags: 0
@@ -2626,7 +2627,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fdc81ad8b9f287b4094d7dff5848dda8, type: 2}
+  - {fileID: 2100000, guid: a2bf70ff8719fb943bb649adaf16566f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2665,8 +2666,8 @@ Transform:
   m_GameObject: {fileID: 1826474209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.140991, y: -0.007995367, z: 0}
-  m_LocalScale: {x: 68.41276, y: 10.305338, z: 0}
+  m_LocalPosition: {x: 8.7742, y: -0.007995367, z: 0}
+  m_LocalScale: {x: 35.67716, y: 10.305338, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
