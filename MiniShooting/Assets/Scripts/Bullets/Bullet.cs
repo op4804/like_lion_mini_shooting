@@ -58,14 +58,11 @@ public class Bullet : MonoBehaviour
     // enemy에게 bullet이 피격되면 소리 재생을 위해 Trigger 변경
     private void OnTriggerEnter2D(Collider2D collision)
     {
-<<<<<<< HEAD
-        bool hasEffect = SkillManager.Instance.IsBulletHaveEffect(gameObject, name);
-=======
+        bool hasEffect = SkillManager.Instance.IsBulletHaveEffect(gameObject);
         if (SkillManager.Instance.IsBulletHaveEffect(gameObject))
         {
             return;
         }
->>>>>>> af9d3c3320f89a91b61518e86f4c6d0c064faece
 
         if (collision.gameObject.CompareTag("Enemy"))
         {

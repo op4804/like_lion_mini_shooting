@@ -36,7 +36,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnElite1());
         StartCoroutine(SpawnElite2());
         StartCoroutine(SpawnElite3());
-
     }
 
     void Update()
@@ -108,6 +107,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay3);
             ResourceManager.Instance.Create("bombEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
         }
+    }
 
 
     private bool IsSpawnAreaClear(Vector3 position)
