@@ -4,7 +4,6 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Bullet : MonoBehaviour
 {
-
     private GameManager gm;
     private Rigidbody2D rb;
 
@@ -14,6 +13,7 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
     }
+
     private void OnEnable()
     {
         if (gm == null)
@@ -23,7 +23,8 @@ public class Bullet : MonoBehaviour
             rb = GetComponent<Rigidbody2D>();
 
         rb.linearVelocity = transform.right * Player.Instance.GetbulletSpeed();
-        SkillManager.Instance.RegisterBulletEffect(gameObject, name);
+
+        //SkillManager.Instance.ReRegisterEffects(gameObject);
     }
 
     void Update()
@@ -33,7 +34,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (SkillManager.Instance.IsBulletHaveEffect(gameObject, name))
+        if (SkillManager.Instance.IsBulletHaveEffect(gameObject))
         {
             return;
         }
@@ -45,6 +46,7 @@ public class Bullet : MonoBehaviour
             // TODO: °üÅë?
             SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
+
         else if (collision.gameObject.CompareTag("Boss"))
         {
             collision.gameObject.GetComponent<BossStatus>().Hit(Player.Instance.GetAttack());
@@ -62,6 +64,7 @@ public class Bullet : MonoBehaviour
         if (transform.position.x > gm.maxBounds.x || transform.position.x < gm.minBounds.x
             || transform.position.y > gm.maxBounds.y || transform.position.y < gm.minBounds.y)
         {
+            SkillManager.Instance.NotifyAllEffectsComplete(gameObject);
             ResourceManager.Instance.Deactivate(gameObject);
         }
     }
