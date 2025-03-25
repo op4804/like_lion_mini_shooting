@@ -6,11 +6,11 @@ using Unity.VisualScripting;
 
 public class KnifeEnergyCirclePattern : MonoBehaviour, IBossPattern
 {
-    public GameObject knife;// ¼ÒÈ¯ÇÒ°Å
-    public Transform spawnPos1;// ¼ÒÈ¯ À§Ä¡
+    public GameObject knife;// ï¿½ï¿½È¯ï¿½Ò°ï¿½
+    public Transform spawnPos1;// ï¿½ï¿½È¯ ï¿½ï¿½Ä¡
 
-    public float moveSpeed = 10f;// º¸½º ÀÌµ¿¼Óµµ
-    public Transform midPos;//º¸½º ÀÌµ¿ ÁÂÇ¥
+    public float moveSpeed = 10f;// ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½
+    public Transform midPos;//ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½Ç¥
 
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
@@ -24,7 +24,7 @@ public class KnifeEnergyCirclePattern : MonoBehaviour, IBossPattern
         isPatternStop = true;
         yield return null;
     }
-    public IEnumerator PatternProgress() // ÄÚ·çÆ¾À» ÀÌ¿ëÇÑ ÃÑ¾Ë ¹ß»ç
+    public IEnumerator PatternProgress() // ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½
     {
         isPatternStop = false;
         yield return StartCoroutine(Move(midPos, moveSpeed));
@@ -49,22 +49,22 @@ public class KnifeEnergyCirclePattern : MonoBehaviour, IBossPattern
         }
     }
 
-    public float knifeSpeed = 5f; // Ä®ÀÌ ³¯¾Æ°¡´Â ¼Óµµ
+    public float knifeSpeed = 5f; // Ä®ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 
     public IEnumerator Spawn(GameObject go, Transform pos)
     {
         GameObject obj = Instantiate(go, pos.position, Quaternion.identity);
 
-        // ·£´ý ¹æÇâ »ý¼º (´ÜÀ§ º¤ÅÍ)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
-        obj.transform.right = randomDir; // ¡ç ÇÙ½É! È¸Àü ¹æÇâ ÁöÁ¤
+        obj.transform.right = randomDir; // ï¿½ï¿½ ï¿½Ù½ï¿½! È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // Rigidbody2D°¡ ÀÖ´Ù¸é ÈûÀ» ÁÜ
+        // Rigidbody2Dï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = randomDir * knifeSpeed;
+            rb.linearVelocity = randomDir * knifeSpeed;
         }
 
         yield return null;
