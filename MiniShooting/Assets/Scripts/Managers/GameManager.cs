@@ -62,5 +62,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GameOver");
+        SoundManager.instance.PlayerDie(); // 플레이어 사망 시 재생
     }
 }

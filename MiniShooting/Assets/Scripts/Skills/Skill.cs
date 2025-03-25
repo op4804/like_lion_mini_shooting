@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour
 {
     protected string skillName { get; set; }//스킬 이름
+    protected string effectKey; // 내부 시스템용 키 (영문/고유)
     protected string description { get; set; } //스킬 설명
 
     protected float damage { get; set; } //데미지
@@ -54,5 +55,15 @@ public abstract class Skill : MonoBehaviour
     public bool GetSkillType()
     {
         return skillType;
+    }
+
+    public virtual bool HasEffectComponent(GameObject bullet)
+    {
+        return false;
+    }
+
+    public string GetEffectKey()
+    {
+        return effectKey;
     }
 }
