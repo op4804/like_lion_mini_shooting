@@ -11,16 +11,17 @@ public class Explosion : Skill
     {
         base.InitializeSkill(player);
         skillName = "폭발";
+        effectKey = "Explosion";
         description = "적을 맞추면 폭발하여 주변 적에게 피해를 줍니다.";
         skillType = false; // 패시브 스킬
-        isUnlocked = true;
+        isUnlocked = false;
     }
 
     public override void ApplyEffect()
     {
         if (!isUnlocked) return;
 
-        Debug.Log("Explosion 스킬 적용됨");
+        Debug.Log($"{effectKey} 스킬 적용됨");
 
         SkillManager.Instance.AddBulletModifier((bullet) =>
         {
@@ -29,6 +30,7 @@ public class Explosion : Skill
                 var explosionBullet = bullet.AddComponent<ExplosionBullet>();
                                 
                 explosionBullet.SetExplosionValues(explosionRadius, explosionDamageMultiplier, effectPrefab);
+                explosionBullet.SetEffectKey(effectKey); // 키 값을 설정해줍니다.
             }
         });
     }

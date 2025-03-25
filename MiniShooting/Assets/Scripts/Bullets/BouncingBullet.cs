@@ -19,10 +19,11 @@ using UnityEngine.InputSystem;
 
 public class BouncingBullet : MonoBehaviour
 {
-    private int maxBounces = 3; // 최대 튕기는 횟수
-    private int currentBounce = 0; // 튕긴 횟수 카운트
-    private float bounceRadius = 200f; // 튕기는 범위    
-    private bool isFirst = false; // 첫 충돌 여부
+    private int maxBounces = 3; //최대 튕기는 횟수
+    private int currentBounce = 0; //튕긴 횟수 카운트
+    private float bounceRadius = 200f; //튕기는 범위    
+    private bool isFirst = false; //첫 충돌 여부
+    private string effectKey; //키 값 설정
 
     private GameObject currentTarget; // 다음 타겟 저장
 
@@ -36,12 +37,22 @@ public class BouncingBullet : MonoBehaviour
         this.maxBounces = maxBounces;
         this.bounceRadius = bounceRadius;
     }
-    void OnEnable() // 오브젝트풀 관련 발사체 초기화코드입니다. 필요하시면 넣으시면됩니다.
+
+    private void OnEnable()
+    {
+        if (!string.IsNullOrEmpty(effectKey))
+        {
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        }
+    }
+
+    void OnDisable() //오브젝트풀 관련 발사체 초기화코드입니다. 필요하시면 넣으시면됩니다.
     {
         currentBounce = 0;
         isFirst = false;
         currentTarget = null;
         alreadyHit.Clear(); // List 초기화
+        transform.rotation = Quaternion.identity;
     }
 
     private void Start()
@@ -55,19 +66,20 @@ public class BouncingBullet : MonoBehaviour
         {
             if (currentTarget == null || !currentTarget || currentTarget.GetComponent<Enemy>()?.IsDead() == true)
             {
-                SkillManager.Instance.NotifyEffectComplete(gameObject, name); // destroy 기능을 한다고 생각하시면 됩니다. 로직중 어딘가에 반드시 구현되어야합니다.
-                                                                              // 실제 destroy는 아니고 스킬매니저에게 효과를 끝내도 된다 알려주는 함수입니다.
-                                                                              // 온, 오프로 생각했을때 스킬 효과를 오프해주는 함수라고 생각하시면됩니다.
+                SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); //destroy 기능을 한다고 생각하시면 됩니다. 로직중 어딘가에 반드시 구현되어야합니다.
+                                                                              //실제 destroy는 아니고 스킬매니저에게 효과를 끝내도 된다 알려주는 함수입니다.
+                                                                              //온, 오프로 생각했을때 스킬 효과를 오프해주는 함수라고 생각하시면됩니다.
                 return;
             }
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-            rb.linearVelocity = direction * Player.Instance.GetbulletSpeed(); // 다음 타겟으로 이동
+            rb.linearVelocity = direction * Player.Instance.GetbulletSpeed(); //다음 타겟으로 이동
+
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
-
-
-    // 이 밑으로는 바운스의 구현부이니 다 지우시고 구현하시면 됩니다.
+    //이 밑으로는 바운스의 구현부이니 다 지우시고 구현하시면 됩니다.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) // 충돌이 적인지 판단
@@ -80,14 +92,20 @@ public class BouncingBullet : MonoBehaviour
 
             alreadyHit.Add(enemy); //이미 맞은적으로 저장
             isFirst = true; //첫 충돌 활성화
-            currentBounce++; //충돌횟수 증가
-            //Debug.Log($"{GetInstanceID()}가 {currentBounce}번째 타격 : {collision}, ID: {collision.GetInstanceID()}", this);
+
+            Debug.Log($"{GetInstanceID()}가 {currentBounce}번째 타격 : {collision}, ID: {collision.GetInstanceID()}", this);
+            Debug.Log($"현재 : {currentBounce}, 최대 : {maxBounces}");
 
             if (currentBounce >= maxBounces)
             {
-                SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+                Debug.Log($"타격 완료 삭제 시도");
+                SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey);
             }
-            NextTarget(enemy.transform.position);//다음 타겟 찾는 함수 호출(충돌 객체 좌표 기준)
+            else
+            {
+                NextTarget(enemy.transform.position);//다음 타겟 찾는 함수 호출(충돌 객체 좌표 기준)
+                currentBounce++;
+            }
         }
     }
 
@@ -125,8 +143,12 @@ public class BouncingBullet : MonoBehaviour
 
         else
         {
-            // Debug.Log($"타겟 없음 종료", this);
-            SkillManager.Instance.NotifyEffectComplete(gameObject, name); // 유효한 타겟이 없으면 바로 종료
+            Debug.Log($"타겟 없음 종료", this);
+            SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); // 유효한 타겟이 없으면 바로 종료
         }
+    }
+    public void SetEffectKey(string keyName)
+    {
+        effectKey = keyName;
     }
 }

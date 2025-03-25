@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private bool isInvincible = false;
     public float invincibleTime = 1.5f;
 
+    Animator pAnimator;
 
     public int GetPlayerLevel() => playerLevel;
     public float GetExp() => exp;
@@ -75,6 +76,8 @@ public class Player : MonoBehaviour
 
         // TODO: 카메라 정보 및 화면의 경곗값은 플레이어만 사용하는 정보는 아니니까 위치 이동을 해야할듯. 
 
+        pAnimator = GetComponent<Animator>();
+
         // 체력 초기화
         currentHealth = maxHealth;
 
@@ -98,10 +101,14 @@ public class Player : MonoBehaviour
             fireTimer = 0f;
             SoundManager.instance.PlayerAttack(); // 공격 사운드 재생
         }
+
         //누르고 있는만큼 나감
         else if (Input.GetKey(KeyCode.X))
         {
             fireTimer += Time.deltaTime;
+
+            //pAnimator.SetTrigger("Attack");
+
             if (fireTimer >= fireRate)
             {
                 FireBullets();
@@ -241,9 +248,6 @@ public class Player : MonoBehaviour
         expFlag = false;
     }
     public bool Getflag() => expFlag;
-
-
-
 
     //플레이어 스텟 변경용 함수들
     public void SetHP(int maxHealth) => this.maxHealth = maxHealth;

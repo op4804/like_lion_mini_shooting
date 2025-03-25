@@ -6,6 +6,7 @@ public class ExplosionBullet : MonoBehaviour
 {
     private float explosionRadius = 3f; //폭발 반경
     private float explosionDamageMultiplier = 0.5f; //폭발 피해 배율
+    private string effectKey; //키 값 설정
 
     private Vector3 originalScale;
 
@@ -13,14 +14,8 @@ public class ExplosionBullet : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.localScale = originalScale;
+        SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
     }
-
-    private void Awake()
-    {
-        originalScale = transform.localScale;
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,8 +42,6 @@ public class ExplosionBullet : MonoBehaviour
             {
                 float playerAttack = Player.Instance.GetAttack() * explosionDamageMultiplier;
                 hit.GetComponent<Enemy>().Hit(playerAttack);
-
-                transform.localScale = Vector3.one * explosionRadius * 2f;
             }
         }
 
@@ -56,12 +49,29 @@ public class ExplosionBullet : MonoBehaviour
         if (effectPrefab != null)
         {
             GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-            float scale = explosionRadius * 2f;
+            float scale = 0.7f;
             effect.transform.localScale = new Vector3(scale, scale, 1f);
 
-            Destroy(effect, 0.2f);
+            Animator anim = effect.GetComponent<Animator>();
+            float animDuration = 0.2f; // 기본값
+
+            if (anim != null && anim.runtimeAnimatorController != null)
+            {
+                AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+                if (clips.Length > 0)
+                {
+                    animDuration = clips[0].length;
+                }
+            }
+
+            Destroy(effect, animDuration);
         }
 
-        SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+        SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey);
+    }
+
+    public void SetEffectKey(string keyName)
+    {
+        effectKey = keyName;
     }
 }
