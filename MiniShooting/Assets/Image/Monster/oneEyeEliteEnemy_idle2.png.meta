@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: e20bdc9184b36b44992709365d178e69
+guid: 748d239ff1157f243965ac48c4c64e9c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6981827254641702772
-    second: cloud_0
+      213: -6418223944728296817
+    second: oneEyeEliteEnemy_idle2_0
+  - first:
+      213: 2033894040601554626
+    second: oneEyeEliteEnemy_idle2_1
+  - first:
+      213: 6971513029684914077
+    second: oneEyeEliteEnemy_idle2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -139,13 +145,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cloud_0
+      name: oneEyeEliteEnemy_idle2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1000
-        height: 1080
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c88c0fb6a119b1f90800000000000000
-      internalID: -6981827254641702772
+      spriteID: f824095d353ede6a0800000000000000
+      internalID: -6418223944728296817
       vertices: []
       indices: 
       edges: []
@@ -164,7 +170,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d5bd3980c37218d45a839c916baa37e9
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +180,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cloud_0: -6981827254641702772
+      oneEyeEliteEnemy_idle2_0: -6418223944728296817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

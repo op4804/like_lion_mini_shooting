@@ -24,6 +24,11 @@ public class ResourceManager : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject claw;
 
+    [Header("Elite Enemies")]
+    public GameObject oneEyeEliteEnemy;
+    public GameObject t;
+    public GameObject t2;
+
     [Header("Skills")]
     public GameObject eagle;
 
@@ -61,6 +66,9 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(bombEnemy);
         prefabs.Add(enemyBullet);
         prefabs.Add(claw);
+        prefabs.Add(oneEyeEliteEnemy);
+        //
+        //
         prefabs.Add(expParticle);
         prefabs.Add(explosionEffect);
         prefabs.Add(eagle);

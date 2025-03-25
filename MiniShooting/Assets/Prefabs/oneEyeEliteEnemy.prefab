@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 878733763702568713}
   - component: {fileID: 5682165935630477923}
   - component: {fileID: 7379517690200317383}
-  - component: {fileID: 5390135618338520027}
+  - component: {fileID: 40629345554762011}
   m_Layer: 0
-  m_Name: oneEyeEnemy
+  m_Name: oneEyeEliteEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8aafee49383b700419adb389cde19d6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2215699416158634486, guid: f1e3bb7a963200949b771dbdab0285b1, type: 3}
+  m_Sprite: {fileID: 7136178167680995065, guid: 42d089cbc965903419c909e7b4aa322d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 450482112071159595}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 42d1b6d3e1a218b49a63b024dd3bee56, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2c4060f7b8ac37f49891b0fb20b6e30b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -148,7 +148,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.4
---- !u!114 &5390135618338520027
+--- !u!114 &40629345554762011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 450482112071159595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11df382169ce45e4ba3b1e1ad7ae589a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a0eaa1eb02f85e4a85f74de5cda9650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentEnemyHP: 0

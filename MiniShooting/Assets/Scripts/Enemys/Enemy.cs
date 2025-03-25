@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected float currentEnemyHP;
     private float MaxEnemyHp;
-    private Vector3 originalScale;
+    protected Vector3 originalScale;
 
-    private bool isDead = false;
+    protected bool isDead = false;
     public bool IsDead() => isDead;
 
     protected virtual void Awake()
@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
         originalScale = transform.localScale;
     }
 
-    public void Hit(float damage)
+    public virtual void Hit(float damage)
     {
         if (isDead) return; // 죽었으면 피격되지 않음.
 
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     }
 
     //원심분리기
-    IEnumerator RotateAndShrinkAndDie()
+    protected IEnumerator RotateAndShrinkAndDie()
     {
 
         float duration = 0.3f;
