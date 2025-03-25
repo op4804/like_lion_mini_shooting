@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         {
             FireBullets();
             fireTimer = 0f;
+            SoundManager.instance.PlayerAttack(); // 공격 사운드 재생
         }
         //누르고 있는만큼 나감
         else if (Input.GetKey(KeyCode.X))
@@ -149,6 +150,7 @@ public class Player : MonoBehaviour
         if (!isInvincible)
         {
             currentHealth--;
+            
 
             if (currentHealth < 0)
             {
@@ -158,7 +160,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Invisible());
             }
-
+            SoundManager.instance.PlayerDamage();
             PlayerHpBar.Instance.UpdateLife();
         }
     }

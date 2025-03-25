@@ -31,19 +31,45 @@ public class Bullet : MonoBehaviour
         DestroyOutOfBoundary(); // 화면 밖으로 나가면 사라지는 부분
     }
 
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (SkillManager.Instance.IsBulletHaveEffect(gameObject, name))
+    //    {
+    //        return;
+    //    }
+
+    //    if (collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
+
+    //        // TODO: 관통?
+    //        SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+    //        SoundManager.instance.PlayerHit(); // 플레이어가 적 피격 시 소리 재생
+    //        Debug.Log("플레이어 히트 사운드 실행!");
+    //    }
+    //    else if (collision.gameObject.CompareTag("Boss"))
+    //    {
+    //        collision.gameObject.GetComponent<BossStatus>().Hit(Player.Instance.GetAttack());
+    //        SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+    //    }
+    //}
+
+    // enemy에게 bullet이 피격되면 소리 재생을 위해 Trigger 변경
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (SkillManager.Instance.IsBulletHaveEffect(gameObject, name))
-        {
-            return;
-        }
+        bool hasEffect = SkillManager.Instance.IsBulletHaveEffect(gameObject, name);
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
-            // TODO: 관통?
-            SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+            if (!hasEffect)
+            {
+                SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+            }
+
+            SoundManager.instance.PlayerHit();
+            Debug.Log("플레이어 히트 사운드 실행!");
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
@@ -51,6 +77,7 @@ public class Bullet : MonoBehaviour
             SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
     }
+
 
     public bool NotifyEffectOutOfScreen()
     {
