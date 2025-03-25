@@ -4,16 +4,15 @@ using UnityEngine.UI;
 public class BossHpbar : MonoBehaviour
 {
     public Image currentHpImage;
-    public BossStatus bossStatus;
+    public Boss boss;
 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        currentHpImage.fillAmount = bossStatus.getCurrentHp() / bossStatus.getMaxHp();
+        currentHpImage.fillAmount = boss.currentHp / boss.maxHp;
     }
 }

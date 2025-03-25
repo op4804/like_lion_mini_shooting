@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DashPattern : MonoBehaviour, IBossPattern
+public class DashPattern : MonoBehaviour
 {
     public float dashSpeed = 20f;
     public float dashWaringTime = 2f;
@@ -40,15 +40,10 @@ public class DashPattern : MonoBehaviour, IBossPattern
 
     }
 
-    IEnumerator IBossPattern.StartPattern()
-    {
-        yield return StartCoroutine(MakeWarningCoroutine());
-    }
+
 
     IEnumerator MakeWarningCoroutine()
     {
-        if (playerTransform == null)
-            yield break;
 
         BosslineRenderer.enabled = true;
 

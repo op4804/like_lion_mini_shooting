@@ -38,6 +38,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2532551887160359834}
+  - {fileID: 8294372120701820572}
+  - {fileID: 2492369290427643738}
   - {fileID: 57732971450944749}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -154,8 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47be41c6f1a2caf4e951e85f17b3fe82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
-  currentHp: 0
 --- !u!114 &5691782795607904653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ae54e0fb70fb948aa8f4e9a9e12e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boss: {fileID: 0}
   patternScripts:
   - {fileID: 7280361820737010521}
   - {fileID: 7280361820737010521}
-  waitTime: 1
 --- !u!114 &4510012165980337064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,15 +201,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc30a05d9a17f8b49bb14b38e7be55d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knifePrefab: {fileID: 1060509560368311458, guid: 18f69f0a2c46c18429aa081198f1688d, type: 3}
-  knifeSpawnTransform: {fileID: 2532551887160359834}
-  moveDuration: 0.5
-  moveRange: 5
-  makeInterval: 0.25
-  throwInterval: 0.25
-  knifeCount: 5
-  radius: 2
-  knifeSpeed: 5
+  knifeCircleSpawner: {fileID: 2351133687329753885, guid: 0336edf05072cac4dac1c5f2a952e71f, type: 3}
+  spawnPos: {fileID: 2532551887160359834}
+  moveSpeed: 5
+  upPos: {fileID: 0}
+  downPos: {fileID: 0}
 --- !u!96 &1055645267940827428
 TrailRenderer:
   serializedVersion: 3
@@ -424,6 +420,37 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &5532237678739632078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8294372120701820572}
+  m_Layer: 0
+  m_Name: Pos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8294372120701820572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5532237678739632078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28, y: -2.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2070639073217295719}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7966800920112533386
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +463,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -449,7 +476,38 @@ Transform:
   m_GameObject: {fileID: 7966800920112533386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.28, y: 2.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2070639073217295719}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7983194120763597321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2492369290427643738}
+  m_Layer: 0
+  m_Name: Pos (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2492369290427643738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983194120763597321}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -467,6 +525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HpUICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1955494204847331240, guid: c796fae89b458df4badd71fe0e94f9f8, type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 7145156898169430360}
     - target: {fileID: 1955494204847331240, guid: c796fae89b458df4badd71fe0e94f9f8, type: 3}
       propertyPath: bossStatus
       value: 

@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
-            collision.gameObject.GetComponent<BossStatus>().Hit(Player.Instance.GetAttack());
+            collision.gameObject.GetComponent<Boss>().Hit(Player.Instance.GetAttack());
             SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
     }
