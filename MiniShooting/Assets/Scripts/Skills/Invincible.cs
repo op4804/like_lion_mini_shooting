@@ -16,9 +16,10 @@ public class Invincible : Skill
 
         // 스킬 설정
         skillName = "무적";
-        coolTime = 10f;
         description = "일정 시간 무적 상태가 됩니다.";
         skillType = true;
+        coolTime = 10f;
+        isUnlocked = false;
 
         SpriteRenderer = player.GetComponent<SpriteRenderer>();
         if(SpriteRenderer != null)
@@ -35,15 +36,15 @@ public class Invincible : Skill
             return;
         }
         Debug.Log($"{skillName} 스킬 사용!");
-        if (!isInvincible)
-        {
-            player.StartCoroutine(InvincibleMode());
-        }
+        player.StartCoroutine(InvincibleMode());
+        SkillCoolTime();
     }
 
     IEnumerator InvincibleMode()
     {
         isInvincible = true;
+        player.SetInvincibleMode(true);
+
         if (SpriteRenderer != null)
         {
             SpriteRenderer.color = InvincibleColor;
@@ -55,6 +56,8 @@ public class Invincible : Skill
         {
             SpriteRenderer.color = playerColor;
         }
+
+        player.SetInvincibleMode(false);
         isInvincible = false;
     }
 
@@ -62,29 +65,45 @@ public class Invincible : Skill
     {
         if (!isInvincible)
         {
-            StartCoroutine(InvincibleMode(duration, glowColor));
+            StartCoroutine(NeonInvincibleMode(duration, glowColor));
         }
     }
 
-    IEnumerator InvincibleMode(float duration, Color glowColor)
+    private IEnumerator NeonInvincibleMode(float duration, Color glowColor)
     {
         isInvincible = true;
+        player.SetInvincibleMode(true);
 
-        if (SpriteRenderer != null)
-        {
-            SpriteRenderer.color = glowColor;
-        }
+        yield return StartCoroutine(NeonEffect(duration));
 
-        yield return new WaitForSeconds(duration);
-
-        if (SpriteRenderer != null)
-        {
-            SpriteRenderer.color = playerColor;
-        }
-
+        player.SetInvincibleMode(false);
         isInvincible = false;
-
     }
+
+
+    private IEnumerator NeonEffect(float duration)
+    {
+        float timer = 0f;
+        bool isYellow = true;
+
+        while (timer < duration)
+        {
+            if (SpriteRenderer != null)
+            {
+                SpriteRenderer.color = isYellow ? Color.yellow : Color.white;
+            }
+
+            isYellow = !isYellow;
+            timer += 0.1f;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        if (SpriteRenderer != null)
+            SpriteRenderer.color = playerColor;
+    }
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("enemyBullet"))

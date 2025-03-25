@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.InputSystem;
 
-//기본적으로는 그냥 복사 붙여넣기하고 표기한 변수만 고쳐주시면됩니다.
-//스킬 구현부-> 스킬 -> 스킬매니저순으로 진행됩니다.
-//해당 클래스는 스킬 구현부입니다.
-//실제 물리적인 계산, 효과, 이펙트등 모든 구현이 이 클래스에 속합니다.
-//책의 속지, 내용이라고 생각하시면 될것같습니다.
-//구현부에서는 필수적으로 구현해야하는 함수는 없습니다.
-//이펙트가 있다면 exoplosion의 이펙트 부분을 참고하세요.
+// 기본적으로는 그냥 복사 붙여넣기하고 표기한 변수만 고쳐주시면됩니다.
+// 스킬 구현부-> 스킬 -> 스킬매니저순으로 진행됩니다.
+// 해당 클래스는 스킬 구현부입니다.
+// 실제 물리적인 계산, 효과, 이펙트등 모든 구현이 이 클래스에 속합니다.
+// 책의 속지, 내용이라고 생각하시면 될것같습니다.
+// 구현부에서는 필수적으로 구현해야하는 함수는 없습니다.
+// 이펙트가 있다면 exoplosion의 이펙트 부분을 참고하세요.
 
-//기본적으로 bullet에 붙어서 쓰인다고 생각하시고 구현하시면됩니다.
-//기본 발사체의 움직임빼고 충돌이나 기타 특성은 무시하시고 그냥 실제 어떻게 작동하는지만 구현하시면됩니다.
-//예를 들어 발사체의 앞으로 나가는 특성은 그대로 가지고있으니 따로 구현안하셔도되고
-//부딪혔을때 충돌처리도 스킬매니저가 해주기때문에
-//효과만 붙이면 알아서 기본 발사체의 로직은 무시됩니다.
+// 기본적으로 bullet에 붙어서 쓰인다고 생각하시고 구현하시면됩니다.
+// 기본 발사체의 움직임빼고 충돌이나 기타 특성은 무시하시고 그냥 실제 어떻게 작동하는지만 구현하시면됩니다.
+// 예를 들어 발사체의 앞으로 나가는 특성은 그대로 가지고있으니 따로 구현안하셔도되고
+// 부딪혔을때 충돌처리도 스킬매니저가 해주기때문에
+// 효과만 붙이면 알아서 기본 발사체의 로직은 무시됩니다.
 
 public class BouncingBullet : MonoBehaviour
 {
@@ -25,13 +25,13 @@ public class BouncingBullet : MonoBehaviour
     private bool isFirst = false; //첫 충돌 여부
     private string effectKey; //키 값 설정
 
-    private GameObject currentTarget; //다음 타겟 저장
+    private GameObject currentTarget; // 다음 타겟 저장
 
-    private List<GameObject> alreadyHit = new List<GameObject>(); //맞은적 중복 제거
+    private List<GameObject> alreadyHit = new List<GameObject>(); // 맞은적 중복 제거
 
-    private Rigidbody2D rb; //첫충돌 이후의 발사체 이동을 위해 사용하는 변수입니다.
+    private Rigidbody2D rb; // 첫충돌 이후의 발사체 이동을 위해 사용하는 변수입니다.
 
-    //스킬부의 고유값을 가져와 구현을 위해 세팅해주는 함수입니다.
+    // 스킬부의 고유값을 가져와 구현을 위해 세팅해주는 함수입니다.
     public void SetBounceValues(int maxBounces, float bounceRadius)
     {
         this.maxBounces = maxBounces;
@@ -57,7 +57,7 @@ public class BouncingBullet : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); //rb 초기화
+        rb = GetComponent<Rigidbody2D>(); // rb 초기화
     }
 
     private void FixedUpdate()
@@ -82,13 +82,13 @@ public class BouncingBullet : MonoBehaviour
     //이 밑으로는 바운스의 구현부이니 다 지우시고 구현하시면 됩니다.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) //충돌이 적인지 판단
+        if (collision.gameObject.CompareTag("Enemy")) // 충돌이 적인지 판단
         {
-            var enemy = collision.gameObject; //충돌 객체를 저장
+            var enemy = collision.gameObject; // 충돌 객체를 저장
 
-            if (alreadyHit.Contains(enemy)) return; //이미 맞은 적이라면 무시
+            if (alreadyHit.Contains(enemy)) return; // 이미 맞은 적이라면 무시
 
-            enemy.GetComponent<Enemy>().Hit(Player.Instance.GetAttack()); //데미지 처리
+            enemy.GetComponent<Enemy>().Hit(Player.Instance.GetAttack()); // 데미지 처리
 
             alreadyHit.Add(enemy); //이미 맞은적으로 저장
             isFirst = true; //첫 충돌 활성화
@@ -138,7 +138,7 @@ public class BouncingBullet : MonoBehaviour
         if (nextTarget != null)
         {
             currentTarget = nextTarget;
-            Debug.Log($"{GetInstanceID()}의 다음 대상 : {nextTarget}, ID: {nextTarget.GetInstanceID()}", this);
+            // Debug.Log($"{GetInstanceID()}의 다음 대상 : {nextTarget}, ID: {nextTarget.GetInstanceID()}", this);
         }
 
         else

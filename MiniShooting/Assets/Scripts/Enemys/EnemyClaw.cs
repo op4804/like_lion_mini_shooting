@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class EnemyClaw : MonoBehaviour
 {
-
     float duration = 1.0f;
-    private void Start()
+
+    private void OnEnable()
     {
+        gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1); // 색상 초기화
+        gameObject.GetComponent<SpriteRenderer>().flipX = false; // 좌우 반전 초기화
+
         StartCoroutine(FadeOut());
         StartCoroutine(Delete());
     }
@@ -23,7 +26,7 @@ public class EnemyClaw : MonoBehaviour
     IEnumerator Delete()
     {
         yield return new WaitForSeconds(duration);
-        Destroy(gameObject);
+        ResourceManager.Instance.Deactivate(gameObject);
     }
 
     IEnumerator FadeOut()

@@ -1,16 +1,15 @@
 using UnityEngine;
 
-//기본적으로는 그냥 복사 붙여넣기하고 표기한 변수만 고쳐주시면됩니다.
-//스킬 구현부-> 스킬 -> 스킬매니저순으로 진행됩니다.
-//해당 클래스는 스킬 클래스입니다.
-//어떤 스킬인지 설명하는 책의 표지라고 보시면 될것같습니다.
+// 기본적으로는 그냥 복사 붙여넣기하고 표기한 변수만 고쳐주시면됩니다.
+// 스킬 구현부-> 스킬 -> 스킬매니저순으로 진행됩니다.
+// 해당 클래스는 스킬 클래스입니다.
+// 어떤 스킬인지 설명하는 책의 표지라고 보시면 될것같습니다.
 
 public class Bounce : Skill
 {
-    //이 부분은 해당 스킬의 고유 수치만 쓰시면됩니다.
-    private int maxBounces = 3; //최대 튕기는 횟수
-    private float bounceRadius = 100f; //튕기는 범위
-    
+    // 이 부분은 해당 스킬의 고유 수치만 쓰시면됩니다.
+    private int maxBounces = 3; // 최대 튕기는 횟수
+    private float bounceRadius = 100f; // 튕기는 범위
 
     //스킬 초기화입니다.
     public override void InitializeSkill(Player player)
