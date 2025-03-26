@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class OneEyeEliteEnemy : EliteEnemy
+public class wolfEliteEnemy : EliteEnemy
 {
     protected override void OnEnable()
     {
@@ -9,15 +9,9 @@ public class OneEyeEliteEnemy : EliteEnemy
         StartCoroutine(MoveFoward()); // 앞으로 가기
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator MoveFoward()
     {
-        for(int i = 0; i < 100; i++)
+        for (int i = 0; i < 100; i++)
         {
             yield return new WaitForFixedUpdate();
             transform.Translate(Vector2.left * Time.deltaTime * 2f);
@@ -30,11 +24,12 @@ public class OneEyeEliteEnemy : EliteEnemy
     {
         while (true)
         {
-            for (int i = 0; i < 10; i++)
+            int clawNum = Random.Range(2, 5);
+            for (int i = 0; i < clawNum; i++)
             {
                 GameObject go = Instantiate(ResourceManager.Instance.oneEyeEliteEnemyBullet, transform.position, Quaternion.identity);
 
-                float angle = 360 / 10 * i;                
+                float angle = 360 / 10 * i;
                 go.GetComponent<oneEyeEliteEnemyBullet>().Init(angle);
             }
 

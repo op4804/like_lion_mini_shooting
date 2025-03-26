@@ -24,10 +24,11 @@ public class ResourceManager : MonoBehaviour
     public GameObject enemyBullet;
     public GameObject claw;
     public GameObject oneEyeEliteEnemyBullet;
+    public GameObject eliteClaw;
 
     [Header("Elite Enemies")]
     public GameObject oneEyeEliteEnemy;
-    public GameObject t;
+    public GameObject wolfEliteEnemy;
     public GameObject t2;
 
     [Header("Skills")]
@@ -37,6 +38,8 @@ public class ResourceManager : MonoBehaviour
     public GameObject expParticle;
     public GameObject explosionEffect;
     public GameObject frag;
+    public GameObject skillBook;
+
 
     // 오브젝트 풀링 구현
     private List<GameObject> prefabs = new(); // 모든 프리팹을 가지고 있는 리스트
@@ -69,12 +72,13 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(claw);
         prefabs.Add(oneEyeEliteEnemyBullet);
         prefabs.Add(oneEyeEliteEnemy);
-        //
+        prefabs.Add(wolfEliteEnemy);
         //
         prefabs.Add(expParticle);
         prefabs.Add(explosionEffect);
         prefabs.Add(eagle);
         prefabs.Add(frag);
+        prefabs.Add(skillBook);
     }
 
     
