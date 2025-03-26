@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4217391666738677946}
   - component: {fileID: 1368697732367443023}
   - component: {fileID: 232351079830190042}
-  - component: {fileID: 4172596466087574338}
+  - component: {fileID: 8223952298100799519}
   m_Layer: 0
-  m_Name: eliteEnemyBullet
+  m_Name: oneEyeEliteEnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.221566, y: -3.6145482, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 3922947334420469022, guid: a62fabddcece09b4381ef82ef3a1aabc, type: 3}
-  m_Color: {r: 1, g: 0.25, b: 0.25, a: 1}
+  m_Color: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,7 +176,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4172596466087574338
+--- !u!114 &8223952298100799519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,6 +185,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8689353794362442462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd995774ac196b46a4ca347a69fdfdd, type: 3}
+  m_Script: {fileID: 11500000, guid: c14f30ee28fc9204e828125ae04892cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
