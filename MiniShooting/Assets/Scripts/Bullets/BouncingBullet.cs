@@ -19,11 +19,12 @@ using UnityEngine.InputSystem;
 
 public class BouncingBullet : MonoBehaviour
 {
+    //
+    private string effectKey;
     private int maxBounces = 3; //최대 튕기는 횟수
     private int currentBounce = 0; //튕긴 횟수 카운트
     private float bounceRadius = 200f; //튕기는 범위    
     private bool isFirst = false; //첫 충돌 여부
-    private string effectKey; //키 값 설정
 
     private GameObject currentTarget; // 다음 타겟 저장
 
@@ -38,10 +39,17 @@ public class BouncingBullet : MonoBehaviour
         this.bounceRadius = bounceRadius;
     }
 
+
     private void OnEnable()
     {
+        rb = GetComponent<Rigidbody2D>(); // rb 초기화
+
+        //Debug.Log($"{effectKey}효과 등록중입니다. ");
+
+
         if (!string.IsNullOrEmpty(effectKey))
         {
+            //Debug.Log($"{GetInstanceID()}가 {effectKey}효과 등록", this);
             SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
         }
     }
@@ -53,11 +61,6 @@ public class BouncingBullet : MonoBehaviour
         currentTarget = null;
         alreadyHit.Clear(); // List 초기화
         transform.rotation = Quaternion.identity;
-    }
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>(); // rb 초기화
     }
 
     private void FixedUpdate()
@@ -93,12 +96,12 @@ public class BouncingBullet : MonoBehaviour
             alreadyHit.Add(enemy); //이미 맞은적으로 저장
             isFirst = true; //첫 충돌 활성화
 
-            Debug.Log($"{GetInstanceID()}가 {currentBounce}번째 타격 : {collision}, ID: {collision.GetInstanceID()}", this);
-            Debug.Log($"현재 : {currentBounce}, 최대 : {maxBounces}");
+            //Debug.Log($"{GetInstanceID()}가 {currentBounce}번째 타격 : {collision}, ID: {collision.GetInstanceID()}", this);
+            //Debug.Log($"현재 : {currentBounce}, 최대 : {maxBounces}");
 
             if (currentBounce >= maxBounces)
             {
-                Debug.Log($"타격 완료 삭제 시도");
+                //Debug.Log($"타격 완료 삭제 시도");
                 SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey);
             }
             else
@@ -138,17 +141,25 @@ public class BouncingBullet : MonoBehaviour
         if (nextTarget != null)
         {
             currentTarget = nextTarget;
-            // Debug.Log($"{GetInstanceID()}의 다음 대상 : {nextTarget}, ID: {nextTarget.GetInstanceID()}", this);
+            //Debug.Log($"{GetInstanceID()}의 다음 대상 : {nextTarget}, ID: {nextTarget.GetInstanceID()}", this);
         }
 
         else
         {
             Debug.Log($"타겟 없음 종료", this);
-            SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); // 유효한 타겟이 없으면 바로 종료
+            //SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); // 유효한 타겟이 없으면 바로 종료
         }
     }
+
+    //**타이밍과 상관없이 키값이 설정되는 즉시 등록하는 기능입니다. 필수로 구현해야합니다.
     public void SetEffectKey(string keyName)
     {
         effectKey = keyName;
+
+        if (SkillManager.Instance != null && gameObject.activeInHierarchy)
+        {
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+            //Debug.Log($"[SetEffectKey] {GetInstanceID()}에 {effectKey} 효과 등록", gameObject);
+        }
     }
 }

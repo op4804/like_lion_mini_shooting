@@ -17,6 +17,8 @@ using UnityEngine;
 
 public class FragmentBullet : MonoBehaviour
 {
+    private string effectKey;
+
     // 이 부분은 해당 스킬의 고유 수치만 쓰시면됩니다.
     private int fragmentNum = 3; // 파편 갯수
     private float fragmentSpeed = 5.0f; // 파편 속도
@@ -66,6 +68,16 @@ public class FragmentBullet : MonoBehaviour
             fragment.GetComponent<Frag>().SetDir(new Vector2(x, y));
         }
         SkillManager.Instance.NotifyEffectComplete(gameObject, name);
+    }
+
+    public void SetEffectKey(string keyName)
+    {
+        effectKey = keyName;
+
+        if (SkillManager.Instance != null && gameObject.activeInHierarchy)
+        {
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        }
     }
 }
 

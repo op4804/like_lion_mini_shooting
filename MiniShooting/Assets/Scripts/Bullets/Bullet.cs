@@ -74,7 +74,7 @@ public class Bullet : MonoBehaviour
             }
 
             SoundManager.instance.PlayerHit();
-            Debug.Log("플레이어 히트 사운드 실행!");
+            //Debug.Log("플레이어 히트 사운드 실행!");
         }
 
         else if (collision.gameObject.CompareTag("Boss"))
@@ -83,7 +83,6 @@ public class Bullet : MonoBehaviour
             SkillManager.Instance.NotifyEffectComplete(gameObject, name);
         }
     }
-
 
     public bool NotifyEffectOutOfScreen()
     {

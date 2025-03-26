@@ -73,5 +73,10 @@ public class ExplosionBullet : MonoBehaviour
     public void SetEffectKey(string keyName)
     {
         effectKey = keyName;
+
+        if (SkillManager.Instance != null && gameObject.activeInHierarchy)
+        {
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        }
     }
 }
