@@ -5,7 +5,7 @@ public class OneEyeEliteEnemy : EliteEnemy
 {
     protected override void OnEnable()
     {
-        currentEnemyHP = 500;
+        currentEnemyHP = 5;
         StartCoroutine(MoveFoward()); // 앞으로 가기
     }
 
