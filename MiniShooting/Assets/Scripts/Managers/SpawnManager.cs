@@ -29,7 +29,6 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        // ���� ����
         StartCoroutine(Spawn1());
         StartCoroutine(Spawn2());
         StartCoroutine(Spawn3());
@@ -88,9 +87,12 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnElite1()
     {
+        if (spawnEliteEnemy1Test)
+        {
+            yield return new WaitForSeconds(spawnDelay1);
+            ResourceManager.Instance.Create("oneEyeEliteEnemy", new Vector3(transform.position.x + 8, 0, 0));
+        }
 
-        yield return new WaitForSeconds(spawnDelay1);
-        ResourceManager.Instance.Create("oneEyeEliteEnemy", new Vector3(transform.position.x + 8, 0, 0));
     }
     IEnumerator SpawnElite2()
     {
