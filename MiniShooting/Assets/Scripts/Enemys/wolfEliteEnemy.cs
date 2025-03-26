@@ -1,21 +1,15 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-public class OneEyeEliteEnemy : EliteEnemy
+public class wolfEliteEnemy : EliteEnemy
 {
-    protected override void OnEnable() // 초기화 및 시작
+    protected override void OnEnable()
     {
         currentEnemyHP = 500;
-        StartCoroutine(MoveFoward());
+        StartCoroutine(MoveFoward()); // 앞으로 가기
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    IEnumerator MoveFoward() // 앞으로 가기
+    IEnumerator MoveFoward()
     {
         for (int i = 0; i < 100; i++)
         {
@@ -23,18 +17,19 @@ public class OneEyeEliteEnemy : EliteEnemy
             transform.Translate(Vector2.left * Time.deltaTime * 2f);
         }
 
-        StartCoroutine(SpecialAttack()); // 특수 공격 시작
+        StartCoroutine(SpecialAttack());
     }
 
     IEnumerator SpecialAttack()
     {
         while (true)
         {
-            for (int i = 0; i < 10; i++)
+            int clawNum = Random.Range(2, 5);
+            for (int i = 0; i < clawNum; i++)
             {
                 GameObject go = Instantiate(ResourceManager.Instance.oneEyeEliteEnemyBullet, transform.position, Quaternion.identity);
 
-                float angle = 360 / 10 * i;                
+                float angle = 360 / 10 * i;
                 go.GetComponent<oneEyeEliteEnemyBullet>().Init(angle);
             }
 

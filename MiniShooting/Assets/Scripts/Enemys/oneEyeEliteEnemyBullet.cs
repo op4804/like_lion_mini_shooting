@@ -1,38 +1,36 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEngine.GraphicsBuffer;
+using Unity.VisualScripting;
+using System;
 
 public class oneEyeEliteEnemyBullet : MonoBehaviour
 {
+    private GameObject player;
 
+    private void Start()
+    {
+        player = GameManager.Instance.player;
+    }
     private void OnEnable()
     {
-        StartCoroutine(MoveFoward());
+
+        StartCoroutine(FollowPlayer());
+    }   
+
+    internal void Init(float angle)
+    {
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    Vector3 dir;
-
-    float angle;
-
-
-    public void Setdir(Vector3 direction)
+    IEnumerator FollowPlayer() // 앞으로 가기
     {
-        this.dir = direction;
-    }
-
-    public void SetRot(float angle)
-    {
-        this.angle = angle;
-    }
-
-    IEnumerator MoveFoward() // 앞으로 가기
-    {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 180; i++)
         {
             yield return new WaitForFixedUpdate();
-            transform.Translate(Vector2.left * Time.deltaTime * 2f);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 2f * Time.deltaTime);
         }
 
-        transform.rotation = Quaternion.Euler(0, 0, angle);
         StartCoroutine(SpecialAttack());
     }
 
@@ -47,4 +45,6 @@ public class oneEyeEliteEnemyBullet : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+
 }
