@@ -17,13 +17,13 @@ public class Bounce : Skill
         base.InitializeSkill(player);
 
         //스킬 설정입니다.
-        //이름, 설명, 스킬 타입(true면 active, false면 패시브), 활성화여부는 필수값입니다.
+        //이름, 키값(반드시 영어), 설명, 스킬 타입(true면 active, false면 패시브), 활성화여부는 필수값입니다.
         //이름 ,설명은 스킬 실행하는데 사용되진않아서 아무거나 적어도 크게 상관없습니다.
         skillName = "바운스";
         effectKey = "Bounce";
         description = "총알이 적들 사이를 튕깁니다.";
         skillType = false;
-        isUnlocked = true;
+        isUnlocked = false;
     }
 
     //스킬 효과 등록입니다.

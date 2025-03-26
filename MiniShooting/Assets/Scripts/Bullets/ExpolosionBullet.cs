@@ -14,7 +14,11 @@ public class ExplosionBullet : MonoBehaviour
 
     private void OnEnable()
     {
-        SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        if (!string.IsNullOrEmpty(effectKey))
+        {
+            //Debug.Log($"{GetInstanceID()}가 {effectKey}효과 등록", this);
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +64,7 @@ public class ExplosionBullet : MonoBehaviour
                 AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
                 if (clips.Length > 0)
                 {
-                    animDuration = clips[0].length;
+                    animDuration = clips[0].length/2;
                 }
             }
 

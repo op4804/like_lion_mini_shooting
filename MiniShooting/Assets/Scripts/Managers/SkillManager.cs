@@ -104,6 +104,7 @@ public class SkillManager : MonoBehaviour
         {
             bulletEffectStates[bullet].Add(effectName);
             Debug.Log($"{bullet.name}에 {effectName} 효과 등록됨", bullet);
+            Debug.Log($"[RegisterBulletEffect] {bullet.name} - 현재 남은 효과 수: {bulletEffectStates[bullet].Count}", bullet);
         }
         else
         {
@@ -115,9 +116,18 @@ public class SkillManager : MonoBehaviour
     // 발사체 사라지는 시점을 모든 효과가 끝난후로 관리합니다.
     public void NotifyEffectComplete(GameObject bullet, string effectName)
     {
-        if (!bulletEffectStates.ContainsKey(bullet)) return;
+        Debug.Log($"[NotifyEffectComplete] 호출됨 - bullet: {bullet.name}, effect: {effectName}");
+
+        if (!bulletEffectStates.ContainsKey(bullet))
+        {
+            Debug.LogWarning($"[NotifyEffectComplete] bulletEffectStates에 {bullet.name} 등록 안됨!", bullet);
+            return;
+        }
+
+        //if (!bulletEffectStates.ContainsKey(bullet)) return;
 
         bulletEffectStates[bullet].Remove(effectName);
+
         Debug.Log($"{bullet.name}에 {effectName} 효과 삭제 시도", bullet);
         Debug.Log($"[NotifyEffectComplete] {bullet.name} - 현재 남은 효과 수: {bulletEffectStates[bullet].Count}", bullet);
 

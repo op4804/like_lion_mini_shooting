@@ -17,6 +17,7 @@ public class Fragment : Skill
         //이름, 설명, 스킬 타입(true면 active, false면 패시브), 활성화여부는 필수값입니다.
         //이름 ,설명은 스킬 실행하는데 사용되진않아서 아무거나 적어도 크게 상관없습니다.
         skillName = "파편";
+        effectKey = "Fragment";
         description = "총알이 적에 맞으면 작은 파편이 주변에 튑니다. ";
         skillType = false; // true : 액티브 스킬 false : 패시브 스킬
         isUnlocked = true;
@@ -38,6 +39,7 @@ public class Fragment : Skill
                                                                                //밑에서 효과 온, 오프로 예시를 들텐데 해당 명령과 상관없이 작동합니다.
 
                 fragmentingBullet.SetFragmentValue(fragmentNum, fragmentSpeed, fragmentDuration, fragmentDamage); //고유 스킬 수치를 넘겨주는 명령입니다.
+                fragmentingBullet.SetEffectKey(effectKey); // 키 값을 설정해줍니다.
             }
         });
     }

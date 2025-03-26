@@ -12,15 +12,15 @@ using UnityEngine.InputSystem;
 // 이펙트가 있다면 exoplosion의 이펙트 부분을 참고하세요.
 
 // 기본적으로 bullet에 붙어서 쓰인다고 생각하시고 구현하시면됩니다.
+// '**'이 붙은 부분은 반드시 구현해야합니다.
 // 기본 발사체의 움직임빼고 충돌이나 기타 특성은 무시하시고 그냥 실제 어떻게 작동하는지만 구현하시면됩니다.
 // 예를 들어 발사체의 앞으로 나가는 특성은 그대로 가지고있으니 따로 구현안하셔도되고
 // 부딪혔을때 충돌처리도 스킬매니저가 해주기때문에
 // 효과만 붙이면 알아서 기본 발사체의 로직은 무시됩니다.
 
 public class BouncingBullet : MonoBehaviour
-{
-    //
-    private string effectKey;
+{    
+    private string effectKey; //**키값입니다. 반드시 있어야합니다.
     private int maxBounces = 3; //최대 튕기는 횟수
     private int currentBounce = 0; //튕긴 횟수 카운트
     private float bounceRadius = 200f; //튕기는 범위    
@@ -38,15 +38,14 @@ public class BouncingBullet : MonoBehaviour
         this.maxBounces = maxBounces;
         this.bounceRadius = bounceRadius;
     }
-
-
+        
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>(); // rb 초기화
 
         //Debug.Log($"{effectKey}효과 등록중입니다. ");
 
-
+        //**키값을 설정해줍니다. 반드시 구현해야합니다.
         if (!string.IsNullOrEmpty(effectKey))
         {
             //Debug.Log($"{GetInstanceID()}가 {effectKey}효과 등록", this);
@@ -69,7 +68,7 @@ public class BouncingBullet : MonoBehaviour
         {
             if (currentTarget == null || !currentTarget || currentTarget.GetComponent<Enemy>()?.IsDead() == true)
             {
-                SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); //destroy 기능을 한다고 생각하시면 됩니다. 로직중 어딘가에 반드시 구현되어야합니다.
+                SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); //**destroy 기능을 한다고 생각하시면 됩니다. 로직중 어딘가에 반드시 구현되어야합니다.
                                                                               //실제 destroy는 아니고 스킬매니저에게 효과를 끝내도 된다 알려주는 함수입니다.
                                                                               //온, 오프로 생각했을때 스킬 효과를 오프해주는 함수라고 생각하시면됩니다.
                 return;
@@ -147,7 +146,7 @@ public class BouncingBullet : MonoBehaviour
         else
         {
             Debug.Log($"타겟 없음 종료", this);
-            //SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); // 유효한 타겟이 없으면 바로 종료
+            SkillManager.Instance.NotifyEffectComplete(gameObject, effectKey); // 유효한 타겟이 없으면 바로 종료
         }
     }
 
@@ -159,7 +158,7 @@ public class BouncingBullet : MonoBehaviour
         if (SkillManager.Instance != null && gameObject.activeInHierarchy)
         {
             SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
-            //Debug.Log($"[SetEffectKey] {GetInstanceID()}에 {effectKey} 효과 등록", gameObject);
+            Debug.Log($"[SetEffectKey] {GetInstanceID()}에 {effectKey} 효과 등록", gameObject);
         }
     }
 }

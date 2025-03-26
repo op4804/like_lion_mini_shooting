@@ -17,7 +17,7 @@ using UnityEngine;
 
 public class FragmentBullet : MonoBehaviour
 {
-    private string effectKey;
+    private string effectKey; //**키값입니다. 반드시 있어야합니다.
 
     // 이 부분은 해당 스킬의 고유 수치만 쓰시면됩니다.
     private int fragmentNum = 3; // 파편 갯수
@@ -36,10 +36,14 @@ public class FragmentBullet : MonoBehaviour
     }
     void OnEnable() // 오브젝트풀 관련 발사체 초기화코드입니다. 필요하시면 넣으시면됩니다.
     {
-
+        //**키값을 설정해줍니다. 반드시 구현해야합니다.
+        if (!string.IsNullOrEmpty(effectKey))
+        {
+            Debug.Log($"{GetInstanceID()}가 {effectKey}효과 등록", this);
+            SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+        }
     }
     
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) // 충돌이 적인지 판단
@@ -77,6 +81,7 @@ public class FragmentBullet : MonoBehaviour
         if (SkillManager.Instance != null && gameObject.activeInHierarchy)
         {
             SkillManager.Instance.RegisterBulletEffect(gameObject, effectKey);
+            Debug.Log($"[SetEffectKey] {GetInstanceID()}에 {effectKey} 효과 등록", gameObject);
         }
     }
 }
