@@ -446,7 +446,6 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
   m_Resource: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
   m_PlayOnAwake: 1
-
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -705,11 +704,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 282896898}
+  - component: {fileID: 282896899}
   - component: {fileID: 282896897}
   - component: {fileID: 282896896}
   - component: {fileID: 282896895}
-  - component: {fileID: 282896899}
   m_Layer: 0
   m_Name: SkillBook
   m_TagString: Untagged
@@ -830,11 +828,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &282896898
+--- !u!4 &282896898 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 716684827340933536, guid: 1ec912179ea632b4792638237b741554, type: 3}
   m_PrefabInstance: {fileID: 3713394830015505145}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &282896899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282896894}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356611376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1393,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd6c9d8b18f56a4ca0b9be7a0915120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillImages: []
+  skillImages:
+  - {fileID: -1278189447, guid: c06802c5114488841bd947216e849aae, type: 3}
+  - {fileID: -1199879797, guid: c06802c5114488841bd947216e849aae, type: 3}
+  - {fileID: -361953694, guid: c06802c5114488841bd947216e849aae, type: 3}
+  - {fileID: 1208363564, guid: c06802c5114488841bd947216e849aae, type: 3}
+  - {fileID: -433727769, guid: c06802c5114488841bd947216e849aae, type: 3}
   skillImg1: {fileID: 94579509}
   skillImg2: {fileID: 1936942551}
   skillImg3: {fileID: 370661281}
@@ -5007,6 +5025,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 282896899}
   - {fileID: 1176494694}
   - {fileID: 1757766094}
   - {fileID: 358329393}
