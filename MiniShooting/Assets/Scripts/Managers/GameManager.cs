@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.ToggleStatusMenu();
         }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            UIManager.Instance.ToggleSkillMenu();
+        }
     }
 
     public void GameOver()
