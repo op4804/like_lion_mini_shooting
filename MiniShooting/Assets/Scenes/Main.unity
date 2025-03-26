@@ -3951,8 +3951,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6f7ee9b85ea889a46b5723bda2c125c9, type: 3}
-  m_Resource: {fileID: 8300000, guid: 6f7ee9b85ea889a46b5723bda2c125c9, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4371,11 +4371,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMSource: {fileID: 1895847288}
   SFXSource: {fileID: 204827163}
-  bgmclip: {fileID: 0}
+  mainClip: {fileID: 8300000, guid: 6f7ee9b85ea889a46b5723bda2c125c9, type: 3}
+  prologueClip: {fileID: 8300000, guid: ac38693f76dac3944b1016bc959e6910, type: 3}
+  bossClip: {fileID: 8300000, guid: 10e1441f7be6aff49847467226798f47, type: 3}
   attackClip: {fileID: 8300000, guid: c145d5dfd544f874f87df9eee7d1c718, type: 3}
   hitClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
-  damageClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
-  dieClip: {fileID: 8300000, guid: d223d553419f45a40a218b58b0a61243, type: 3}
+  dieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  upgradeClip: {fileID: 8300000, guid: d223d553419f45a40a218b58b0a61243, type: 3}
+  bombEnemyDamageClip: {fileID: 8300000, guid: e6aa2d7a7066f394d80ac8328b08c5a3, type: 3}
+  wolfEnemyDamageClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
+  OneEyeEnemyDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
+  OneEyeEliteDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
+  BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
+  EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
 --- !u!4 &2100314355
 Transform:
   m_ObjectHideFlags: 0

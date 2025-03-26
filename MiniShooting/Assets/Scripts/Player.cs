@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Invisible());
             }
-            SoundManager.instance.PlayerDamage();
+            //SoundManager.instance.PlayerDamage();
             PlayerHpBar.Instance.UpdateLife();
         }
     }
