@@ -54,12 +54,13 @@ public class UpgradeMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            selectedOption = (selectedOption - 1 + Upgrade.Instance.GetCount()) % Upgrade.Instance.GetCount();
+            if (selectedOption == 0) selectedOption = UpgradeChooseNum;
+            selectedOption = (selectedOption - 1) % UpgradeChooseNum;
             UpdateArrowPosition();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
-            selectedOption = (selectedOption + 1) % Upgrade.Instance.GetCount();
+            selectedOption = (selectedOption + 1) % UpgradeChooseNum;
             UpdateArrowPosition();
         }
 
