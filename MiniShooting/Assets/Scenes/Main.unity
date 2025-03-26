@@ -4382,6 +4382,7 @@ MonoBehaviour:
   wolfEnemyDamageClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
   OneEyeEnemyDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
   OneEyeEliteDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
+  OneEyeEliteSpecialClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
 --- !u!4 &2100314355

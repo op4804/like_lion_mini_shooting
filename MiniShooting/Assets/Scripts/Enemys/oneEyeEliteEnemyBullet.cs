@@ -14,7 +14,7 @@ public class oneEyeEliteEnemyBullet : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        SoundManager.instance.OneEyeEliteAttack(); // 엘리트 공격 시 효과음 재생
         StartCoroutine(FollowPlayer());
     }   
 
@@ -30,7 +30,7 @@ public class oneEyeEliteEnemyBullet : MonoBehaviour
             yield return new WaitForFixedUpdate();
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 2f * Time.deltaTime);
         }
-
+        SoundManager.instance.OneEyeEliteSpecial(); // SpecialAttack() 효과음 재생
         StartCoroutine(SpecialAttack());
     }
 

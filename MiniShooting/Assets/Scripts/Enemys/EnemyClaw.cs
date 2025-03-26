@@ -10,6 +10,8 @@ public class EnemyClaw : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1); // 색상 초기화
         gameObject.GetComponent<SpriteRenderer>().flipX = false; // 좌우 반전 초기화
 
+        SoundManager.instance.WolfEnemyAttack(); // 근접 공격 효과음 재생
+
         StartCoroutine(FadeOut());
         StartCoroutine(Delete());
     }

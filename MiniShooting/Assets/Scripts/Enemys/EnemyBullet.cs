@@ -32,6 +32,7 @@ public class EnemyBullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().Hit();
             ResourceManager.Instance.Deactivate(gameObject);
+            SoundManager.instance.OneEyeEnemyAttack(); // 원거리 공격 출력 효과음
         }
     }
 }

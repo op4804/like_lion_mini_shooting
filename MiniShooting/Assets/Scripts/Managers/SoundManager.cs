@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip wolfEnemyDamageClip;
     public AudioClip OneEyeEnemyDamageClip;
     public AudioClip OneEyeEliteDamageClip;
+    public AudioClip OneEyeEliteSpecialClip;
 
     [Header("경고 사운드")]
     [SerializeField] private AudioClip BosswarningClip;
@@ -137,6 +138,7 @@ public class SoundManager : MonoBehaviour
     public void WolfEnemyAttack() => SFXSource.PlayOneShot(wolfEnemyDamageClip);
     public void OneEyeEnemyAttack() => SFXSource.PlayOneShot(OneEyeEnemyDamageClip);
     public void OneEyeEliteAttack() => SFXSource.PlayOneShot(OneEyeEliteDamageClip);
+    public void OneEyeEliteSpecial() => SFXSource.PlayOneShot(OneEyeEliteSpecialClip);
 
     //// 경고음 재생 부분
     //public void PlayBossWarning() => SFXSource.PlayOneShot(bossClip);
