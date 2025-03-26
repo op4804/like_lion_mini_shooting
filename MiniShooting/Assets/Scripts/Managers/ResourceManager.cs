@@ -23,6 +23,7 @@ public class ResourceManager : MonoBehaviour
     [Header("Enemy Bullets")]
     public GameObject enemyBullet;
     public GameObject claw;
+    public GameObject oneEyeEliteEnemyBullet;
 
     [Header("Elite Enemies")]
     public GameObject oneEyeEliteEnemy;
@@ -66,6 +67,7 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(bombEnemy);
         prefabs.Add(enemyBullet);
         prefabs.Add(claw);
+        prefabs.Add(oneEyeEliteEnemyBullet);
         prefabs.Add(oneEyeEliteEnemy);
         //
         //
@@ -88,6 +90,7 @@ public class ResourceManager : MonoBehaviour
         }
         else 
         {
+            Debug.Log(key);
             go = Instantiate(stringToGameobject(key), position, Quaternion.identity);
             return go;
         }        
