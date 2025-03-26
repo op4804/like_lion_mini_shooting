@@ -69,8 +69,11 @@ public class SkillManager : MonoBehaviour
             {
                 if (skill.IsActiveSkill && skill.IsUnlockSkill())
                     skill.UseSkill();
+                else
+                    Debug.Log($"활성화된 액티브 스킬이 없습니다.");
             }
         }
+        
     }
 
     //발사체 효과 등록
@@ -138,6 +141,11 @@ public class SkillManager : MonoBehaviour
         }
     }
 
+    public void NotifyEffectComplete(GameObject bullet)
+    {
+        ResourceManager.Instance.Deactivate(bullet);
+    }
+
     //화면 밖으로 이탈시 효과를 제거해주는 함수입니다.
     public void NotifyAllEffectsComplete(GameObject bullet)
     {
@@ -152,5 +160,23 @@ public class SkillManager : MonoBehaviour
     public bool IsBulletHaveEffect(GameObject bullet)
     {
         return bulletEffectStates.ContainsKey(bullet) && bulletEffectStates[bullet].Count > 0;
+    }
+
+    public void SetActiveSkill(Skill selectSkill)
+    {
+        Debug.Log("액티브 스킬을 세팅합니다.");        
+        foreach(var skill in skills)
+        {
+            skill.LockSkill();
+        }
+        selectSkill.UnlockSkill();
+        var activeUnlockedSkill = skills.Find(skill => skill.IsActiveSkill && skill.IsUnlockSkill());
+        Debug.Log($"현재 세팅된 스킬 : {activeUnlockedSkill.name}");
+    }
+
+    public void SetPassiveSkill(Skill selectSkill)
+    {
+        Debug.Log("패시브 스킬을 세팅합니다.");
+        selectSkill.UnlockSkill();
     }
 }

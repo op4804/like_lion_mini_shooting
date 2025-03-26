@@ -5,10 +5,11 @@ using TMPro;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
 
 public class SkillMenu : MonoBehaviour
 {
-    public Image[] skillImages;
+    public Sprite[] skillImages;
     public Image skillImg1;
     public Image skillImg2;
     public Image skillImg3;
@@ -18,14 +19,20 @@ public class SkillMenu : MonoBehaviour
     public GameObject skillpanel;
     private bool isMenuActive = false;
 
+    private Skill skillSelection;
+
     private List<Skill> skillList;
 
+    int option = 1;
+
     Dictionary<int, string> SkillNum = new Dictionary<int, string>();
+    
     void LoadSkills()
     {
         for (int i = 0; i < skillList.Count; i++)
         {
-            SkillNum.Add(i, skillList[i].name);
+            if (skillList[i].IsUnlockSkill() == false)
+                SkillNum.Add(i, skillList[i].name);
         }
     }
     void Start()
@@ -35,6 +42,7 @@ public class SkillMenu : MonoBehaviour
         LoadSkills();
         Random();
         SetSkillName();
+        InitializeSkillMenu();
     }
 
     void Update()
@@ -75,6 +83,8 @@ public class SkillMenu : MonoBehaviour
             randomSet.Add(value); // 이미 있으면 안 들어감
         }
         randomList = randomSet.ToList();
+        SetSkillName();
+        SetSkillIMG();
     }
 
     //스킬명 설정함수
@@ -87,46 +97,56 @@ public class SkillMenu : MonoBehaviour
     //스킬이미지 변경함수
     public void SetSkillIMG()
     {
-        //skillImg1.sprite = ;
-        //skillImg2.sprite = ;
-        //skillImg3.sprite = ;
+        skillImg1.sprite = skillImages[randomList[0]];
+        skillImg2.sprite = skillImages[randomList[1]];
+        skillImg3.sprite = skillImages[randomList[2]];
     }
-    int option = 1;
+
+    private void InitializeSkillMenu(){
+        option = 0;
+        SelectSkill();
+    }
+
     public void HandleMenu()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if (option != 0) option--;
             SelectSkill();
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             if (option != 2) option++;
             SelectSkill();
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             holdIndex.Add(randomList[option]);
-            skillList[randomList[option]].IsUnlockSkill();
+            skillSelection = skillList[randomList[option]];
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
+            SetSkillUnlock();
+            //skillList[randomList[option]].IsUnlockSkill();
             ToggleMenu();
         }
     }
     public void SelectSkill()
     {
-        SetAlpha(skillImg1, 1f);
-        SetAlpha(skillImg2, 1f);
-        SetAlpha(skillImg3, 1f);
+        SetAlpha(skillImg1, 0.5f);
+        SetAlpha(skillImg2, 0.5f);
+        SetAlpha(skillImg3, 0.5f);
         switch (option)
         {
             case 0:
-                SetAlpha(skillImg1, 0.5f);
+                SetAlpha(skillImg1, 1f);
                 break;
             case 1:
-                SetAlpha(skillImg2, 0.5f);
+                SetAlpha(skillImg2, 1f);
                 break;
             case 2:
-                SetAlpha(skillImg3, 0.5f);
+                SetAlpha(skillImg3, 1f);
                 break;
         }
     }
@@ -135,5 +155,16 @@ public class SkillMenu : MonoBehaviour
         Color c = img.color;
         c.a = alpha;
         img.color = c;
+    }
+
+    void SetSkillUnlock()
+    {
+        if (skillSelection != null)
+        {
+            if (skillSelection.IsActiveSkill == true)
+                SkillManager.Instance.SetActiveSkill(skillSelection);
+            else
+                SkillManager.Instance.SetPassiveSkill(skillSelection);
+        }
     }
 }

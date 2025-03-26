@@ -111,7 +111,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
     private bool IsSpawnAreaClear(Vector3 position)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(position, spawnCheckRadius);
