@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
             statusMenu.ToggleMenu();
         }
     }
+
     public void ToggleSkillMenu()
     {
         if (IsToggle == "SkillMenu" || IsToggle == null)

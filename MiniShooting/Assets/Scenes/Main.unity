@@ -342,9 +342,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
+  m_Resource: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
+  m_PlayOnAwake: 1
+
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -614,7 +615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &282896895
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -907,13 +908,13 @@ MonoBehaviour:
   bombEnemy: {fileID: 1830415529988329020, guid: 69cc71215f4ea634982ab8ea6b5ef95d, type: 3}
   enemyBullet: {fileID: 3236589637684782574, guid: 74954b3fba04e3d4da553c7ed57da64b, type: 3}
   claw: {fileID: 2386591105652181286, guid: 8dc313f234690bc4a87e5af4bb454493, type: 3}
-  oneEyeEliteEnemy: {fileID: 0}
+  oneEyeEliteEnemy: {fileID: 450482112071159595, guid: ada071efe2459a0468409e08a7505aba, type: 3}
   t: {fileID: 0}
   t2: {fileID: 0}
   eagle: {fileID: 8348515755537654264, guid: 86831d6ccb6c24a4bb00bca4c589f9ff, type: 3}
-  expParticle: {fileID: 6471412309864157466, guid: 63640038b32499f419bbb1f19c9188fa, type: 3}
+  expParticle: {fileID: 2406405117786264165, guid: a0a03a8db6fd311419d364bf163ded01, type: 3}
   explosionEffect: {fileID: 5584700356191228352, guid: 239b666a28427c248876467101b162a6, type: 3}
-  frag: {fileID: 0}
+  frag: {fileID: 6982010220359553438, guid: 67a69feff050f1f41881e4278c897c1e, type: 3}
 --- !u!4 &358329393
 Transform:
   m_ObjectHideFlags: 0
@@ -2499,6 +2500,7 @@ GameObject:
   - component: {fileID: 1034518134}
   - component: {fileID: 1034518136}
   - component: {fileID: 1034518135}
+  - component: {fileID: 1034518137}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2602,7 +2604,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -6048969002465102489, guid: 419d4978c11cea44598aeaddab808c61, type: 3}
+  m_Sprite: {fileID: -158159736661832691, guid: 802aba2b9de30ad448985625adbfb029, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2678,7 +2680,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.6166666, y: 3.1733334}
+    oldSize: {x: 1.9433334, y: 3.1533334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2902,6 +2904,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1034518137
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034518128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19b9b5abce6ddd540b3cecec767a7f83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1038407973
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,7 +4131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1895847288
 AudioSource:
   m_ObjectHideFlags: 0

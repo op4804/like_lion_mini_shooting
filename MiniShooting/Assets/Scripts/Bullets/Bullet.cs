@@ -59,7 +59,8 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         bool hasEffect = SkillManager.Instance.IsBulletHaveEffect(gameObject);
-        if (SkillManager.Instance.IsBulletHaveEffect(gameObject))
+
+        if (hasEffect)
         {
             return;
         }
@@ -68,10 +69,7 @@ public class Bullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
-            if (!hasEffect)
-            {
-                SkillManager.Instance.NotifyEffectComplete(gameObject, name);
-            }
+            SkillManager.Instance.NotifyEffectComplete(gameObject);
 
             SoundManager.instance.PlayerHit();
             //Debug.Log("플레이어 히트 사운드 실행!");
