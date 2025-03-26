@@ -28,7 +28,22 @@ public class OneEyeEliteEnemy : EliteEnemy
 
     IEnumerator SpecialAttack()
     {
-        yield return new WaitForSeconds(5f);
-        // Instantiate();
+        while (true)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject go = Instantiate(ResourceManager.Instance.oneEyeEliteEnemyBullet, transform.position, Quaternion.identity);
+
+                float angle = 360 / 10 * i;
+
+                go.GetComponent<oneEyeEliteEnemyBullet>().Setdir(new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0));
+                go.GetComponent<oneEyeEliteEnemyBullet>().SetRot(angle);
+            }
+
+
+            yield return new WaitForSeconds(5f);
+
+
+        }
     }
 }
