@@ -20,7 +20,7 @@ public class Fragment : Skill
         effectKey = "Fragment";
         description = "총알이 적에 맞으면 작은 파편이 주변에 튑니다. ";
         skillType = false; // true : 액티브 스킬 false : 패시브 스킬
-        isUnlocked = false;
+        isUnlocked = true;
     }
 
     //스킬 효과 등록입니다.

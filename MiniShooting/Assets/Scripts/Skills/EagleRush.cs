@@ -23,7 +23,7 @@ public class EagleRush : Skill
         damage = 100;
         skillType = true;
         coolTime = 5.0f;
-        isUnlocked = false;
+        isUnlocked = true;
     }
 
     public override void UseSkill()

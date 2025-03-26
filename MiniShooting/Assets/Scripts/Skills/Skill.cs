@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Skill : MonoBehaviour
 {
     protected string skillName { get; set; }//스킬 이름
-    protected string effectKey { get; set; } // 내부 시스템용 키 (영문/고유)
+    protected string effectKey; // 내부 시스템용 키 (영문/고유)
     protected string description { get; set; } //스킬 설명
 
     protected float damage { get; set; } //데미지
@@ -23,11 +23,6 @@ public abstract class Skill : MonoBehaviour
     public bool IsUnlockSkill()
     {
         return isUnlocked;
-    }
-
-    public void LockSkill()
-    {
-        isUnlocked = false;
     }
 
     public void UnlockSkill()
