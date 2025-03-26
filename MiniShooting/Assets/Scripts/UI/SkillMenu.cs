@@ -9,7 +9,7 @@ using UnityEditor.Experimental.GraphView;
 
 public class SkillMenu : MonoBehaviour
 {
-    public Image[] skillImages;
+    public Sprite[] skillImages;
     public Image skillImg1;
     public Image skillImg2;
     public Image skillImg3;
@@ -41,7 +41,6 @@ public class SkillMenu : MonoBehaviour
         skillpanel.SetActive(isMenuActive);
         LoadSkills();
         Random();
-        SetSkillName();
         InitializeSkillMenu();
     }
 
@@ -83,6 +82,8 @@ public class SkillMenu : MonoBehaviour
             randomSet.Add(value); // 이미 있으면 안 들어감
         }
         randomList = randomSet.ToList();
+        SetSkillName();
+        SetSkillIMG();
     }
 
     //스킬명 설정함수
@@ -95,9 +96,9 @@ public class SkillMenu : MonoBehaviour
     //스킬이미지 변경함수
     public void SetSkillIMG()
     {
-        //skillImg1.sprite = ;
-        //skillImg2.sprite = ;
-        //skillImg3.sprite = ;
+        skillImg1.sprite = skillImages[randomList[0]];
+        skillImg2.sprite = skillImages[randomList[1]];
+        skillImg3.sprite = skillImages[randomList[2]];
     }
 
     private void InitializeSkillMenu(){
@@ -132,19 +133,19 @@ public class SkillMenu : MonoBehaviour
     }
     public void SelectSkill()
     {
-        SetAlpha(skillImg1, 1f);
-        SetAlpha(skillImg2, 1f);
-        SetAlpha(skillImg3, 1f);
+        SetAlpha(skillImg1, 0.5f);
+        SetAlpha(skillImg2, 0.5f);
+        SetAlpha(skillImg3, 0.5f);
         switch (option)
         {
             case 0:
-                SetAlpha(skillImg1, 0.5f);
+                SetAlpha(skillImg1, 1f);
                 break;
             case 1:
-                SetAlpha(skillImg2, 0.5f);
+                SetAlpha(skillImg2, 1f);
                 break;
             case 2:
-                SetAlpha(skillImg3, 0.5f);
+                SetAlpha(skillImg3, 1f);
                 break;
         }
     }
