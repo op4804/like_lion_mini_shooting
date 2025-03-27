@@ -16,15 +16,15 @@ public class BossBarrier : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ////ÃÑ¾ËÀÎÁö ÅÂ±×³ª ÄÄÆ÷³ÍÆ®·Î È®ÀÎ
+        ////ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â±×³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È®ï¿½ï¿½
         if (collision.CompareTag("PlayerBullet"))
         {
             Rigidbody2D bulletRb = collision.GetComponent<Rigidbody2D>();
-            // ¼Óµµ¸¦ ¹ÝÀü
-            bulletRb.velocity = -bulletRb.velocity;
-            // È¸Àü°ª ¹ÝÀü °è»ê (¼Óµµ ¹æÇâÀ» ±âÁØÀ¸·Î)
-            float angle = Mathf.Atan2(bulletRb.velocity.y, bulletRb.velocity.x) * Mathf.Rad2Deg;
-            collision.transform.rotation = Quaternion.Euler(0, 0, angle); // +90Àº ¾Õ¹æÇâ º¸Á¤¿ë (ÇÊ¿ä ½Ã Á¶Àý)
+            // ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            bulletRb.linearVelocity = -bulletRb.linearVelocity;
+            // È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+            float angle = Mathf.Atan2(bulletRb.linearVelocity.y, bulletRb.linearVelocity.x) * Mathf.Rad2Deg;
+            collision.transform.rotation = Quaternion.Euler(0, 0, angle); // +90ï¿½ï¿½ ï¿½Õ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½Ê¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             collision.AddComponent<Knife>();
 
         }
