@@ -65,4 +65,31 @@ public class BombEnemy : Enemy
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    public override void Hit(float damage)
+    {
+        if (isDead) return;
+
+        currentEnemyHP -= damage;
+
+        if (currentEnemyHP <= 0)
+        {
+            SoundManager.instance.BombEnemyDie();
+
+            isDead = true;
+            GetComponent<Collider2D>().enabled = false;
+
+            GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
+            expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
+
+            StopAllCoroutines();
+            StartCoroutine(RotateAndShrinkAndDie());
+
+            return;
+        }
+
+        gameObject.GetComponent<Animator>().SetTrigger("hit");
+        transform.Translate(Vector3.right * 0.1f);
+    }
+
 }

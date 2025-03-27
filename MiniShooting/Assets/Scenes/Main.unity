@@ -3809,7 +3809,7 @@ Transform:
   m_GameObject: {fileID: 1757766092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.04, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3963,7 +3963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1895847288
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4401,6 +4401,7 @@ MonoBehaviour:
   hitClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
   dieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
   upgradeClip: {fileID: 8300000, guid: d223d553419f45a40a218b58b0a61243, type: 3}
+  levelup: {fileID: 8300000, guid: 5bb170ace2405d0438846f6e0666950b, type: 3}
   bombEnemyDamageClip: {fileID: 8300000, guid: e6aa2d7a7066f394d80ac8328b08c5a3, type: 3}
   wolfEnemyDamageClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
   OneEyeEnemyDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
@@ -4408,6 +4409,17 @@ MonoBehaviour:
   OneEyeEliteSpecialClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
+  BossMoveShoot: {fileID: 0}
+  BossDashSlash: {fileID: 0}
+  BossBlinkMove: {fileID: 0}
+  BossSRoadPattern: {fileID: 0}
+  BossKnifeEnergyCircle: {fileID: 0}
+  BossSpawnSpinSword: {fileID: 0}
+  bombEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  wolfEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  oneEyeEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  oneEyeEliteDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  bossDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
 --- !u!4 &2100314355
 Transform:
   m_ObjectHideFlags: 0

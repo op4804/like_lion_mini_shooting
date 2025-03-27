@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
 
         if (currentEnemyHP <= 0) // 사망
         {
+            
             isDead = true;
 
             GetComponent<Collider2D>().enabled = false;
