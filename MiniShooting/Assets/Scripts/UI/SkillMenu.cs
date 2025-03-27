@@ -34,13 +34,13 @@ public class SkillMenu : MonoBehaviour
                 SkillNum.Add(i, skillList[i].name);
         }
     }
+
     void Start()
     {
         skillList = SkillManager.Instance.skills;
         skillpanel.SetActive(isMenuActive);
         LoadSkills();
         Random();
-        InitializeSkillMenu();
     }
 
     void Update()
@@ -66,21 +66,30 @@ public class SkillMenu : MonoBehaviour
         }
         Random();
     }
+
     HashSet<int> holdIndex = new HashSet<int>();
     List<int> randomList;
     //값 랜덤 뽑기
     public void Random()
     {
-        HashSet<int> randomSet = new HashSet<int>();
-        System.Random rand = new System.Random();
-
-        while (randomSet.Count < 3 && holdIndex.Count < skillList.Count)
+        //아직 보유하지 않은 스킬 인덱스를 모음
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < skillList.Count; i++)
         {
-            int value = rand.Next(0, skillList.Count);
-            if (holdIndex.Contains(value)) continue;
-            randomSet.Add(value); // 이미 있으면 안 들어감
+            if (!holdIndex.Contains(i))
+                availableIndices.Add(i);
         }
-        randomList = randomSet.ToList();
+
+        // 보유하지 않은 스킬이 3개 미만인 경우 경고 출력
+        if (availableIndices.Count < 3)
+        {
+            Debug.LogWarning("보유하지 않은 스킬이 3개 미만입니다. 현재 " + availableIndices.Count + "개만 사용 가능합니다.");
+        }
+
+        // System.Random을 사용하여 availableIndices를 섞고, 최대 3개를 선택
+        System.Random rand = new System.Random();
+        randomList = availableIndices.OrderBy(x => rand.Next()).Take(3).ToList();
+
         SetSkillName();
         SetSkillIMG();
     }
@@ -88,23 +97,46 @@ public class SkillMenu : MonoBehaviour
     //스킬명 설정함수
     public void SetSkillName()
     {
-        skillName1.text = SkillNum[randomList[0]];
-        skillName2.text = SkillNum[randomList[1]];
-        skillName3.text = SkillNum[randomList[2]];
+        // 첫 번째 슬롯
+        if (randomList.Count > 0 && SkillNum.ContainsKey(randomList[0]))
+            skillName1.text = SkillNum[randomList[0]];
+        else
+            skillName1.text = "";
+
+        // 두 번째 슬롯
+        if (randomList.Count > 1 && SkillNum.ContainsKey(randomList[1]))
+            skillName2.text = SkillNum[randomList[1]];
+        else
+            skillName2.text = "";
+
+        // 세 번째 슬롯
+        if (randomList.Count > 2 && SkillNum.ContainsKey(randomList[2]))
+            skillName3.text = SkillNum[randomList[2]];
+        else
+            skillName3.text = "";
     }
     //스킬이미지 변경함수
     public void SetSkillIMG()
     {
-        skillImg1.sprite = skillImages[randomList[0]];
-        skillImg2.sprite = skillImages[randomList[1]];
-        skillImg3.sprite = skillImages[randomList[2]];
+        // 첫 번째 슬롯
+        if (randomList.Count > 0)
+            skillImg1.sprite = skillImages[randomList[0]];
+        else
+            skillImg1.sprite = null;
+
+        // 두 번째 슬롯
+        if (randomList.Count > 1)
+            skillImg2.sprite = skillImages[randomList[1]];
+        else
+            skillImg2.sprite = null;
+
+        // 세 번째 슬롯
+        if (randomList.Count > 2)
+            skillImg3.sprite = skillImages[randomList[2]];
+        else
+            skillImg3.sprite = null;
     }
 
-    private void InitializeSkillMenu()
-    {
-        option = 0;
-        SelectSkill();
-    }
 
     public void HandleMenu()
     {
@@ -123,18 +155,21 @@ public class SkillMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            //선택한 값을 보유함 해시셋에 넣기
             holdIndex.Add(randomList[option]);
-            skillList[randomList[option]].IsUnlockSkill();
+            //선택한 스킬 활성화
+            skillList[randomList[option]].UnlockSkill();
             Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
-            SetSkillUnlock();
+            //SetSkillUnlock();
+            //메뉴 끄기
             ToggleMenu();
         }
     }
     public void SelectSkill()
     {
-        SetAlpha(skillImg1, 0.5f);
-        SetAlpha(skillImg2, 0.5f);
-        SetAlpha(skillImg3, 0.5f);
+        SetAlpha(skillImg1, 0.1f);
+        SetAlpha(skillImg2, 0.1f);
+        SetAlpha(skillImg3, 0.1f);
         switch (option)
         {
             case 0:
