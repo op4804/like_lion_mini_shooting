@@ -19,7 +19,8 @@ public class EliteEnemy : Enemy
 
             // TODO: 특성 아이템 생성
             // GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
-            
+            GameObject Skill = Instantiate(ResourceManager.Instance.skillBook, transform.position, Quaternion.identity);
+
             // 크기 줄이기-> 줄어들면 오브젝트 파괴
             StopAllCoroutines(); // 모든 행동 중지
             StartCoroutine(RotateAndShrinkAndDie());

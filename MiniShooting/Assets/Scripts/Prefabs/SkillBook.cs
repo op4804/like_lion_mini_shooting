@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SkillBook : MonoBehaviour
 {
+    public float speed = 1.0f;
     void Start()
     {
         
@@ -9,7 +10,7 @@ public class SkillBook : MonoBehaviour
 
     void Update()
     {
-        
+        transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

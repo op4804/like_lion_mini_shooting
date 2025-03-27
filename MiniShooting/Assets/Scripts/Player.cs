@@ -220,6 +220,7 @@ public class Player : MonoBehaviour
             playerLevel += 1;
             exp = 0;
             UIManager.Instance.ToggleUpgradeMenu(); //레벨업 능력치 상승 메뉴
+            SoundManager.instance.PlayerLevelUp(); // 레벨업 사운드 재생
         }
 
         //경험치 먹은거 체크

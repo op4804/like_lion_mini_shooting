@@ -16,6 +16,7 @@ public class LeftKnife : MonoBehaviour
     void Start()
     {
         StartCoroutine(Move(playerTransform, moveSpeed));
+        transform.Rotate(0, 0, +90); // 위방향이 앞이라90도 더해줌
     }
 
     IEnumerator Move(Transform playerTransform, float moveSpeed)

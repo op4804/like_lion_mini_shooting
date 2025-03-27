@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class BossHpbar : MonoBehaviour
 {
     public Image currentHpImage;
-    public Boss boss;
+    public GameObject go;
 
     void Start()
     {
@@ -13,6 +13,6 @@ public class BossHpbar : MonoBehaviour
 
     void Update()
     {
-        currentHpImage.fillAmount = boss.currentHp / boss.maxHp;
+        currentHpImage.fillAmount = go.GetComponent<Boss>().currentHp / go.GetComponent<Boss>().maxHp;
     }
 }

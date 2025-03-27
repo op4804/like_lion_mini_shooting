@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance; // 싱글톤
 
+    public bool isMute = false; // 음소거 여부 (테스트용)
+
     [Header("배경 음악 및 효과음 소스")]
     [SerializeField]
     private AudioSource BGMSource;
@@ -33,6 +35,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip hitClip; // bullet이 enemy에게 충돌하면 재생되는 효과음
     [SerializeField] private AudioClip dieClip; // player 사망 시 효과음
     [SerializeField] private AudioClip upgradeClip; // player 업그레이드 획득 시 효과음
+    [SerializeField] private AudioClip levelup;
 
     [Header("적이 플레이어에게 공격 시 피격음")]
     public AudioClip bombEnemyDamageClip;
@@ -44,6 +47,22 @@ public class SoundManager : MonoBehaviour
     [Header("경고 사운드")]
     [SerializeField] private AudioClip BosswarningClip;
     [SerializeField] private AudioClip EliteWarningClip;
+
+    [Header("보스 패턴 사운드")]
+    [SerializeField] private AudioClip BossMoveShoot;
+    [SerializeField] private AudioClip BossDashSlash;
+    [SerializeField] private AudioClip BossBlinkMove;
+    [SerializeField] private AudioClip BossSRoadPattern;
+    [SerializeField] private AudioClip BossKnifeEnergyCircle;
+    [SerializeField] private AudioClip BossSpawnSpinSword;
+
+    [Header("적 사망 시 사운드")]
+    [SerializeField] private AudioClip bombEnemyDieClip;
+    [SerializeField] private AudioClip wolfEnemyDieClip;
+    [SerializeField] private AudioClip oneEyeEnemyDieClip;
+    [SerializeField] private AudioClip oneEyeEliteDieClip;
+    [SerializeField] private AudioClip bossDieClip;
+
 
     private void Awake()
     {
@@ -61,9 +80,15 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        if (isMute)
+        {
+            gameObject.SetActive(false);
+        }
         PlayBGMForScene(SceneManager.GetActiveScene().name);
     }
+    
 
+    // 씬 전환? 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "BossTest")
@@ -123,7 +148,7 @@ public class SoundManager : MonoBehaviour
             BGMSource.clip = targetClip;
             BGMSource.loop = true;
             BGMSource.Play();
-            Debug.Log($"▶ 씬 '{sceneName}'의 BGM 재생 시작: {targetClip.name}");
+            Debug.Log($"씬 '{sceneName}'의 BGM 재생 시작: {targetClip.name}");
         }
     }
 
@@ -132,6 +157,7 @@ public class SoundManager : MonoBehaviour
     public void PlayerHit() => SFXSource.PlayOneShot(hitClip);
     public void PlayerDie() => SFXSource.PlayOneShot(dieClip);
     public void PlayerUpgrade() => SFXSource.PlayOneShot(upgradeClip);
+    public void PlayerLevelUp() => SFXSource.PlayOneShot(levelup);
 
     // 적 피격음 재생 부분
     public void BombEnemyAttack() => SFXSource.PlayOneShot(bombEnemyDamageClip);
@@ -144,4 +170,18 @@ public class SoundManager : MonoBehaviour
     //public void PlayBossWarning() => SFXSource.PlayOneShot(bossClip);
     //public void PlayEliteWarning() => SFXSource.PlayOneShot(EliteWarningClip);
 
+    // 보스 재생 부분
+    public void PlayBossMoveShoot() => SFXSource.PlayOneShot(BossMoveShoot);
+    public void PlayBossDashSlash() => SFXSource.PlayOneShot(BossDashSlash);
+    public void PlayBossBlinkMove() => SFXSource.PlayOneShot(BossBlinkMove);
+    public void PlayBossSRoadPattern() => SFXSource.PlayOneShot(BossSRoadPattern);
+    public void PlayBossKnifeEnergyCircle() => SFXSource.PlayOneShot(BossKnifeEnergyCircle);
+    public void PlayBossSpawnSpinSword() => SFXSource.PlayOneShot(BossSpawnSpinSword);
+
+    // 적 사망 사운드 부분
+    public void BombEnemyDie() => SFXSource.PlayOneShot(bombEnemyDieClip);
+    public void WolfEnemyDie() => SFXSource.PlayOneShot(wolfEnemyDieClip);
+    public void OneEyeEnemyDie() => SFXSource.PlayOneShot(oneEyeEnemyDieClip);
+    public void OneEyeEliteDie() => SFXSource.PlayOneShot(oneEyeEliteDieClip);
+    public void BossDie() => SFXSource.PlayOneShot(bossDieClip);
 }
