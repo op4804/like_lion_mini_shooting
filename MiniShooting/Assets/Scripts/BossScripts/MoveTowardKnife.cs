@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MoveTowardKnife : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 5f;
-    Transform playerTransform; 
+    Transform playerTransform;
 
     void Awake()
     {
@@ -15,30 +14,39 @@ public class MoveTowardKnife : MonoBehaviour
 
     void Start()
     {
+        // 회전 추가
+        RotateTowardsPlayer();
         StartCoroutine(Move(playerTransform, moveSpeed));
+    }
+
+    void RotateTowardsPlayer()
+    {
+        Vector2 direction = playerTransform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f; //앞방향이 오른쪽이 아니라 위라서 90도 빼줌
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     IEnumerator Move(Transform playerTransform, float moveSpeed)
     {
-        // 플레이어 방향을 향해 벡터 계산
         Vector2 dir = (playerTransform.position - transform.position).normalized;
 
-        // 프레임마다 이동
         while (true)
         {
             transform.position += (Vector3)(dir * moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
+
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().Hit(); 
+            collision.gameObject.GetComponent<Player>().Hit();
             Destroy(gameObject);
         }
     }
