@@ -7,12 +7,6 @@ public class WolfEnemy : Enemy
     int upDown = -1;
     bool isAttack = false;
 
-    GameManager gm;
-    void Start()
-    {
-        gm = GameManager.Instance;
-    }
-
     protected override void OnEnable() // 재생성 되었을때 초기화
     {
         base.OnEnable();
@@ -85,5 +79,31 @@ public class WolfEnemy : Enemy
             yield return new WaitForSeconds(0.02f);
         }
         isAttack = false;
+    }
+
+    public override void Hit(float damage)
+    {
+        if (isDead) return;
+
+        currentEnemyHP -= damage;
+
+        if (currentEnemyHP <= 0)
+        {
+            SoundManager.instance.WolfEnemyDie();
+
+            isDead = true;
+            GetComponent<Collider2D>().enabled = false;
+
+            GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
+            expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
+
+            StopAllCoroutines();
+            StartCoroutine(RotateAndShrinkAndDie());
+
+            return;
+        }
+
+        gameObject.GetComponent<Animator>().SetTrigger("hit");
+        transform.Translate(Vector3.right * 0.1f);
     }
 }

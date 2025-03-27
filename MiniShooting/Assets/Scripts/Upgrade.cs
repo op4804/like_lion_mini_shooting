@@ -101,6 +101,7 @@ public class Upgrade : MonoBehaviour
         float t = StatChange.GetplayerSpeed() + balancedSpeed;
         StatChange.SetSpeed(t);
         upgradeStack[(int)UpgradeType.IncreaseSpeed]++;
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseFireRate()
@@ -110,6 +111,7 @@ public class Upgrade : MonoBehaviour
         float t = StatChange.GetFireRate() - balancedFireRate;
         StatChange.SetFireRate(t);
         upgradeStack[(int)UpgradeType.IncreaseFireRate]++;
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseMaxHealth()
@@ -120,6 +122,7 @@ public class Upgrade : MonoBehaviour
         StatChange.SetHP(t);
         upgradeStack[(int)UpgradeType.IncreaseMaxHealth]++;
         PlayerHpBar.Instance.UpdateLife();
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseCurrentHealth()
@@ -128,6 +131,7 @@ public class Upgrade : MonoBehaviour
         int balancedHP = 2;
         int t = StatChange.GetCurrentHealth() + balancedHP;
         StatChange.SetCurrentHP(t);
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseBulletCount()
@@ -137,6 +141,7 @@ public class Upgrade : MonoBehaviour
         int t = StatChange.GetbulletCount() + balancedBC;
         StatChange.SetBulletCount(t);
         upgradeStack[(int)UpgradeType.IncreaseBulletCount]++;
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseAttack()
@@ -146,6 +151,7 @@ public class Upgrade : MonoBehaviour
         float t = StatChange.GetAttack() + balancedATK;
         StatChange.SetAttack(t);
         upgradeStack[(int)UpgradeType.IncreaseAttack]++;
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 
     void IncreaseBulletSpeed()
@@ -155,5 +161,6 @@ public class Upgrade : MonoBehaviour
         float t = StatChange.GetbulletSpeed() + balancedBS;
         StatChange.SetBulletSpeed(t);
         upgradeStack[(int)UpgradeType.IncreaseBulletSpeed]++;
+        SoundManager.instance.PlayerUpgrade(); // 업그레이드 시 사운드 재생
     }
 }

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     protected float currentEnemyHP;
     private float MaxEnemyHp;
     protected Vector3 originalScale;
+    protected GameManager gm;
+    
 
     protected bool isDead = false;
     public bool IsDead() => isDead;
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         originalScale = transform.localScale;
+        gm = GameManager.Instance;
     }
 
     public virtual void Hit(float damage)
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour
 
         if (currentEnemyHP <= 0) // 사망
         {
+            
             isDead = true;
 
             GetComponent<Collider2D>().enabled = false;

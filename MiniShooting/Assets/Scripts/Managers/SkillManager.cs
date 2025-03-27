@@ -53,6 +53,8 @@ public class SkillManager : MonoBehaviour
         foreach (var skill in skills)
         {
             skill.InitializeSkill(Player.Instance); //플레이어 정보를 가져옴
+            //skill.ApplyEffect(); //스킬의 효과 등록
+
             skill.LockSkill();
         }
 

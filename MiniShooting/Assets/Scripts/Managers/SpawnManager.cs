@@ -96,7 +96,7 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnElite2()
     {
-        while (spawnEliteEnemy2Test)
+        if (spawnEliteEnemy2Test)
         {
             yield return new WaitForSeconds(spawnDelay2);
             ResourceManager.Instance.Create("wolfEliteEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
