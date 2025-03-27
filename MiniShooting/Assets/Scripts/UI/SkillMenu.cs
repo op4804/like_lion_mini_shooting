@@ -5,6 +5,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
 
 public class SkillMenu : MonoBehaviour
 {
@@ -18,14 +19,19 @@ public class SkillMenu : MonoBehaviour
     public GameObject skillpanel;
     private bool isMenuActive = false;
 
+    private Skill skillSelection;
+
     private List<Skill> skillList;
+
+    int option = 1;
 
     Dictionary<int, string> SkillNum = new Dictionary<int, string>();
     void LoadSkills()
     {
         for (int i = 0; i < skillList.Count; i++)
         {
-            SkillNum.Add(i, skillList[i].name);
+            if (skillList[i].IsUnlockSkill() == false)
+                SkillNum.Add(i, skillList[i].name);
         }
     }
     void Start()
@@ -34,6 +40,7 @@ public class SkillMenu : MonoBehaviour
         skillpanel.SetActive(isMenuActive);
         LoadSkills();
         Random();
+        InitializeSkillMenu();
     }
 
     void Update()
@@ -92,24 +99,34 @@ public class SkillMenu : MonoBehaviour
         skillImg2.sprite = skillImages[randomList[1]];
         skillImg3.sprite = skillImages[randomList[2]];
     }
-    int option = 1;
+
+    private void InitializeSkillMenu()
+    {
+        option = 0;
+        SelectSkill();
+    }
+
     public void HandleMenu()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if (option != 0) option--;
             SelectSkill();
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             if (option != 2) option++;
             SelectSkill();
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             holdIndex.Add(randomList[option]);
             skillList[randomList[option]].IsUnlockSkill();
+            Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
+            SetSkillUnlock();
             ToggleMenu();
         }
     }
@@ -136,5 +153,16 @@ public class SkillMenu : MonoBehaviour
         Color c = img.color;
         c.a = alpha;
         img.color = c;
+    }
+
+    void SetSkillUnlock()
+    {
+        if (skillSelection != null)
+        {
+            if (skillSelection.IsActiveSkill == true)
+                SkillManager.Instance.SetActiveSkill(skillSelection);
+            else
+                SkillManager.Instance.SetPassiveSkill(skillSelection);
+        }
     }
 }
