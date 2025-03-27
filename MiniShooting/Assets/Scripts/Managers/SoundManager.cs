@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance; // 싱글톤
 
+    public bool isMute = false; // 음소거 여부 (테스트용)
+
     [Header("배경 음악 및 효과음 소스")]
     [SerializeField]
     private AudioSource BGMSource;
@@ -61,9 +63,15 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        if (isMute)
+        {
+            gameObject.SetActive(false);
+        }
         PlayBGMForScene(SceneManager.GetActiveScene().name);
     }
+    
 
+    // 씬 전환? 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "BossTest")

@@ -7,12 +7,6 @@ public class WolfEnemy : Enemy
     int upDown = -1;
     bool isAttack = false;
 
-    GameManager gm;
-    void Start()
-    {
-        gm = GameManager.Instance;
-    }
-
     protected override void OnEnable() // 재생성 되었을때 초기화
     {
         base.OnEnable();

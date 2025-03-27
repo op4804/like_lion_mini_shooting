@@ -7,7 +7,7 @@ public class EnemyClaw : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1); // 색상 초기화
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1); // 색상 초기화
         gameObject.GetComponent<SpriteRenderer>().flipX = false; // 좌우 반전 초기화
 
         SoundManager.instance.WolfEnemyAttack(); // 근접 공격 효과음 재생
@@ -19,7 +19,7 @@ public class EnemyClaw : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player>().Hit();
         }
@@ -37,7 +37,10 @@ public class EnemyClaw : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alpha);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(
+                gameObject.GetComponent<SpriteRenderer>().color.r,
+                gameObject.GetComponent<SpriteRenderer>().color.g,
+                gameObject.GetComponent<SpriteRenderer>().color.b, alpha);
             alpha -= Time.deltaTime * 20;
         }
     }
