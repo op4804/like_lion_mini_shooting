@@ -34,11 +34,16 @@ public class ResourceManager : MonoBehaviour
     [Header("Skills")]
     public GameObject eagle;
 
+    [Header("Effects")]
+    public GameObject enemyHitEffect;
+
     [Header("etc")]
     public GameObject expParticle;
     public GameObject explosionEffect;
     public GameObject frag;
     public GameObject skillBook;
+
+
 
 
     // 오브젝트 풀링 구현
@@ -79,6 +84,7 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(eagle);
         prefabs.Add(frag);
         prefabs.Add(skillBook);
+        prefabs.Add(enemyHitEffect);
     }
 
     

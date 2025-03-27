@@ -53,7 +53,7 @@ public class SkillManager : MonoBehaviour
         foreach (var skill in skills)
         {
             skill.InitializeSkill(Player.Instance); //플레이어 정보를 가져옴
-            skill.ApplyEffect(); //스킬의 효과 등록
+            skill.LockSkill(); //전체 스킬 잠금
         }
 
         Debug.Log($"보유 스킬 수 : {skills.Count}");
@@ -164,11 +164,14 @@ public class SkillManager : MonoBehaviour
     public void SetActiveSkill(Skill selectSkill)
     {
         Debug.Log("액티브 스킬을 세팅합니다.");
+
         foreach (var skill in skills)
         {
             skill.LockSkill();
         }
+
         selectSkill.UnlockSkill();
+
         var activeUnlockedSkill = skills.Find(skill => skill.IsActiveSkill && skill.IsUnlockSkill());
         Debug.Log($"현재 세팅된 스킬 : {activeUnlockedSkill.name}");
     }
@@ -177,5 +180,11 @@ public class SkillManager : MonoBehaviour
     {
         Debug.Log("패시브 스킬을 세팅합니다.");
         selectSkill.UnlockSkill();
+        var passiveUnlockedSkill = skills.FindAll(skill => !skill.IsActiveSkill && skill.IsUnlockSkill());
+
+        foreach (var s in passiveUnlockedSkill)
+        {            
+            Debug.Log($"현재 세팅된 스킬 : {s.name}");
+        }
     }
 }

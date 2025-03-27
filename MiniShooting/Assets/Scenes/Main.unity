@@ -738,7 +738,8 @@ MonoBehaviour:
   wolfEliteEnemy: {fileID: 3777413828489364806, guid: 1b7ce6aebd72c9448a836a3f5cbf4fd1, type: 3}
   t2: {fileID: 0}
   eagle: {fileID: 8348515755537654264, guid: 86831d6ccb6c24a4bb00bca4c589f9ff, type: 3}
-  expParticle: {fileID: 2406405117786264165, guid: a0a03a8db6fd311419d364bf163ded01, type: 3}
+  enemyHitEffect: {fileID: 582725328058819008, guid: 375c0c4c027735f4ebc3b3b13974164a, type: 3}
+  expParticle: {fileID: 2757950206957510146, guid: f6b8f486469c47d42a9440d8bf2491e2, type: 3}
   explosionEffect: {fileID: 5584700356191228352, guid: 239b666a28427c248876467101b162a6, type: 3}
   frag: {fileID: 6982010220359553438, guid: 67a69feff050f1f41881e4278c897c1e, type: 3}
   skillBook: {fileID: 7808624311493422528, guid: 1ec912179ea632b4792638237b741554, type: 3}
@@ -3089,7 +3090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8d8c5d6a658d94e8c6212979e3635c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 3536115883199355628, guid: f23837825226a474e82739f58906a5ed, type: 3}
+  effectPrefab: {fileID: 3633659845182067973, guid: 572b43c9533c1cc4585b4fcddf37551c, type: 3}
 --- !u!1 &1278300139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,11 +3168,11 @@ MonoBehaviour:
   spawnDelay2: 5.1
   spawnDelay3: 2
   spawnCheckRadius: 1.5
-  spawnEnemy1Test: 0
-  spawnEnemy2Test: 0
-  spawnEnemy3Test: 0
+  spawnEnemy1Test: 1
+  spawnEnemy2Test: 1
+  spawnEnemy3Test: 1
   spawnEliteEnemy1Test: 0
-  spawnEliteEnemy2Test: 1
+  spawnEliteEnemy2Test: 0
   spawnEliteEnemy3Test: 0
 --- !u!4 &1326465898
 Transform:
@@ -3738,9 +3739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Level :
-
-    Exp : '
+  m_Text: 'Level :'
 --- !u!224 &1682957591
 RectTransform:
   m_ObjectHideFlags: 0

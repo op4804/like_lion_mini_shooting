@@ -222,8 +222,6 @@ public class Player : MonoBehaviour
             UIManager.Instance.ToggleUpgradeMenu(); //레벨업 능력치 상승 메뉴
         }
 
-        UIManager.Instance.ViewExp(exp, playerLevel);  //레벨, 경험치 현황 표기
-
         //경험치 먹은거 체크
         //경험지 먹은지 3초 지나면 체크 해제
         expFlag = true;

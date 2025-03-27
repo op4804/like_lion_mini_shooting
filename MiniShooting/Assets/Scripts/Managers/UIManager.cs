@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         PlayerHpBar.Instance.UpdateLife();
+        ViewExp();
     }
 
     public void ToggleUpgradeMenu()
@@ -60,8 +61,9 @@ public class UIManager : MonoBehaviour
     }
 
     //레벨, 경험치 표기
-    public void ViewExp(float playerExp, int playerLevel)
+    public void ViewExp()
     {
-        expText.text = $"Level : {playerLevel} \nExp : {playerExp}";
+        Debug.Log($"Level : {Player.Instance.GetPlayerLevel()}");   
+        expText.text = $"Level : {Player.Instance.GetPlayerLevel()}";
     }
 }

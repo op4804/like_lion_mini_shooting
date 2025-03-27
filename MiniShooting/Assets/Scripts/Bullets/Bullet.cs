@@ -59,15 +59,19 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         bool hasEffect = SkillManager.Instance.IsBulletHaveEffect(gameObject);
+
         if (hasEffect)
         {
             return;
         }
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
             SkillManager.Instance.NotifyEffectComplete(gameObject);
+
+
 
             SoundManager.instance.PlayerHit();
             //Debug.Log("플레이어 히트 사운드 실행!");

@@ -126,6 +126,7 @@ public class SkillMenu : MonoBehaviour
             holdIndex.Add(randomList[option]);
             skillList[randomList[option]].IsUnlockSkill();
             Debug.Log($"선택된 스킬 : {skillList[randomList[option]].name} 스킬타입 : {skillList[randomList[option]].GetSkillType()}");
+            skillSelection = skillList[randomList[option]];
             SetSkillUnlock();
             ToggleMenu();
         }

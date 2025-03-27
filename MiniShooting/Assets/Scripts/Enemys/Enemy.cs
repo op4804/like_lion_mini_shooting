@@ -20,10 +20,13 @@ public class Enemy : MonoBehaviour
     }
 
     public virtual void Hit(float damage)
-    {
+    {        
+        GameObject hitEffect = ResourceManager.Instance.Create("enemyHitEffect", transform.position);
+        ResourceManager.Instance.Deactivate(hitEffect, 0.5f);
+
         if (isDead) return; // 죽었으면 피격되지 않음.
 
-        currentEnemyHP -= damage;      
+        currentEnemyHP -= damage;
 
         if (currentEnemyHP <= 0) // 사망
         {
