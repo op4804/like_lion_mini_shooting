@@ -3,6 +3,7 @@ using System.Collections;
 
 public class wolfEliteEnemy : EliteEnemy
 {
+
     protected override void OnEnable()
     {
         currentEnemyHP = 500;
@@ -27,10 +28,10 @@ public class wolfEliteEnemy : EliteEnemy
             int clawNum = Random.Range(2, 5);
             for (int i = 0; i < clawNum; i++)
             {
-                GameObject go = Instantiate(ResourceManager.Instance.oneEyeEliteEnemyBullet, transform.position, Quaternion.identity);
+                float randX = Random.Range(gm.maxBounds.x, gm.minBounds.x);
+                float randY = Random.Range(gm.maxBounds.y, gm.minBounds.y);
+                GameObject go = Instantiate(ResourceManager.Instance.eliteClaw, new Vector3(randX, randY, 0), Quaternion.identity);
 
-                float angle = 360 / 10 * i;
-                go.GetComponent<oneEyeEliteEnemyBullet>().Init(angle);
             }
 
             yield return new WaitForSeconds(5f);

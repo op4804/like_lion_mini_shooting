@@ -6,13 +6,6 @@ public class OneEyeEnemy : Enemy
     // 몬스터의 공격
     float attackDelay = 2.0f;
 
-    GameManager gm;
-
-    void Start()
-    {
-        gm = GameManager.Instance;
-    }
-
     protected override void OnEnable() // 처음, 재생성되었을때 초기화
     {
         base.OnEnable();
