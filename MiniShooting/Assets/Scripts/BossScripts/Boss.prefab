@@ -211,9 +211,7 @@ MonoBehaviour:
   - {fileID: 8896714072482138517}
   - {fileID: 5321352830972515950}
   - {fileID: 9099024271310745575}
-  - {fileID: 5321352830972515950}
-  - {fileID: 5321352830972515950}
-  - {fileID: 5321352830972515950}
+  - {fileID: 8122113790244968787}
 --- !u!114 &4510012165980337064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +299,7 @@ MonoBehaviour:
   knife: {fileID: 1060509560368311458, guid: 4a22e541e13442c4994961eb196303ad, type: 3}
   spawnPos1: {fileID: 2532551887160359834}
   spawnPos2: {fileID: 2492369290427643738}
-  moveSpeed: 3
+  moveSpeed: 5
   startPos: {fileID: 0}
   upPos: {fileID: 0}
   downPos: {fileID: 0}
@@ -398,12 +396,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 4453166037403692332}
   swordBarrier: {fileID: 1584709739066991689, guid: 8e4cb463a0a53be4380c02e7a6c08d8a, type: 3}
-  magiceCircle: {fileID: 6963256499051499225, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
+  magicCircle: {fileID: 6963256499051499225, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
   spawnPos1: {fileID: 0}
   spawnPos2: {fileID: 0}
   spawnPos3: {fileID: 0}
   spawnPos4: {fileID: 0}
-  magicCircle: {fileID: 6963256499051499225, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
   moveSpeed: 10
   movePoss: []
   startPos: {fileID: 0}
