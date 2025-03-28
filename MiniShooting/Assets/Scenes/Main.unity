@@ -789,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47be41c6f1a2caf4e951e85f17b3fe82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 0
+  currentHp: 0
 --- !u!212 &368006652
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1899,7 +1901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHpImage: {fileID: 710220797}
-  boss: {fileID: 0}
+  go: {fileID: 0}
 --- !u!114 &710220797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4374,22 +4376,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e43b57f9d64394f963227dbbe1e59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMute: 1
+  isMute: 0
   BGMSource: {fileID: 1895847288}
   SFXSource: {fileID: 204827163}
-  mainClip: {fileID: 8300000, guid: 6f7ee9b85ea889a46b5723bda2c125c9, type: 3}
+  mainClip: {fileID: 8300000, guid: 15b2dc0cd19d57243947809eb2947d08, type: 3}
   prologueClip: {fileID: 8300000, guid: ac38693f76dac3944b1016bc959e6910, type: 3}
   bossClip: {fileID: 8300000, guid: 10e1441f7be6aff49847467226798f47, type: 3}
   attackClip: {fileID: 8300000, guid: c145d5dfd544f874f87df9eee7d1c718, type: 3}
   hitClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
-  dieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  upgradeClip: {fileID: 8300000, guid: d223d553419f45a40a218b58b0a61243, type: 3}
-  levelup: {fileID: 8300000, guid: 5bb170ace2405d0438846f6e0666950b, type: 3}
-  bombEnemyDamageClip: {fileID: 8300000, guid: e6aa2d7a7066f394d80ac8328b08c5a3, type: 3}
-  wolfEnemyDamageClip: {fileID: 8300000, guid: 0d33c9469bcd41945a99fd7bc13012c2, type: 3}
-  OneEyeEnemyDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
-  OneEyeEliteDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
-  OneEyeEliteSpecialClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
+  dieClip: {fileID: 8300000, guid: f51cb1d6853bb7a4d8a1ea00643574ce, type: 3}
+  upgradeClip: {fileID: 8300000, guid: 56791a1e70f491a428e41c2d49b72abd, type: 3}
+  levelup: {fileID: 8300000, guid: f223d95c181e0c54f886ee4333e7c4d1, type: 3}
+  bombEnemyDamageClip: {fileID: 8300000, guid: 553a8ed1eab236843af34bfa9c6e8628, type: 3}
+  wolfEnemyDamageClip: {fileID: 8300000, guid: 43d1b17a6c179ad4fa292a0f6ab6fabe, type: 3}
+  OneEyeEnemyDamageClip: {fileID: 8300000, guid: 3b71cc8a76507b045909840a1b4b9888, type: 3}
+  OneEyeEliteDamageClip: {fileID: 8300000, guid: 3b71cc8a76507b045909840a1b4b9888, type: 3}
+  OneEyeEliteSpecialClip: {fileID: 0}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   BossMoveShoot: {fileID: 0}
@@ -4398,11 +4400,11 @@ MonoBehaviour:
   BossSRoadPattern: {fileID: 0}
   BossKnifeEnergyCircle: {fileID: 0}
   BossSpawnSpinSword: {fileID: 0}
-  bombEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  wolfEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  oneEyeEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  oneEyeEliteDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  bossDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  bombEnemyDieClip: {fileID: 0}
+  wolfEnemyDieClip: {fileID: 0}
+  oneEyeEnemyDieClip: {fileID: 0}
+  oneEyeEliteDieClip: {fileID: 0}
+  bossDieClip: {fileID: 0}
 --- !u!4 &2100314355
 Transform:
   m_ObjectHideFlags: 0
