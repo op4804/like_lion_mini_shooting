@@ -43,9 +43,6 @@ public class ResourceManager : MonoBehaviour
     public GameObject frag;
     public GameObject skillBook;
 
-
-
-
     // 오브젝트 풀링 구현
     private List<GameObject> prefabs = new(); // 모든 프리팹을 가지고 있는 리스트
     private Dictionary<string, Queue<GameObject>> objectDic = new();

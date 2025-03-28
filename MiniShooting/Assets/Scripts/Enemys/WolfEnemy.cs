@@ -19,7 +19,7 @@ public class WolfEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        if(!isAttack)
+        if (!isAttack)
         {
             Move();
             DestroyOutOfBoundary();
@@ -34,7 +34,7 @@ public class WolfEnemy : Enemy
         {
             upDown *= -1;
         }
-        else if(transform.position.y < -2)
+        else if (transform.position.y < -2)
         {
             upDown *= -1;
         }
@@ -51,7 +51,7 @@ public class WolfEnemy : Enemy
 
     IEnumerator Attack()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(4.0f);
             isAttack = true;
@@ -61,7 +61,7 @@ public class WolfEnemy : Enemy
 
     IEnumerator Rush()
     {
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
             transform.Translate(Vector3.left);
             yield return new WaitForSeconds(0.02f);
@@ -73,7 +73,7 @@ public class WolfEnemy : Enemy
     }
     IEnumerator RushBack()
     {
-        for(int i = 0; i < 7; i++)
+        for (int i = 0; i < 7; i++)
         {
             transform.Translate(Vector3.right);
             yield return new WaitForSeconds(0.02f);
@@ -83,27 +83,6 @@ public class WolfEnemy : Enemy
 
     public override void Hit(float damage)
     {
-        if (isDead) return;
-
-        currentEnemyHP -= damage;
-
-        if (currentEnemyHP <= 0)
-        {
-            SoundManager.instance.WolfEnemyDie();
-
-            isDead = true;
-            GetComponent<Collider2D>().enabled = false;
-
-            GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
-            expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
-
-            StopAllCoroutines();
-            StartCoroutine(RotateAndShrinkAndDie());
-
-            return;
-        }
-
-        gameObject.GetComponent<Animator>().SetTrigger("hit");
-        transform.Translate(Vector3.right * 0.1f);
+        base.Hit(damage);
     }
 }

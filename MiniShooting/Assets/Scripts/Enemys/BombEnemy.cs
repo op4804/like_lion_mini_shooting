@@ -26,12 +26,12 @@ public class BombEnemy : Enemy
 
     void Update()
     {
-        Trace();        
+        Trace();
     }
 
     void Trace()
     {
-        if(isTracing)
+        if (isTracing)
         {
             if (Vector2.Distance(transform.position, target.position) > distance)
             {
@@ -49,7 +49,7 @@ public class BombEnemy : Enemy
     {
         yield return new WaitForSeconds(1.5f); // 1.5초 뒤 폭발
         ResourceManager.Instance.Create("explosionEffect", transform.position);
-        if(currentEnemyHP > 0) // 오브젝트 풀에 중복으로 들어가는 것 방지.
+        if (currentEnemyHP > 0) // 오브젝트 풀에 중복으로 들어가는 것 방지.
         {
             ResourceManager.Instance.Deactivate(gameObject);
         }
@@ -58,9 +58,9 @@ public class BombEnemy : Enemy
     IEnumerator Ignite() // 점점 빨게지는 부분
     {
         float colorGB = 1;
-        while(true)
+        while (true)
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, colorGB, colorGB);            
+            gameObject.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(1, colorGB, colorGB);
             colorGB -= Time.deltaTime * 9;
             yield return new WaitForSeconds(0.1f);
         }
@@ -68,28 +68,7 @@ public class BombEnemy : Enemy
 
     public override void Hit(float damage)
     {
-        if (isDead) return;
-
-        currentEnemyHP -= damage;
-
-        if (currentEnemyHP <= 0)
-        {
-            SoundManager.instance.BombEnemyDie();
-
-            isDead = true;
-            GetComponent<Collider2D>().enabled = false;
-
-            GameObject expParticle = Instantiate(ResourceManager.Instance.expParticle, transform.position, Quaternion.identity);
-            expParticle.GetComponent<ExperienceParticle>().SetExpAmount(10f);
-
-            StopAllCoroutines();
-            StartCoroutine(RotateAndShrinkAndDie());
-
-            return;
-        }
-
-        gameObject.GetComponent<Animator>().SetTrigger("hit");
-        transform.Translate(Vector3.right * 0.1f);
+        base.Hit(damage);
     }
 
     public void Scat()

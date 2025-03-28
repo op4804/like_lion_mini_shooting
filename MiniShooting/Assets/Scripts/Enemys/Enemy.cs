@@ -24,13 +24,17 @@ public class Enemy : MonoBehaviour
 
     public virtual void Hit(float damage)
     {        
+        //피격 이펙트
         GameObject hitEffect = ResourceManager.Instance.Create("enemyHitEffect", transform.position);
-        ResourceManager.Instance.Deactivate(hitEffect, 0.5f);
+        Debug.Log($"[HitEffect] Spawned at {transform.position}", hitEffect);
+        //ResourceManager.Instance.Deactivate(hitEffect, 0.5f);
+
+        //피격 사운드
 
         if (isDead) return; // 죽었으면 피격되지 않음.
 
         currentEnemyHP -= damage;
-
+        Debug.Log($"{currentEnemyHP}", transform);
         if (currentEnemyHP <= 0) // 사망
         {
             
