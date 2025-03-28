@@ -27,31 +27,27 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private bool spawnEliteEnemy3Test = true;
 
+    IEnumerator spawn1Ro;
+    IEnumerator spawn2Ro;
+    IEnumerator spawn3Ro;
+
     private Coroutine spawn1Co;
     private Coroutine spawn2Co;
     private Coroutine spawn3Co;
-    private Coroutine spawnElite1Co;
-    private Coroutine spawnElite2Co;
-    private Coroutine spawnElite3Co;
 
-    private float patern1Delay = 5f;
-    private float patern2Delay = 5f;
-    private float patern3Delay = 5f;
+    private float patern1Delay = 10f;
+    private float patern2Delay = 10f;
+    private float patern3Delay = 10f;
+
+    private float nextPaternDelay = 5f;
 
     void Start()
     {
-        spawn1Co = StartCoroutine(Spawn1());
-        spawn2Co = StartCoroutine(Spawn2());
-        spawn3Co = StartCoroutine(Spawn3());
-        spawnElite1Co = StartCoroutine(SpawnElite1());
-        spawnElite2Co = StartCoroutine(SpawnElite2());
-        spawnElite3Co = StartCoroutine(SpawnElite3());
+        spawn1Ro = Spawn1();
+        spawn2Ro = Spawn2();
+        spawn2Ro = Spawn3();
 
-        SpawnPatern1();
-        StartCoroutine(StopSpawningAfterDelay(spawnElite1Co, 1f));
-        SpawnPatern2();
-        SpawnPatern3();
-
+        StartCoroutine(SpawnPattern1());
     }
 
     void Update()
@@ -102,29 +98,40 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnElite1()
+    IEnumerator SpawnElite1(System.Action<GameObject> onSpawned = null)
     {
         if (spawnEliteEnemy1Test)
         {
             yield return new WaitForSeconds(spawnDelay1);
-            ResourceManager.Instance.Create("oneEyeEliteEnemy", new Vector3(transform.position.x + 8, 0, 0));
+            Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
+            GameObject elite = ResourceManager.Instance.Create("oneEyeEliteEnemy", pos);
+
+            onSpawned?.Invoke(elite);
         }
 
     }
-    IEnumerator SpawnElite2()
+    IEnumerator SpawnElite2(System.Action<GameObject> onSpawned = null)
     {
         if (spawnEliteEnemy2Test)
         {
             yield return new WaitForSeconds(spawnDelay2);
-            ResourceManager.Instance.Create("wolfEliteEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
+
+            Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
+            GameObject elite = ResourceManager.Instance.Create("wolfEliteEnemy", pos);
+
+            onSpawned?.Invoke(elite);
         }
     }
-    IEnumerator SpawnElite3()
+    IEnumerator SpawnElite3(System.Action<GameObject> onSpawned = null)
     {
         if (spawnEliteEnemy3Test)
         {
             yield return new WaitForSeconds(spawnDelay3);
-            ResourceManager.Instance.Create("bombEliteEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
+
+            Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
+            GameObject elite = ResourceManager.Instance.Create("bombEliteEnemy", pos);
+
+            onSpawned?.Invoke(elite);
         }
     }
 
@@ -150,16 +157,90 @@ public class SpawnManager : MonoBehaviour
         StopCoroutine(spawn);
     }
 
-    private void SpawnPatern1()
+    //소환 패턴1
+    IEnumerator SpawnPattern1()
     {
-        StartCoroutine(StopSpawningAfterDelay(spawn1Co, patern1Delay));
-    }
-    private void SpawnPatern2()
-    {
+        //소환 패턴
+        spawn1Co = StartCoroutine(Spawn1());
+        yield return new WaitForSeconds(patern1Delay);
+        StopCoroutine(spawn1Co);
 
-    }
-    private void SpawnPatern3()
-    {
+        //패턴 후 엘리트 등장
+        GameObject eliteEnemy = null;
+        yield return StartCoroutine(SpawnElite1(obj => eliteEnemy = obj));
 
+        if (eliteEnemy != null)
+        {
+            Enemy enemy = eliteEnemy.GetComponent<Enemy>();
+            yield return new WaitUntil(() => enemy.IsDead());
+        }
+
+        //엘리트 죽으면 다음 패턴
+        Debug.Log("Patern1 Done");
+        yield return new WaitForSeconds(nextPaternDelay);
+        yield return StartCoroutine(SpawnPattern2());
+    }
+
+    //소환 패턴2
+    IEnumerator SpawnPattern2()
+    {
+        //소환 패턴
+        spawn1Co = StartCoroutine(Spawn1());
+        spawn2Co = StartCoroutine(Spawn2());
+
+        yield return new WaitForSeconds(patern2Delay);
+
+        StopCoroutine(spawn1Co);
+
+        //패턴 후 엘리트 등장
+        GameObject eliteEnemy = null;
+        yield return StartCoroutine(SpawnElite2(obj => eliteEnemy = obj));
+
+        if (eliteEnemy != null)
+        {
+            StopCoroutine(spawn2Co);
+            Enemy enemy = eliteEnemy.GetComponent<Enemy>();
+            yield return new WaitUntil(() => enemy.IsDead());
+        }
+
+        //엘리트 죽으면 다음 패턴
+        Debug.Log("Patern2 Done");
+        yield return new WaitForSeconds(nextPaternDelay);
+        yield return StartCoroutine(SpawnPattern3());
+    }
+
+    //소환 패턴3
+    IEnumerator SpawnPattern3()
+    {
+        //소환 패턴
+        spawn1Co = StartCoroutine(Spawn1());
+        spawn2Co = StartCoroutine(Spawn2());
+        spawn3Co = StartCoroutine(Spawn3());
+
+        yield return new WaitForSeconds(patern3Delay);
+
+        StopCoroutine(spawn1Co);
+        StopCoroutine(spawn2Co);
+        StopCoroutine(spawn3Co);
+
+        //패턴 후 엘리트 등장
+        GameObject eliteEnemy = null;
+        yield return StartCoroutine(SpawnElite3(obj => eliteEnemy = obj));
+
+        if (eliteEnemy != null)
+        {
+            Enemy enemy = eliteEnemy.GetComponent<Enemy>();
+            yield return new WaitUntil(() => enemy.IsDead());
+        }
+
+        //엘리트 죽으면 다음 패턴
+        Debug.Log("Patern3 Done");
+        yield return new WaitForSeconds(nextPaternDelay);
+        yield return BossSequence();
+    }
+    IEnumerator BossSequence()
+    {
+        Debug.Log("BOSS Appearance");
+        yield break;
     }
 }

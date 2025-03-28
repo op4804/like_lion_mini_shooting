@@ -7,7 +7,7 @@ public class wolfEliteEnemy : EliteEnemy
     protected override void OnEnable()
     {
         base.OnEnable();
-        maxEnemyHp = 500;
+        maxEnemyHp = 50;
         currentEnemyHP = maxEnemyHp;
         StartCoroutine(MoveFoward()); // 앞으로 가기
     }
