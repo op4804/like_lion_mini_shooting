@@ -41,8 +41,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip bombEnemyDamageClip;
     public AudioClip wolfEnemyDamageClip;
     public AudioClip OneEyeEnemyDamageClip;
+
+    [Header("엘리트 몬스터 공격 시 피격음")]
     public AudioClip OneEyeEliteDamageClip;
     public AudioClip OneEyeEliteSpecialClip;
+    public AudioClip bombEliteDamageClip;
+    public AudioClip wolfEliteDamageClip;
+
 
     [Header("경고 사운드")]
     [SerializeField] private AudioClip BosswarningClip;
@@ -58,11 +63,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip BossLazerClip;
 
     [Header("적 사망 시 사운드")]
-    [SerializeField] private AudioClip bombEnemyDieClip;
-    [SerializeField] private AudioClip wolfEnemyDieClip;
-    [SerializeField] private AudioClip oneEyeEnemyDieClip;
-    [SerializeField] private AudioClip oneEyeEliteDieClip;
-    [SerializeField] private AudioClip bossDieClip;
+    [SerializeField] private AudioClip EnemyDieClip;
+    [SerializeField] private AudioClip EliteDieClip;
+    [SerializeField] private AudioClip BossDieClip;
 
 
     private void Awake()
@@ -164,12 +167,10 @@ public class SoundManager : MonoBehaviour
     public void BombEnemyAttack() => SFXSource.PlayOneShot(bombEnemyDamageClip);
     public void WolfEnemyAttack() => SFXSource.PlayOneShot(wolfEnemyDamageClip);
     public void OneEyeEnemyAttack() => SFXSource.PlayOneShot(OneEyeEnemyDamageClip);
-    public void OneEyeEliteAttack() => SFXSource.PlayOneShot(OneEyeEliteDamageClip);
-    public void OneEyeEliteSpecial() => SFXSource.PlayOneShot(OneEyeEliteSpecialClip);
 
-    //// 경고음 재생 부분
-    //public void PlayBossWarning() => SFXSource.PlayOneShot(bossClip);
-    //public void PlayEliteWarning() => SFXSource.PlayOneShot(EliteWarningClip);
+    // 경고음 재생 부분
+    public void PlayBossWarning() => SFXSource.PlayOneShot(bossClip);
+    public void PlayEliteWarning() => SFXSource.PlayOneShot(EliteWarningClip);
 
     // 보스 재생 부분
     public void PlayBossMoveClipt() => SFXSource.PlayOneShot(BossMoveClip);
@@ -181,9 +182,15 @@ public class SoundManager : MonoBehaviour
     public void PlayBossLazerClip() => SFXSource.PlayOneShot(BossLazerClip);
 
     // 적 사망 사운드 부분
-    public void BombEnemyDie() => SFXSource.PlayOneShot(bombEnemyDieClip);
-    public void WolfEnemyDie() => SFXSource.PlayOneShot(wolfEnemyDieClip);
-    public void OneEyeEnemyDie() => SFXSource.PlayOneShot(oneEyeEnemyDieClip);
-    public void OneEyeEliteDie() => SFXSource.PlayOneShot(oneEyeEliteDieClip);
-    public void BossDie() => SFXSource.PlayOneShot(bossDieClip);
+    public void EnemyDie()=> SFXSource.PlayOneShot(EnemyDieClip);
+    public void EliteDie() => SFXSource.PlayOneShot(EliteDieClip);
+    public void BossDie() => SFXSource.PlayOneShot(BossDieClip);
+
+    // 엘리트 몬스터 피격음 부분
+    public void OneEyeEliteAttack() => SFXSource.PlayOneShot(OneEyeEliteDamageClip);
+    public void OneEyeEliteSpecial() => SFXSource.PlayOneShot(OneEyeEliteSpecialClip);
+
+    public void BombEliteAttack() => SFXSource.PlayOneShot(bombEliteDamageClip);
+    public void WolfEliteAttack() => SFXSource.PlayOneShot(wolfEliteDamageClip);
+
 }
