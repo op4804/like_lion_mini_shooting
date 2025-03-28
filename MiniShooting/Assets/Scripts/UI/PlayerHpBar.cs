@@ -51,12 +51,12 @@ public class PlayerHpBar : MonoBehaviour
             RectTransform lifeTransform = setLife.GetComponent<RectTransform>();
 
             // 좌표 기준 왼쪽 아래로 변경
-            lifeTransform.anchorMin = new Vector2(0, 0);
-            lifeTransform.anchorMax = new Vector2(0, 0);
-            lifeTransform.pivot = new Vector2(0, 0);
+            lifeTransform.anchorMin = new Vector2(0, 1);
+            lifeTransform.anchorMax = new Vector2(0, 1);
+            lifeTransform.pivot = new Vector2(0, 1);
 
             // 라이프 배치
-            lifeTransform.anchoredPosition = new Vector2((50 * i)+10, 5);
+            lifeTransform.anchoredPosition = new Vector2((50 * i)+10, -5);
             lifeList.Add(setLife);
 
             // 현재 체력 아이콘 추가
