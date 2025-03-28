@@ -172,7 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f94721e3ce9eed48b7575bf8264b19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pattern: {fileID: 4453166037403692332, guid: e5c7c12b1c620e94d966add35aae31ab, type: 3}
+  magicCircle: {fileID: 1210504791397287429, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
+  barrierSword: {fileID: 4592956134879901714}
 --- !u!114 &4592956134879901714
 MonoBehaviour:
   m_ObjectHideFlags: 0

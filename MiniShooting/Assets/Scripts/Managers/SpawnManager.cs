@@ -104,10 +104,10 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnElite3()
     {
-        while (spawnEliteEnemy3Test)
+        if (spawnEliteEnemy3Test)
         {
             yield return new WaitForSeconds(spawnDelay3);
-            ResourceManager.Instance.Create("bombEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
+            ResourceManager.Instance.Create("bombEliteEnemy", new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0));
         }
     }
 

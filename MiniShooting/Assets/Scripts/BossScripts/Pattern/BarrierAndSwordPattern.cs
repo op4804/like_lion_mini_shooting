@@ -8,8 +8,8 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
 {
     public GameObject Boss;//보스정보가져오기위해
     public GameObject swordBarrier;// 소환할거
-    public GameObject magicCircle;// 소환할거
     public Transform spawnPos1, spawnPos2, spawnPos3, spawnPos4;// 소환 위치
+    public static int swordCount;
 
 
     public float moveSpeed = 10f;// 보스 이동속도
@@ -26,6 +26,7 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
 
     public IEnumerator StopPattern()
     {
+        Debug.Log("패턴종료");
         isPatternStop = true;
         yield return null;
     }
@@ -33,18 +34,21 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
     {
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
+
         yield return StartCoroutine(Spawn(swordBarrier, spawnPos1));
         yield return StartCoroutine(Spawn(swordBarrier, spawnPos2));
         yield return StartCoroutine(Spawn(swordBarrier, spawnPos3));
         yield return StartCoroutine(Spawn(swordBarrier, spawnPos4));
-        yield return StartCoroutine(Spawn(magicCircle, startPos));
+        swordCount = 4;
         transform.Find("BossBarrier").gameObject.SetActive(true);//배리어 활성화,마법진 및 봉인의 검 4개 소환
-
         while (true)
         {
             yield return StartCoroutine(Heal());
             yield return new WaitForSeconds(0.1f);
-
+            if(swordCount <= 0 )
+            {
+                isPatternStop = true;
+            }
             if (isPatternStop == true)
             {
                 transform.Find("BossBarrier").gameObject.SetActive(false);//배리어 비활성화

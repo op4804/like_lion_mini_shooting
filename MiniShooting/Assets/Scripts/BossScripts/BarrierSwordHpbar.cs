@@ -7,12 +7,12 @@ public class BarrierSwordHpbar : MonoBehaviour
     public GameObject go;
 
     void Start()
-    {
-
+    {     
     }
-
     void Update()
     {
         currentHpImage.fillAmount = go.GetComponent<Boss>().currentHp / go.GetComponent<Boss>().maxHp;
     }
+
+
 }
