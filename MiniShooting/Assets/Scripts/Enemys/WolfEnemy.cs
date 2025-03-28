@@ -80,9 +80,4 @@ public class WolfEnemy : Enemy
         }
         isAttack = false;
     }
-
-    public override void Hit(float damage)
-    {
-        base.Hit(damage);
-    }
 }

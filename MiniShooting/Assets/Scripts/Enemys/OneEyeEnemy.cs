@@ -41,9 +41,4 @@ public class OneEyeEnemy : Enemy
             ResourceManager.Instance.Deactivate(gameObject);
         }
     }
-
-    public override void Hit(float damage)
-    {
-        base.Hit(damage);
-    }
 }

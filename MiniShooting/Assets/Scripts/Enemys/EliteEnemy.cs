@@ -29,6 +29,7 @@ public class EliteEnemy : Enemy
             StopAllCoroutines(); // 모든 행동 중지
             UIManager.Instance.DeactivateEliteEnemyHpBar();
             StartCoroutine(RotateAndShrinkAndDie());
+            SoundManager.instance.EliteDie();
 
             return;
         }

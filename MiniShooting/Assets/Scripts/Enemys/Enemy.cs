@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
             // 크기 줄이기-> 줄어들면 오브젝트 파괴
             StopAllCoroutines(); // 모든 행동 중지
             StartCoroutine(RotateAndShrinkAndDie());
+            SoundManager.instance.EnemyDie();
 
             return;
         }

@@ -66,11 +66,6 @@ public class BombEnemy : Enemy
         }
     }
 
-    public override void Hit(float damage)
-    {
-        base.Hit(damage);
-    }
-
     public void Scat()
     {
         StartCoroutine(DeleteRigidBody());
