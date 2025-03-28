@@ -27,14 +27,31 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private bool spawnEliteEnemy3Test = true;
 
+    private Coroutine spawn1Co;
+    private Coroutine spawn2Co;
+    private Coroutine spawn3Co;
+    private Coroutine spawnElite1Co;
+    private Coroutine spawnElite2Co;
+    private Coroutine spawnElite3Co;
+
+    private float patern1Delay = 5f;
+    private float patern2Delay = 5f;
+    private float patern3Delay = 5f;
+
     void Start()
     {
-        StartCoroutine(Spawn1());
-        StartCoroutine(Spawn2());
-        StartCoroutine(Spawn3());
-        StartCoroutine(SpawnElite1());
-        StartCoroutine(SpawnElite2());
-        StartCoroutine(SpawnElite3());
+        spawn1Co = StartCoroutine(Spawn1());
+        spawn2Co = StartCoroutine(Spawn2());
+        spawn3Co = StartCoroutine(Spawn3());
+        spawnElite1Co = StartCoroutine(SpawnElite1());
+        spawnElite2Co = StartCoroutine(SpawnElite2());
+        spawnElite3Co = StartCoroutine(SpawnElite3());
+
+        SpawnPatern1();
+        StartCoroutine(StopSpawningAfterDelay(spawnElite1Co, 1f));
+        SpawnPatern2();
+        SpawnPatern3();
+
     }
 
     void Update()
@@ -123,6 +140,26 @@ public class SpawnManager : MonoBehaviour
         }
 
         return true;
+
+    }
+
+    IEnumerator StopSpawningAfterDelay(Coroutine spawn, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        StopCoroutine(spawn);
+    }
+
+    private void SpawnPatern1()
+    {
+        StartCoroutine(StopSpawningAfterDelay(spawn1Co, patern1Delay));
+    }
+    private void SpawnPatern2()
+    {
+
+    }
+    private void SpawnPatern3()
+    {
 
     }
 }
