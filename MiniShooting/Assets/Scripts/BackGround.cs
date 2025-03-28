@@ -136,11 +136,9 @@ public class Background : MonoBehaviour
 
     public void BgChange(GameObject BG)
     {
-        Debug.Log(BgChangeCount);
         if (BgChangeCount < 5)
         {
             int change = BgChangeCount + 2;
-            Debug.Log(change);
             BgChangeCount++;
             if (change == 5) change = 0;
             if (change == 6) change = 1;
