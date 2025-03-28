@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private SkillMenu skillMenu;
 
+    [SerializeField]
+    private GameObject eliteEnemyHpBar;
+
     public string IsToggle { get; set; } = null;
 
     public Text expText;
@@ -63,7 +66,17 @@ public class UIManager : MonoBehaviour
     //레벨, 경험치 표기
     public void ViewExp()
     {
-        Debug.Log($"Level : {Player.Instance.GetPlayerLevel()}");   
+        Debug.Log($"Level : {Player.Instance.GetPlayerLevel()}");
         expText.text = $"Level : {Player.Instance.GetPlayerLevel()}";
+    }
+
+    public void ActivateEliteEnemyHpBar(EliteEnemy eliteEnemy)
+    {
+        eliteEnemyHpBar.gameObject.SetActive(true);
+        eliteEnemyHpBar.GetComponent<EliteEnemyHpBar>().SetEliteEnemy(eliteEnemy);
+    }
+    public void DeactivateEliteEnemyHpBar()
+    {
+        eliteEnemyHpBar.gameObject.SetActive(false);
     }
 }

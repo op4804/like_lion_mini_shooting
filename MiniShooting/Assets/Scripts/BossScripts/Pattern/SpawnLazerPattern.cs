@@ -32,11 +32,10 @@ public class SpawnLazerPattern : MonoBehaviour, IBossPattern
         while (true)
         {
             int randomIndex = Random.Range(0, spawnPoss.Count);
-            Transform randomPos = spawnPoss[randomIndex]; //랜덤으로 spawnPoss중 하나를 선택
+            Transform transform = spawnPoss[randomIndex]; //랜덤으로 spawnPoss중 하나를 선택
 
             Vector2 randomOffset = Random.insideUnitCircle * 1;
-            randomPos.position = (Vector2)randomPos.position + randomOffset;//주변반경 1안의 위치로 조정
-
+            Vector2 randomPos = (Vector2)transform.position + randomOffset;//주변반경 1안의 위치로 조정
 
             yield return StartCoroutine(Spawn(spawner, randomPos));
             yield return new WaitForSeconds(0.5f);
@@ -65,11 +64,15 @@ public class SpawnLazerPattern : MonoBehaviour, IBossPattern
         }
     }
 
+    public IEnumerator Spawn(GameObject go, Vector2 pos)
+    {
+        Instantiate(go, pos, Quaternion.identity);
+        yield return null;
+    }
     public IEnumerator Spawn(GameObject go, Transform pos)
     {
         Instantiate(go, pos.position, Quaternion.identity);
         yield return null;
     }
-
 }
 

@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     // 몬스터 체력
     [SerializeField]
     protected float currentEnemyHP;
-    private float MaxEnemyHp;
+    protected float maxEnemyHp;
     protected Vector3 originalScale;
     protected GameManager gm;
     
