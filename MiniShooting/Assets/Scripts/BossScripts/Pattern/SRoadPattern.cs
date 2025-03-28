@@ -37,6 +37,7 @@ public class SRoadPattern : MonoBehaviour, IBossPattern
             yield return StartCoroutine(Move(downPos, moveSpeed));
             StopCoroutine(myCo1);
             StopCoroutine(myCo2);
+
             if (isPatternStop == true)
             {
                 break;

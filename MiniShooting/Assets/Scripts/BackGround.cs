@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
+    [HideInInspector]
+    public static Background Instance = null;
+
     [SerializeField]
     private float scrollSpeed = 0.5f; //화면 흐르는 속도
     public Material[] materials;
@@ -20,6 +23,17 @@ public class Background : MonoBehaviour
     private Renderer rend2;
 
     private int BgChangeCount = 0;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {
@@ -39,6 +53,12 @@ public class Background : MonoBehaviour
             StartCoroutine(ChangeBgCo());
             StartCoroutine(MoveCloudToTarget());
         }
+    }
+
+    public void CHANGEBG()
+    {
+        StartCoroutine(ChangeBgCo());
+        StartCoroutine(MoveCloudToTarget());
     }
 
     //배경 변경 코루틴

@@ -76,7 +76,7 @@ public class UpgradeMenu : MonoBehaviour
     {
         int optionCount = Upgrade.Instance.GetCount();
         float totalHeight = optionCount * 60f;
-        float startY = totalHeight / 2 - 30f; // 중앙 기준 정렬
+        float startY = totalHeight / 2 - 70f; // 중앙 기준 정렬
 
         for (int i = 0; i < UpgradeChooseNum; i++)
         {

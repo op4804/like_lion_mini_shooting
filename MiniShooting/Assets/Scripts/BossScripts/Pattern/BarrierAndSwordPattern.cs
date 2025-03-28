@@ -60,8 +60,8 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
     
     public IEnumerator Heal()
     {
-        Boss.GetComponent<Boss>().currentHp += 5;
-        yield return new WaitForSeconds(0.1f);
+        Boss.GetComponent<Boss>().currentHp += 10;
+        yield return new WaitForSeconds(1f);
     }
     public IEnumerator MoveToStart()
     {
