@@ -22,16 +22,24 @@ public class Enemy : MonoBehaviour
         gm = GameManager.Instance;
     }
 
+    //피격 이펙트
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet"))
+        {
+            Vector3 hitPos = GetComponent<Collider2D>().ClosestPoint(collision.transform.position);
+
+            GameObject hitEffect = ResourceManager.Instance.Create("enemyHitEffect", hitPos);
+            ResourceManager.Instance.Deactivate(hitEffect, 0.5f);
+        }
+    }
+
     public virtual void Hit(float damage)
     {        
-        //피격 이펙트
-        GameObject hitEffect = ResourceManager.Instance.Create("enemyHitEffect", transform.position);
-        Debug.Log($"[HitEffect] Spawned at {transform.position}", hitEffect);
-        //ResourceManager.Instance.Deactivate(hitEffect, 0.5f);
+        if (isDead) return; // 죽었으면 피격되지 않음.
 
         //피격 사운드
-
-        if (isDead) return; // 죽었으면 피격되지 않음.
+        SoundManager.instance.PlayerHit();
 
         currentEnemyHP -= damage;
         Debug.Log($"{currentEnemyHP}", transform);

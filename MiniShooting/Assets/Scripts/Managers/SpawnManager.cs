@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -48,11 +49,6 @@ public class SpawnManager : MonoBehaviour
         spawn2Ro = Spawn3();
 
         StartCoroutine(SpawnPattern1());
-    }
-
-    void Update()
-    {
-
     }
 
     IEnumerator Spawn1()
@@ -110,6 +106,7 @@ public class SpawnManager : MonoBehaviour
         }
 
     }
+
     IEnumerator SpawnElite2(System.Action<GameObject> onSpawned = null)
     {
         if (spawnEliteEnemy2Test)
@@ -122,6 +119,7 @@ public class SpawnManager : MonoBehaviour
             onSpawned?.Invoke(elite);
         }
     }
+
     IEnumerator SpawnElite3(System.Action<GameObject> onSpawned = null)
     {
         if (spawnEliteEnemy3Test)
@@ -135,7 +133,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-
     private bool IsSpawnAreaClear(Vector3 position)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(position, spawnCheckRadius);
@@ -148,13 +145,6 @@ public class SpawnManager : MonoBehaviour
 
         return true;
 
-    }
-
-    IEnumerator StopSpawningAfterDelay(Coroutine spawn, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        StopCoroutine(spawn);
     }
 
     //소환 패턴1
@@ -241,6 +231,10 @@ public class SpawnManager : MonoBehaviour
     IEnumerator BossSequence()
     {
         Debug.Log("BOSS Appearance");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene("Bosstest");
         yield break;
     }
 }
