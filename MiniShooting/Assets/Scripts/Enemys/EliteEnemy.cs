@@ -11,11 +11,13 @@ public class EliteEnemy : Enemy
         UIManager.Instance.ActivateEliteEnemyHpBar(this);
         Debug.Log("EliteEnemy OnEnable");
     }
-    
-    
+
     public override void Hit(float damage)
     {
         if (isDead) return; // 죽었으면 피격되지 않음.
+
+        //피격 사운드
+        SoundManager.instance.PlayerHit();
 
         currentEnemyHP -= damage;
 

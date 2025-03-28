@@ -70,11 +70,6 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().Hit(Player.Instance.GetAttack());
 
             SkillManager.Instance.NotifyEffectComplete(gameObject);
-
-
-
-            SoundManager.instance.PlayerHit();
-            //Debug.Log("플레이어 히트 사운드 실행!");
         }
 
         else if (collision.gameObject.CompareTag("Boss"))
