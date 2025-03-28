@@ -111,6 +111,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (spawnEliteEnemy1Test)
         {
+            Background.Instance.CHANGEBG();
             yield return new WaitForSeconds(spawnDelay1);
             Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
             GameObject elite = ResourceManager.Instance.Create("oneEyeEliteEnemy", pos);
@@ -124,6 +125,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (spawnEliteEnemy2Test)
         {
+            Background.Instance.CHANGEBG();
             yield return new WaitForSeconds(spawnDelay2);
 
             Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
@@ -137,6 +139,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (spawnEliteEnemy3Test)
         {
+            Background.Instance.CHANGEBG();
             yield return new WaitForSeconds(spawnDelay3);
 
             Vector3 pos = new Vector3(transform.position.x + 8, 0, 0);
@@ -151,7 +154,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud1)
         {
             yield return new WaitForSeconds(spawnDelay1);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
+            Vector3 spawnPos = new Vector3(transform.position.x + 12, Random.Range(-4.0f, 4.0f), 0);
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {
                 GameObject obj = ResourceManager.Instance.Create("cloud1", spawnPos);
@@ -165,7 +168,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud2)
         {
             yield return new WaitForSeconds(spawnDelay2);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
+            Vector3 spawnPos = new Vector3(transform.position.x + 12, Random.Range(-4.0f, 4.0f), 0);
 
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {
@@ -180,7 +183,7 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud3)
         {
             yield return new WaitForSeconds(spawnDelay3);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
+            Vector3 spawnPos = new Vector3(transform.position.x + 12, Random.Range(-4.0f, 4.0f), 0);
 
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {

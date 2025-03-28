@@ -22,7 +22,7 @@ public class smallCloud : MonoBehaviour
 
     private void DestroyOutOfBoundary()
     {
-        if (transform.position.x > gm.maxBounds.x || transform.position.x < gm.minBounds.x
+        if (transform.position.x > gm.maxBounds.x + 10f || transform.position.x < gm.minBounds.x - 10f
             || transform.position.y > gm.maxBounds.y || transform.position.y < gm.minBounds.y)
         {
             ResourceManager.Instance.Deactivate(gameObject);
