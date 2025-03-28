@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BossPatternManager : MonoBehaviour
 {
@@ -22,8 +23,7 @@ public class BossPatternManager : MonoBehaviour
     //반피패턴
     //1.마법진과 봉인의검4개소환, 봉인의검 깨지기 전까지 회복
 
-    //마지막패턴
-    //1.분신을소환하여 4개로 나뉜뒤 죽을때까지 검기 날리기
+
     private void Awake()
     {
         foreach (var script in patternScripts)
@@ -36,7 +36,9 @@ public class BossPatternManager : MonoBehaviour
     }
     void Start()
     {
+
         StartCoroutine(PatternProgress());
+
     }
 
     IEnumerator PatternProgress()
@@ -44,26 +46,61 @@ public class BossPatternManager : MonoBehaviour
         //yield return StartCoroutine(Test(5f));
         //패턴 테스트
 
-        yield return StartCoroutine(MaveAndShoot(5f));
-        yield return StartCoroutine(Sroad(5f));
-        yield return StartCoroutine(Rampage(5f));
-        yield return StartCoroutine(DashSlash(3f));
-        yield return StartCoroutine(SpinSword(5f));
-        yield return StartCoroutine(Lazer(5f));
-        yield return StartCoroutine(BlinkMove(5f));
+        while(true)
+        {
+            yield return StartCoroutine(MaveAndShoot(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(Sroad(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(Rampage(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(DashSlash(3f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(SpinSword(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(Lazer(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(BlinkMove(5f));
+            if (boss.currentHp <= 0) { break; }
+        }
         yield return StartCoroutine(HealSword());
+        while (true)
+        {
+            yield return StartCoroutine(MaveAndShoot(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(Sroad(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(Rampage(5f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(DashSlash(3f));
+            if (boss.currentHp <= 0) { break; }
+            yield return StartCoroutine(BlinkMove(5f));
+            if (boss.currentHp <= 0) { break; }
 
+        }
+        Destroy(gameObject);
 
         StartCoroutine(patterns[5].PatternProgress());
         //패턴넣어주기
         StartCoroutine(patterns[5].StopPattern());
         yield return new WaitUntil(() => patterns[5].isPatternEnd);
 
-        StartCoroutine(patterns[6].PatternProgress());
-        //패턴넣어주기
-        StartCoroutine(patterns[6].StopPattern());
-        yield return new WaitUntil(() => patterns[5].isPatternEnd);
+        //StartCoroutine(patterns[6].PatternProgress());
+        ////패턴넣어주기
+        //StartCoroutine(patterns[6].StopPattern());
+        //yield return new WaitUntil(() => patterns[5].isPatternEnd);
     }
+
+
+
+
+
+
+
+
+
+
+
 
     IEnumerator Test(float seconds)
     {
