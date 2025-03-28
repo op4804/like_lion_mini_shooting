@@ -3306,11 +3306,11 @@ MonoBehaviour:
   spawnDelay3: 2
   spawnCheckRadius: 1.5
   spawnEnemy1Test: 1
-  spawnEnemy2Test: 0
-  spawnEnemy3Test: 0
-  spawnEliteEnemy1Test: 0
-  spawnEliteEnemy2Test: 0
-  spawnEliteEnemy3Test: 0
+  spawnEnemy2Test: 1
+  spawnEnemy3Test: 1
+  spawnEliteEnemy1Test: 1
+  spawnEliteEnemy2Test: 1
+  spawnEliteEnemy3Test: 1
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0
