@@ -4771,7 +4771,9 @@ MonoBehaviour:
   wolfEnemyDamageClip: {fileID: 8300000, guid: 43d1b17a6c179ad4fa292a0f6ab6fabe, type: 3}
   OneEyeEnemyDamageClip: {fileID: 8300000, guid: 3b71cc8a76507b045909840a1b4b9888, type: 3}
   OneEyeEliteDamageClip: {fileID: 8300000, guid: 3b71cc8a76507b045909840a1b4b9888, type: 3}
-  OneEyeEliteSpecialClip: {fileID: 0}
+  OneEyeEliteSpecialClip: {fileID: 8300000, guid: 814ced66c87becc4596a1d5f1368b684, type: 3}
+  bombEliteDamageClip: {fileID: 8300000, guid: 0081482164ed76645864de49c979b2a0, type: 3}
+  wolfEliteDamageClip: {fileID: 8300000, guid: 3ce6866fd8673fb449f61807a71120a2, type: 3}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   BossMoveShoot: {fileID: 0}
@@ -4780,11 +4782,9 @@ MonoBehaviour:
   BossSRoadPattern: {fileID: 0}
   BossKnifeEnergyCircle: {fileID: 0}
   BossSpawnSpinSword: {fileID: 0}
-  bombEnemyDieClip: {fileID: 0}
-  wolfEnemyDieClip: {fileID: 0}
-  oneEyeEnemyDieClip: {fileID: 0}
-  oneEyeEliteDieClip: {fileID: 0}
-  bossDieClip: {fileID: 0}
+  EnemyDieClip: {fileID: 8300000, guid: 5cba00ffa28031b4d87f357074fd0bb0, type: 3}
+  EliteDieClip: {fileID: 8300000, guid: b83d638c50ab296498ad78bf4a5a394c, type: 3}
+  BossDieClip: {fileID: 8300000, guid: 9e73466567a52104985bccde915ee4f8, type: 3}
 --- !u!4 &2100314355
 Transform:
   m_ObjectHideFlags: 0
