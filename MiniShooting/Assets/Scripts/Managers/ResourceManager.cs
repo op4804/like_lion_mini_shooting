@@ -43,6 +43,12 @@ public class ResourceManager : MonoBehaviour
     public GameObject frag;
     public GameObject skillBook;
 
+    [Header("Cloud")]
+    public GameObject cloud1;
+    public GameObject cloud2;
+    public GameObject cloud3;
+
+
     // 오브젝트 풀링 구현
     private List<GameObject> prefabs = new(); // 모든 프리팹을 가지고 있는 리스트
     private Dictionary<string, Queue<GameObject>> objectDic = new();
@@ -82,6 +88,9 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(frag);
         prefabs.Add(skillBook);
         prefabs.Add(enemyHitEffect);
+        prefabs.Add(cloud1);
+        prefabs.Add(cloud2);
+        prefabs.Add(cloud3);
     }
 
     

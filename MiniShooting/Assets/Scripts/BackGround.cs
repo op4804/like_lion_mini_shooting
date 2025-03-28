@@ -4,13 +4,13 @@ using UnityEngine;
 public class Background : MonoBehaviour
 {
     [SerializeField]
-    private float scrollSpeed = 0.05f; //화면 흐르는 속도
+    private float scrollSpeed = 0.5f; //화면 흐르는 속도
     public Material[] materials;
     public GameObject FirstBackground;
     public GameObject SecondBackground;
     public GameObject Cloud;
     public GameObject Cloud1;
-    public float speed = 5f;
+    private float speed = 10f;
     private bool FirstIsMain = true;
 
     private Vector3 startPos;
@@ -41,17 +41,19 @@ public class Background : MonoBehaviour
         }
     }
 
+    //배경 변경 코루틴
     IEnumerator ChangeBgCo()
     {
         // 현재 FirstIsMain 값을 저장해두고, 상태가 바뀔 때까지 반복
         bool initialState = FirstIsMain;
-        yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(1f);
         while (FirstIsMain == initialState)
         {
             BgPositionMove(FirstBackground, SecondBackground);
             yield return null;
         }
     }
+    //구름 이동 코루틴
     IEnumerator MoveCloudToTarget()
     {
         Vector3 originPos = Cloud.transform.position;
@@ -69,15 +71,7 @@ public class Background : MonoBehaviour
         // 이동 완료 후 처리
         Cloud.transform.position = originPos;
     }
-
-    public void ChangeMaterial(int index)
-    {
-        if (index >= 0 && index < materials.Length)
-        {
-            rend1.material = materials[index];
-        }
-    }
-
+    //배경 이미지 오프셋 이동
     public void BgOffsetMove(Renderer BG1, Renderer BG2)
     {
         if(FirstIsMain)
@@ -97,7 +91,7 @@ public class Background : MonoBehaviour
             Debug.Log("배경 오프셋 오류");
         }
     }
-
+    //배경 이미지 이동
     public void BgPositionMove(GameObject BG1, GameObject BG2)
     {
         if (FirstIsMain)
@@ -121,19 +115,21 @@ public class Background : MonoBehaviour
             }
         }
     }
-
+    //대기 위치로 배경 이미지 이동
     public void BgWait(GameObject BG)
     {
         BG.transform.position = waitPos;
         BgChange(BG);
     }
-
+    //배경 이미지 초기화
     public void BgInit(GameObject BG1, GameObject BG2)
     {
         BG1.GetComponent<Renderer>().material = materials[0];
         BG2.GetComponent<Renderer>().material = materials[1];
     }
 
+
+    //배경 이미지 변경
     public void BgChange(GameObject BG)
     {
         if (BgChangeCount < 5)
