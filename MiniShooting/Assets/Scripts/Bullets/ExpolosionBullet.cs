@@ -42,7 +42,7 @@ public class ExplosionBullet : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Enemy")|| hit.CompareTag("Boss"))
             {
                 float playerAttack = Player.Instance.GetAttack() * explosionDamageMultiplier;
                 hit.GetComponent<Enemy>().Hit(playerAttack);

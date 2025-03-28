@@ -84,7 +84,7 @@ public class BouncingBullet : MonoBehaviour
     //이 밑으로는 바운스의 구현부이니 다 지우시고 구현하시면 됩니다.
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) // 충돌이 적인지 판단
+        if (collision.gameObject.CompareTag("Enemy")|| collision.gameObject.CompareTag("Boss")) // 충돌이 적인지 판단
         {
             var enemy = collision.gameObject; // 충돌 객체를 저장
 

@@ -736,13 +736,16 @@ MonoBehaviour:
   eliteClaw: {fileID: 2991028135187285306, guid: 4d76a16ada81baf4b8170b52a79a3a9e, type: 3}
   oneEyeEliteEnemy: {fileID: 450482112071159595, guid: ada071efe2459a0468409e08a7505aba, type: 3}
   wolfEliteEnemy: {fileID: 3777413828489364806, guid: 1b7ce6aebd72c9448a836a3f5cbf4fd1, type: 3}
-  t2: {fileID: 0}
+  bombEliteEnemy: {fileID: 817924503527544913, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
   eagle: {fileID: 8348515755537654264, guid: 86831d6ccb6c24a4bb00bca4c589f9ff, type: 3}
   enemyHitEffect: {fileID: 582725328058819008, guid: 375c0c4c027735f4ebc3b3b13974164a, type: 3}
   expParticle: {fileID: 2757950206957510146, guid: f6b8f486469c47d42a9440d8bf2491e2, type: 3}
   explosionEffect: {fileID: 5584700356191228352, guid: 239b666a28427c248876467101b162a6, type: 3}
   frag: {fileID: 6982010220359553438, guid: 67a69feff050f1f41881e4278c897c1e, type: 3}
   skillBook: {fileID: 7808624311493422528, guid: 1ec912179ea632b4792638237b741554, type: 3}
+  cloud1: {fileID: 0}
+  cloud2: {fileID: 0}
+  cloud3: {fileID: 0}
 --- !u!4 &358329393
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,6 +1043,7 @@ MonoBehaviour:
   FirstBackground: {fileID: 568859963}
   SecondBackground: {fileID: 403526950}
   Cloud: {fileID: 435459322}
+  Cloud1: {fileID: 0}
 --- !u!1 &399335714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1081,7 @@ MonoBehaviour:
   statusMenu: {fileID: 399335720}
   upgradeMenu: {fileID: 399335719}
   skillMenu: {fileID: 399335722}
+  eliteEnemyHpBar: {fileID: 0}
   expText: {fileID: 1682957590}
 --- !u!4 &399335717
 Transform:
@@ -3156,9 +3161,12 @@ MonoBehaviour:
   spawnEnemy1Test: 1
   spawnEnemy2Test: 1
   spawnEnemy3Test: 1
-  spawnEliteEnemy1Test: 0
-  spawnEliteEnemy2Test: 0
-  spawnEliteEnemy3Test: 0
+  spawnEliteEnemy1Test: 1
+  spawnEliteEnemy2Test: 1
+  spawnEliteEnemy3Test: 1
+  spawnCloud1: 1
+  spawnCloud2: 1
+  spawnCloud3: 1
 --- !u!4 &1326465898
 Transform:
   m_ObjectHideFlags: 0
@@ -3310,7 +3318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1534990064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,6 +4400,8 @@ MonoBehaviour:
   OneEyeEnemyDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
   OneEyeEliteDamageClip: {fileID: 8300000, guid: 52d5040aa1dbe9843867ff3d438e65f3, type: 3}
   OneEyeEliteSpecialClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
+  bombEliteDamageClip: {fileID: 0}
+  wolfEliteDamageClip: {fileID: 0}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   BossMoveClip: {fileID: 8300000, guid: 005cc3a8e324eaa46892d59092114624, type: 3}
@@ -4401,11 +4411,9 @@ MonoBehaviour:
   BossWarningSpaceClip: {fileID: 8300000, guid: b13b0d00852a0a045ac29c3dfe9b1606, type: 3}
   BossSpinSwordClip: {fileID: 8300000, guid: d97df16c4fe10654ab73849fbf72e758, type: 3}
   BossLazerClip: {fileID: 8300000, guid: c99723c26f529f24ca3222fe23e7cd5c, type: 3}
-  bombEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  wolfEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  oneEyeEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  oneEyeEliteDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
-  bossDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
+  EnemyDieClip: {fileID: 0}
+  EliteDieClip: {fileID: 0}
+  BossDieClip: {fileID: 0}
 --- !u!4 &2100314355
 Transform:
   m_ObjectHideFlags: 0
@@ -4502,67 +4510,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143852218}
   m_CullTransparentMesh: 1
---- !u!1001 &1523947399316014933
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 817924503527544913, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_Name
-      value: bombEliteEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 817924503527544913, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173239752684260662, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9023af7039787ee4e90d10d695773fc6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4580,4 +4527,3 @@ SceneRoots:
   - {fileID: 49108571}
   - {fileID: 373537789}
   - {fileID: 1034518132}
-  - {fileID: 1523947399316014933}

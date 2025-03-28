@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
 public class PrologueManager : MonoBehaviour
 {
@@ -14,7 +15,16 @@ public class PrologueManager : MonoBehaviour
     {
         confirmationPanel.SetActive(false);
         timeline.stopped += TimelineEnd;
+                
+        timeline.extrapolationMode = DirectorWrapMode.None;
     }
+
+    //마지막 프레임으로 이동
+    //void Start()
+    //{
+    //    timeline.time = timeline.duration;
+    //    timeline.Play();
+    //}
 
     void Update()
     {
@@ -26,6 +36,11 @@ public class PrologueManager : MonoBehaviour
         if (isPanelOpen&&Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("Main");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            JumpPart();
         }
     }
 
@@ -61,9 +76,49 @@ public class PrologueManager : MonoBehaviour
 
     private void TimelineEnd(PlayableDirector director)
     {
-        if (!isPanelOpen && director == timeline) // 패널이 열려있지 않을 때만 씬 이동
+        Debug.Log("Timeline End Event Triggered");
+        if (!isPanelOpen && director == timeline)
         {
+            Debug.Log("Loading Main Scene...");
             SceneManager.LoadScene("Main");
+        }
+    }
+
+    public void JumpToFrame(int frame)
+    {
+        TimelineAsset asset = timeline.playableAsset as TimelineAsset;
+
+        double fps = asset.editorSettings.fps;
+        timeline.time = frame / fps;
+        timeline.Evaluate();
+    }
+
+    public void JumpPart()
+    {
+        TimelineAsset asset = timeline.playableAsset as TimelineAsset;
+        double fps = asset.editorSettings.fps;
+        int currentFrame = Mathf.FloorToInt((float)(timeline.time * fps));
+
+        Debug.Log($"[JumpPart] currentTime: {timeline.time}, currentFrame: {currentFrame}");
+        if (currentFrame < 420)
+        {
+            JumpToFrame(420);
+        }
+        else if (currentFrame < 840)
+        {
+            JumpToFrame(840);
+        }
+        else if (currentFrame < 1260)
+        {
+            JumpToFrame(1260);
+        }
+        else if (currentFrame < 2940)
+        {
+            JumpToFrame(2940);
+        }
+        else if (currentFrame < 3900)
+        {
+            JumpToFrame(3900);
         }
     }
 }
