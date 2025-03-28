@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         PlayerHpBar.Instance.UpdateLife();
-        ViewExp();
     }
 
     public void ToggleUpgradeMenu()
@@ -61,13 +60,6 @@ public class UIManager : MonoBehaviour
         {
             skillMenu.ToggleMenu();
         }
-    }
-
-    //레벨, 경험치 표기
-    public void ViewExp()
-    {
-        Debug.Log($"Level : {Player.Instance.GetPlayerLevel()}");
-        expText.text = $"Level : {Player.Instance.GetPlayerLevel()}";
     }
 
     public void ActivateEliteEnemyHpBar(EliteEnemy eliteEnemy)
