@@ -284,8 +284,8 @@ public class SpawnManager : MonoBehaviour
 
         //엘리트 죽으면 다음 패턴
         Debug.Log("Patern3 Done");
-        yield return new WaitForSeconds(nextPaternDelay);
-        yield return BossSequence();
+        //yield return new WaitForSeconds(nextPaternDelay);
+        //yield return BossSequence();
     }
     IEnumerator BossSequence()
     {
