@@ -9,6 +9,7 @@ TagManager:
   - enemyBullet
   - Shield
   - PlayerBullet
+  - Cloud
   layers:
   - Default
   - TransparentFX

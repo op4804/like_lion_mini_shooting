@@ -27,6 +27,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private bool spawnEliteEnemy3Test = true;
 
+    [Header("Cloud")]
+    [SerializeField]
+    private bool spawnCloud1 = true;
+    [SerializeField]
+    private bool spawnCloud2 = true;
+    [SerializeField]
+    private bool spawnCloud3 = true;
+
     void Start()
     {
         StartCoroutine(Spawn1());
@@ -35,6 +43,9 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnElite1());
         StartCoroutine(SpawnElite2());
         StartCoroutine(SpawnElite3());
+        StartCoroutine(SpawnCloud1());
+        StartCoroutine(SpawnCloud2());
+        StartCoroutine(SpawnCloud3());
     }
 
     void Update()
@@ -111,6 +122,46 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnCloud1()
+    {
+        while (spawnCloud1)
+        {
+            yield return new WaitForSeconds(spawnDelay1);
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
+
+            if (IsSpawnAreaClearCloudVer(spawnPos))
+            {
+                ResourceManager.Instance.Create("cloud1", spawnPos);
+            }
+        }
+    }
+    IEnumerator SpawnCloud2()
+    {
+        while (spawnCloud2)
+        {
+            yield return new WaitForSeconds(spawnDelay2);
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
+
+            if (IsSpawnAreaClearCloudVer(spawnPos))
+            {
+                ResourceManager.Instance.Create("cloud2", spawnPos);
+            }
+        }
+    }
+    IEnumerator SpawnCloud3()
+    {
+        while (spawnCloud3)
+        {
+            yield return new WaitForSeconds(spawnDelay3);
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
+
+            if (IsSpawnAreaClearCloudVer(spawnPos))
+            {
+                ResourceManager.Instance.Create("cloud3", spawnPos);
+            }
+        }
+    }
+
 
     private bool IsSpawnAreaClear(Vector3 position)
     {
@@ -119,6 +170,20 @@ public class SpawnManager : MonoBehaviour
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Enemy"))
+                return false;
+        }
+
+        return true;
+
+    }
+
+    private bool IsSpawnAreaClearCloudVer(Vector3 position)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(position, spawnCheckRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Cloud"))
                 return false;
         }
 

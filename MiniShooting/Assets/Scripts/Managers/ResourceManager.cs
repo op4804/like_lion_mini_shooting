@@ -43,7 +43,10 @@ public class ResourceManager : MonoBehaviour
     public GameObject frag;
     public GameObject skillBook;
 
-
+    [Header("Cloud")]
+    public GameObject cloud1;
+    public GameObject cloud2;
+    public GameObject cloud3;
 
 
     // 오브젝트 풀링 구현
@@ -85,6 +88,9 @@ public class ResourceManager : MonoBehaviour
         prefabs.Add(frag);
         prefabs.Add(skillBook);
         prefabs.Add(enemyHitEffect);
+        prefabs.Add(cloud1);
+        prefabs.Add(cloud2);
+        prefabs.Add(cloud3);
     }
 
     
