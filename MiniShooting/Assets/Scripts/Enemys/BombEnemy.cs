@@ -92,4 +92,13 @@ public class BombEnemy : Enemy
         transform.Translate(Vector3.right * 0.1f);
     }
 
+    public void Scat()
+    {
+        StartCoroutine(DeleteRigidBody());
+    }
+    IEnumerator DeleteRigidBody()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(GetComponent<Rigidbody2D>());
+    }
 }
