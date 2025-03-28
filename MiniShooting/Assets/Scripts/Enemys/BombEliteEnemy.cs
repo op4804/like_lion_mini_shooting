@@ -37,9 +37,10 @@ public class BombEliteEnemy : EliteEnemy
             // TODO: 특성 아이템 생성
 
             StartCoroutine(ClusterExplosion());
+            UIManager.Instance.DeactivateEliteEnemyHpBar();
             GameObject go = Instantiate(ResourceManager.Instance.explosionEffect, transform.position, Quaternion.identity);
             go.transform.localScale = new Vector3(10, 10, 10);
-            GameObject Skill = Instantiate(ResourceManager.Instance.skillBook, transform.position, Quaternion.identity);
+            GameObject Skill = Instantiate(ResourceManager.Instance.skillBook, transform.position, Quaternion.identity);            
             ResourceManager.Instance.Deactivate(gameObject, 0.1f);
             return;
         }

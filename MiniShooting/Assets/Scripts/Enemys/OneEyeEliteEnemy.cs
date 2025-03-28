@@ -6,7 +6,7 @@ public class OneEyeEliteEnemy : EliteEnemy
     protected override void OnEnable()
     {
         base.OnEnable();
-        maxEnemyHp = 50;
+        maxEnemyHp = 90;
         currentEnemyHP = maxEnemyHp;
         StartCoroutine(MoveFoward()); // 앞으로 가기
     }
