@@ -396,7 +396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Boss: {fileID: 4453166037403692332}
   swordBarrier: {fileID: 1584709739066991689, guid: 8e4cb463a0a53be4380c02e7a6c08d8a, type: 3}
-  magicCircle: {fileID: 6963256499051499225, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
   spawnPos1: {fileID: 0}
   spawnPos2: {fileID: 0}
   spawnPos3: {fileID: 0}

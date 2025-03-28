@@ -21,6 +21,7 @@ public class wolfEliteEnemy : EliteEnemy
         }
 
         StartCoroutine(SpecialAttack());
+        SoundManager.instance.WolfEliteAttack();
     }
 
     IEnumerator SpecialAttack()

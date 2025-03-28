@@ -49,6 +49,7 @@ public class SpawnManager : MonoBehaviour
     private bool spawnCloud2 = true;
     [SerializeField]
     private bool spawnCloud3 = true;
+    private float speed;
 
     void Start()
     {
@@ -150,11 +151,12 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud1)
         {
             yield return new WaitForSeconds(spawnDelay1);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
-
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {
-                ResourceManager.Instance.Create("cloud1", spawnPos);
+                GameObject obj = ResourceManager.Instance.Create("cloud1", spawnPos);
+                speed = Random.Range(1f, 10.0f);
+                obj.GetComponent<smallCloud>().SetSpeed(speed);
             }
         }
     }
@@ -163,11 +165,13 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud2)
         {
             yield return new WaitForSeconds(spawnDelay2);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
 
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {
-                ResourceManager.Instance.Create("cloud2", spawnPos);
+                GameObject obj = ResourceManager.Instance.Create("cloud2", spawnPos);
+                speed = Random.Range(1f, 10.0f);
+                obj.GetComponent<smallCloud>().SetSpeed(speed);
             }
         }
     }
@@ -176,11 +180,13 @@ public class SpawnManager : MonoBehaviour
         while (spawnCloud3)
         {
             yield return new WaitForSeconds(spawnDelay3);
-            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-2.0f, 2.0f), 0);
+            Vector3 spawnPos = new Vector3(transform.position.x + 8, Random.Range(-4.0f, 4.0f), 0);
 
             if (IsSpawnAreaClearCloudVer(spawnPos))
             {
-                ResourceManager.Instance.Create("cloud3", spawnPos);
+                GameObject obj = ResourceManager.Instance.Create("cloud3", spawnPos);
+                speed = Random.Range(1f, 10.0f);
+                obj.GetComponent<smallCloud>().SetSpeed(speed);
             }
         }
     }

@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class DashSlash : MonoBehaviour, IBossPattern
 {
     public GameObject spawner;// 소환할거
-    public Transform playerPos;// 플레이어좌표
+    private Transform playerPos;// 플레이어좌표
     public Transform spawnPos;//소환좌표
 
     public float moveSpeed = 10f;// 보스 이동속도
