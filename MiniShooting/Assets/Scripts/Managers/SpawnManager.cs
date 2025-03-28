@@ -59,7 +59,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnCloud1());
         StartCoroutine(SpawnCloud2());
         StartCoroutine(SpawnCloud3());
-    }
 
         StartCoroutine(SpawnPattern1());
     }
@@ -303,6 +302,5 @@ public class SpawnManager : MonoBehaviour
         }
 
         return true;
-
     }
 }
