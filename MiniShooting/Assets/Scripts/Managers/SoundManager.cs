@@ -49,12 +49,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip EliteWarningClip;
 
     [Header("보스 패턴 사운드")]
-    [SerializeField] private AudioClip BossMoveShoot;
-    [SerializeField] private AudioClip BossDashSlash;
-    [SerializeField] private AudioClip BossBlinkMove;
-    [SerializeField] private AudioClip BossSRoadPattern;
-    [SerializeField] private AudioClip BossKnifeEnergyCircle;
-    [SerializeField] private AudioClip BossSpawnSpinSword;
+    [SerializeField] private AudioClip BossMoveClip;
+    [SerializeField] private AudioClip BossDashClip;
+    [SerializeField] private AudioClip BossShootClip;
+    [SerializeField] private AudioClip BossSlashClip;
+    [SerializeField] private AudioClip BossWarningSpaceClip;
+    [SerializeField] private AudioClip BossSpinSwordClip;
+    [SerializeField] private AudioClip BossLazerClip;
 
     [Header("적 사망 시 사운드")]
     [SerializeField] private AudioClip bombEnemyDieClip;
@@ -171,12 +172,13 @@ public class SoundManager : MonoBehaviour
     //public void PlayEliteWarning() => SFXSource.PlayOneShot(EliteWarningClip);
 
     // 보스 재생 부분
-    public void PlayBossMoveShoot() => SFXSource.PlayOneShot(BossMoveShoot);
-    public void PlayBossDashSlash() => SFXSource.PlayOneShot(BossDashSlash);
-    public void PlayBossBlinkMove() => SFXSource.PlayOneShot(BossBlinkMove);
-    public void PlayBossSRoadPattern() => SFXSource.PlayOneShot(BossSRoadPattern);
-    public void PlayBossKnifeEnergyCircle() => SFXSource.PlayOneShot(BossKnifeEnergyCircle);
-    public void PlayBossSpawnSpinSword() => SFXSource.PlayOneShot(BossSpawnSpinSword);
+    public void PlayBossMoveClipt() => SFXSource.PlayOneShot(BossMoveClip);
+    public void PlayBossShootClip() => SFXSource.PlayOneShot(BossShootClip);
+    public void PlayBossDashClip() => SFXSource.PlayOneShot(BossDashClip);
+    public void PlayBossSlashClip() => SFXSource.PlayOneShot(BossSlashClip);
+    public void PlayBossWarningSpaceClip() => SFXSource.PlayOneShot(BossWarningSpaceClip);
+    public void PlayBossSpinSwordClip() => SFXSource.PlayOneShot(BossSpinSwordClip);
+    public void PlayBossLazerClip() => SFXSource.PlayOneShot(BossLazerClip);
 
     // 적 사망 사운드 부분
     public void BombEnemyDie() => SFXSource.PlayOneShot(bombEnemyDieClip);

@@ -789,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47be41c6f1a2caf4e951e85f17b3fe82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 0
+  currentHp: 0
 --- !u!212 &368006652
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1899,7 +1901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHpImage: {fileID: 710220797}
-  boss: {fileID: 0}
+  go: {fileID: 0}
 --- !u!114 &710220797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4392,12 +4394,13 @@ MonoBehaviour:
   OneEyeEliteSpecialClip: {fileID: 8300000, guid: 9f4f01d7e309d44428308d728acde416, type: 3}
   BosswarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
   EliteWarningClip: {fileID: 8300000, guid: ecdba66801dba284e9322aa639491e71, type: 3}
-  BossMoveShoot: {fileID: 0}
-  BossDashSlash: {fileID: 0}
-  BossBlinkMove: {fileID: 0}
-  BossSRoadPattern: {fileID: 0}
-  BossKnifeEnergyCircle: {fileID: 0}
-  BossSpawnSpinSword: {fileID: 0}
+  BossMoveClip: {fileID: 8300000, guid: 005cc3a8e324eaa46892d59092114624, type: 3}
+  BossDashClip: {fileID: 8300000, guid: d97df16c4fe10654ab73849fbf72e758, type: 3}
+  BossShootClip: {fileID: 8300000, guid: 431631b9c71bbf84d858120fa9b16d53, type: 3}
+  BossSlashClip: {fileID: 8300000, guid: 005cc3a8e324eaa46892d59092114624, type: 3}
+  BossWarningSpaceClip: {fileID: 8300000, guid: b13b0d00852a0a045ac29c3dfe9b1606, type: 3}
+  BossSpinSwordClip: {fileID: 8300000, guid: d97df16c4fe10654ab73849fbf72e758, type: 3}
+  BossLazerClip: {fileID: 8300000, guid: c99723c26f529f24ca3222fe23e7cd5c, type: 3}
   bombEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
   wolfEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
   oneEyeEnemyDieClip: {fileID: 8300000, guid: 70ac8622a1856104483b7fc2b0b64abe, type: 3}
