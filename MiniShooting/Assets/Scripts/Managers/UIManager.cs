@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField]
+    private CanvasGroup fadePanel;
+
     [HideInInspector]
     public static UIManager Instance = null;
 
@@ -71,4 +75,22 @@ public class UIManager : MonoBehaviour
     {
         eliteEnemyHpBar.gameObject.SetActive(false);
     }
+
+
+
+
+    public IEnumerator FadeScreen(float from, float to, float duration)
+    {
+        CanvasGroup fade = fadePanel; // 검정 패널 연결돼 있어야 함
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            fade.alpha = Mathf.Lerp(from, to, t / duration);
+            yield return null;
+        }
+        fade.alpha = to;
+    }
 }
+
+

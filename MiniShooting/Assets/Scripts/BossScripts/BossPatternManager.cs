@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class BossPatternManager : MonoBehaviour
 {
-    public Boss boss;
     public List<MonoBehaviour> patternScripts; // 보스 패턴 리스트
     public List<IBossPattern> patterns = new List<IBossPattern>();
     //주패턴
@@ -24,19 +23,13 @@ public class BossPatternManager : MonoBehaviour
     //1.마법진과 봉인의검4개소환, 봉인의검 깨지기 전까지 회복
 
 
-    private void Awake()
+    private void OnEnable()
     {
         foreach (var script in patternScripts)
         {
             IBossPattern pattern = script as IBossPattern;
             patterns.Add(pattern);
         }
-
-
-    }
-    void Start()
-    {
-
         StartCoroutine(PatternProgress());
 
     }
@@ -49,34 +42,48 @@ public class BossPatternManager : MonoBehaviour
         while(true)
         {
             yield return StartCoroutine(MaveAndShoot(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(Sroad(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(Rampage(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(DashSlash(3f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(SpinSword(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(Lazer(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
             yield return StartCoroutine(BlinkMove(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= this.GetComponent<Boss>().GetMaxHp() / 2) { break; }
         }
         yield return StartCoroutine(HealSword());
         while (true)
         {
+            yield return StartCoroutine(SpinSwordStart());
             yield return StartCoroutine(MaveAndShoot(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
             yield return StartCoroutine(Sroad(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
             yield return StartCoroutine(Rampage(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
             yield return StartCoroutine(DashSlash(3f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
             yield return StartCoroutine(BlinkMove(5f));
-            if (boss.currentHp <= 0) { break; }
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(SpinSwordStop());
 
+            yield return StartCoroutine(LazerStart());
+            yield return StartCoroutine(MaveAndShoot(5f));
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(Sroad(5f));
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(Rampage(5f));
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(DashSlash(3f));
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(BlinkMove(5f));
+            if (this.GetComponent<Boss>().GetCurrentHp() <= 0) { break; }
+            yield return StartCoroutine(LazerStop());
         }
         Destroy(gameObject);
 
@@ -85,10 +92,10 @@ public class BossPatternManager : MonoBehaviour
         StartCoroutine(patterns[5].StopPattern());
         yield return new WaitUntil(() => patterns[5].isPatternEnd);
 
-        //StartCoroutine(patterns[6].PatternProgress());
-        ////패턴넣어주기
-        //StartCoroutine(patterns[6].StopPattern());
-        //yield return new WaitUntil(() => patterns[5].isPatternEnd);
+        StartCoroutine(patterns[6].PatternProgress());
+        //패턴넣어주기
+        StartCoroutine(patterns[6].StopPattern());
+        yield return new WaitUntil(() => patterns[5].isPatternEnd);
     }
 
 
@@ -101,6 +108,27 @@ public class BossPatternManager : MonoBehaviour
 
 
 
+    IEnumerator SpinSwordStart()
+    {
+        StartCoroutine(patterns[5].PatternProgress());
+        yield return null;
+    }
+    IEnumerator SpinSwordStop()
+    {
+        StartCoroutine(patterns[5].StopPattern());
+        yield return new WaitUntil(() => patterns[5].isPatternEnd);
+        //회전검랜덤소환
+    }
+    IEnumerator LazerStart()
+    {
+        StartCoroutine(patterns[6].PatternProgress());
+        yield return null;
+    }
+    IEnumerator LazerStop()
+    {
+        StartCoroutine(patterns[6].StopPattern());
+        yield return new WaitUntil(() => patterns[6].isPatternEnd);
+    }
 
     IEnumerator Test(float seconds)
     {

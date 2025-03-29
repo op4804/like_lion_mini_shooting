@@ -72,11 +72,6 @@ public class Bullet : MonoBehaviour
             SkillManager.Instance.NotifyEffectComplete(gameObject);
         }
 
-        else if (collision.gameObject.CompareTag("Boss"))
-        {
-            collision.gameObject.GetComponent<Boss>().Hit(Player.Instance.GetAttack());
-            SkillManager.Instance.NotifyEffectComplete(gameObject, name);
-        }
     }
 
     public bool NotifyEffectOutOfScreen()

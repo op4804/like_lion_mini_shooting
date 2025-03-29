@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DashSlash : MonoBehaviour, IBossPattern
 {
     public GameObject spawner;// 소환할거
-    private Transform playerPos;// 플레이어좌표
     public Transform spawnPos;//소환좌표
 
     public float moveSpeed = 10f;// 보스 이동속도
@@ -18,10 +18,6 @@ public class DashSlash : MonoBehaviour, IBossPattern
     public bool isPatternStop { get; set; }
 
 
-    void Awake()
-    {
-        playerPos = Player.Instance.transform;
-    }
 
     public IEnumerator StopPattern()
     {
@@ -30,21 +26,22 @@ public class DashSlash : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress()
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
-        Vector2 dirTemp = (playerPos.position - spawnPos.position).normalized;
-        Vector2 backPos = (Vector2)playerPos.position + dirTemp * 15f;
+        Vector2 dirTemp = (Player.Instance.transform.position - spawnPos.position).normalized;
+        Vector2 backPos = (Vector2)Player.Instance.transform.position + dirTemp * 15f;
         yield return StartCoroutine(Move(-backPos, dashSpeed / 5));
         while (true)
         {
             //yield return StartCoroutine(MoveToStart());//위치 가운데로 초기화
 
-            Vector2 direction = playerPos.position - spawnPos.position;
+            Vector2 direction = Player.Instance.transform.position - spawnPos.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.Euler(0, 0, angle); // 플레이어와 보스 사이 회전값 계산
 
-            Vector2 dir = (playerPos.position - spawnPos.position).normalized;
-            Vector2 targetPos = (Vector2)playerPos.position + dir * 15f;
+            Vector2 dir = (Player.Instance.transform.position - spawnPos.position).normalized;
+            Vector2 targetPos = (Vector2)Player.Instance.transform.position + dir * 15f;
 
 
             yield return StartCoroutine(Spawn(spawner, this.transform, rotation));//내위치에 대쉬경고프리팹생성

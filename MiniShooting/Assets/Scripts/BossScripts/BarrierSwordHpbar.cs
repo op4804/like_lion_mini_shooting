@@ -11,7 +11,7 @@ public class BarrierSwordHpbar : MonoBehaviour
     }
     void Update()
     {
-        currentHpImage.fillAmount = go.GetComponent<Boss>().currentHp / go.GetComponent<Boss>().maxHp;
+        currentHpImage.fillAmount = go.GetComponent<BarrierSword>().GetCurrentHp() / go.GetComponent<BarrierSword>().GetMaxHp();
     }
 
 

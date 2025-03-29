@@ -51,6 +51,8 @@ public class SpawnManager : MonoBehaviour
     private bool spawnCloud3 = true;
     private float speed;
 
+    [SerializeField] private GameObject bossObject;
+
     void Start()
     {
         spawn1Ro = Spawn1();
@@ -287,8 +289,8 @@ public class SpawnManager : MonoBehaviour
 
         //엘리트 죽으면 다음 패턴
         Debug.Log("Patern3 Done");
-        //yield return new WaitForSeconds(nextPaternDelay);
-        //yield return BossSequence();
+        yield return new WaitForSeconds(nextPaternDelay);
+        yield return BossSequence();
     }
     IEnumerator BossSequence()
     {
@@ -296,8 +298,19 @@ public class SpawnManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene("Bosstest");
-        yield break;
+        // 1. 화면 어둡게
+        yield return UIManager.Instance.FadeScreen(0f, 1f, 1f);
+
+        // 2. 경고음 재생
+        SoundManager.instance.PlayBossWarningThenBGM();
+        yield return new WaitForSeconds(0.5f);
+
+        // 3. 화면 밝게
+        yield return UIManager.Instance.FadeScreen(1f, 0f, 1f);
+
+        // 4. 보스 등장
+        bossObject.SetActive(true);
+
     }
 
     private bool IsSpawnAreaClearCloudVer(Vector3 position)

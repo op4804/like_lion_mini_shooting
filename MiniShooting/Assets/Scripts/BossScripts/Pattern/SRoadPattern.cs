@@ -13,12 +13,11 @@ public class SRoadPattern : MonoBehaviour, IBossPattern
     public Transform startPos;//보스 이동 처음시작좌표
     public Transform upPos,downPos;//보스 이동 좌표
 
+    public bool isSpawning;
+
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
 
-    void Start()
-    {
-    }
 
     public IEnumerator StopPattern()
     {
@@ -27,22 +26,21 @@ public class SRoadPattern : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress() // 코루틴을 이용한 총알 발사
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
         while (true)
         {
-            Coroutine myCo1 = StartCoroutine(Spawning(knife, spawnPos1));
-            Coroutine myCo2 = StartCoroutine(Spawning(knife, spawnPos2));
+            Coroutine c1 = StartCoroutine(Spawning(knife, spawnPos1));
+            Coroutine c2 = StartCoroutine(Spawning(knife, spawnPos2));
             yield return StartCoroutine(Move(upPos, moveSpeed));
             yield return StartCoroutine(Move(downPos, moveSpeed));
-            StopCoroutine(myCo1);
-            StopCoroutine(myCo2);
-
+            StopCoroutine(c1);
+            StopCoroutine(c2);
             if (isPatternStop == true)
             {
                 break;
             }
-
         }
         isPatternEnd = true;
     }

@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class SpawnLazerPattern : MonoBehaviour, IBossPattern
 {
     public GameObject spawner;// 소환할거
-    public List<Transform> spawnPoss;//칼 소환 좌표
+    public List<Transform> spawnPoss;//소환 좌표
 
 
     public float moveSpeed = 10f;// 보스 이동속도
@@ -16,10 +16,6 @@ public class SpawnLazerPattern : MonoBehaviour, IBossPattern
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
 
-    void Start()
-    {
-    }
-
     public IEnumerator StopPattern()
     {
         isPatternStop = true;
@@ -27,6 +23,7 @@ public class SpawnLazerPattern : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress() // 코루틴을 이용한 총알 발사
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
         while (true)

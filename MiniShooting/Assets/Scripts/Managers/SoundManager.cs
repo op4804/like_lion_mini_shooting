@@ -102,7 +102,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Boss 씬 진입 시 경고음 재생 코루틴
-    private IEnumerator PlayBossWarningThenBGM()
+    public IEnumerator PlayBossWarningThenBGM()
     {
         BGMSource.Stop();
 

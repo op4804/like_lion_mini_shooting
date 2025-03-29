@@ -16,9 +16,6 @@ public class SpawnSpinSwordPattern : MonoBehaviour, IBossPattern
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
 
-    void Start()
-    {
-    }
 
     public IEnumerator StopPattern()
     {
@@ -27,6 +24,7 @@ public class SpawnSpinSwordPattern : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress() // 코루틴을 이용한 총알 발사
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
         while (true)

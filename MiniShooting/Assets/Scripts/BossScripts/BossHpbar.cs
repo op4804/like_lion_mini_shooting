@@ -10,9 +10,8 @@ public class BossHpbar : MonoBehaviour
     {
         
     }
-
     void Update()
     {
-        currentHpImage.fillAmount = go.GetComponent<Boss>().currentHp / go.GetComponent<Boss>().maxHp;
+        currentHpImage.fillAmount = go.GetComponent<Boss>().GetCurrentHp() / go.GetComponent<Boss>().GetMaxHp();
     }
 }

@@ -32,6 +32,7 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress() // 코루틴을 이용한 총알 발사
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
 
@@ -41,6 +42,7 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
         yield return StartCoroutine(Spawn(swordBarrier, spawnPos4));
         swordCount = 4;
         transform.Find("BossBarrier").gameObject.SetActive(true);//배리어 활성화,마법진 및 봉인의 검 4개 소환
+        transform.GetComponent<BoxCollider2D>().enabled = false;//뎀지안받음
         while (true)
         {
             yield return StartCoroutine(Heal());
@@ -52,6 +54,7 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
             if (isPatternStop == true)
             {
                 transform.Find("BossBarrier").gameObject.SetActive(false);//배리어 비활성화
+                transform.GetComponent<BoxCollider2D>().enabled = true;//뎀지받음
                 break;
             }
         }
@@ -60,7 +63,7 @@ public class BarrierAndSwordPattern : MonoBehaviour, IBossPattern
     
     public IEnumerator Heal()
     {
-        Boss.GetComponent<Boss>().currentHp += 10;
+        Boss.GetComponent<Boss>().setCurrentHp(Boss.GetComponent<Boss>().GetCurrentHp() + 10); 
         yield return new WaitForSeconds(1f);
     }
     public IEnumerator MoveToStart()

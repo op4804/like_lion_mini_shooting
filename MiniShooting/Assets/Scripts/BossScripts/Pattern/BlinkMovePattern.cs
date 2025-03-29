@@ -20,11 +20,6 @@ public class BlinkMovePattern : MonoBehaviour, IBossPattern
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
 
-    void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     public IEnumerator StopPattern()
     {
         isPatternStop = true;
@@ -32,6 +27,7 @@ public class BlinkMovePattern : MonoBehaviour, IBossPattern
     }
     public IEnumerator PatternProgress() // 코루틴을 이용한 총알 발사
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
         while (true)

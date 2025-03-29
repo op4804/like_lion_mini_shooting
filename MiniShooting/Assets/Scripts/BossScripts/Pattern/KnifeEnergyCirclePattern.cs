@@ -15,17 +15,15 @@ public class KnifeEnergyCirclePattern : MonoBehaviour, IBossPattern
     public bool isPatternEnd { get; set; }
     public bool isPatternStop { get; set; }
 
-    void Start()
-    {
-    }
 
     public IEnumerator StopPattern()
     {
         isPatternStop = true;
         yield return null;
     }
-    public IEnumerator PatternProgress() // �ڷ�ƾ�� �̿��� �Ѿ� �߻�
+    public IEnumerator PatternProgress() 
     {
+        isPatternEnd = false;
         isPatternStop = false;
         yield return StartCoroutine(MoveToStart());
         while (true)

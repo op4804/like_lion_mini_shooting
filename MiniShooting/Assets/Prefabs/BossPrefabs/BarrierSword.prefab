@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 8390329298136636273}
   - component: {fileID: 603058527742147980}
   - component: {fileID: -1432128303645906649}
-  - component: {fileID: 4592956134879901714}
   m_Layer: 0
   m_Name: BarrierSword
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3793705790771552126, guid: 11a8c784030a8f94abe7d06df3fd7a73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,22 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f94721e3ce9eed48b7575bf8264b19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicCircle: {fileID: 1210504791397287429, guid: 55c4725ac0adc5b428d5fac46843ff32, type: 3}
-  barrierSword: {fileID: 4592956134879901714}
---- !u!114 &4592956134879901714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584709739066991689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47be41c6f1a2caf4e951e85f17b3fe82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 10
-  currentHp: 300
+  currentEnemyHP: 0
 --- !u!1 &1899590794417631410
 GameObject:
   m_ObjectHideFlags: 0
